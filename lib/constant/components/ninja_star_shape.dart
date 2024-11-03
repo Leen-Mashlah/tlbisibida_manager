@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_shapes/flutter_shapes.dart';
 import 'package:lambda_dent_dash/constant/constants/constants.dart';
 
@@ -17,25 +18,8 @@ class NinjaStarShape extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  ClipPath(
-                    child: Container(
-                      width: 300,
-                      height: 300,
-                      color: cyan300,
-                    ),
-                    clipper: _Triangle(),
-                  ),
-                  Transform.rotate(
-                    angle: 180 * pi / 180,
-                    child: ClipPath(
-                      child: Container(
-                        width: 300,
-                        height: 300,
-                        color: cyan300,
-                      ),
-                      clipper: _Triangle(),
-                    ),
-                  ),
+                  blade(),
+                  Transform.rotate(angle: 180 * pi / 180, child: blade()),
                 ],
               ),
             ),
@@ -43,33 +27,46 @@ class NinjaStarShape extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Transform.rotate(
-                    angle: -90 * pi / 180,
-                    child: ClipPath(
-                      child: Container(
-                        width: 300,
-                        height: 300,
-                        color: cyan300,
-                      ),
-                      clipper: _Triangle(),
-                    ),
-                  ),
-                  Transform.rotate(
-                    angle: 90 * pi / 180,
-                    child: ClipPath(
-                      child: Container(
-                        width: 300,
-                        height: 300,
-                        color: cyan300,
-                      ),
-                      clipper: _Triangle(),
-                    ),
-                  ),
+                  Transform.rotate(angle: -90 * pi / 180, child: blade()),
+                  Transform.rotate(angle: 90 * pi / 180, child: blade()),
                 ],
               ),
             ),
+            Center(
+              child: Icon(
+                Icons.circle,
+                size: 50,
+                color: Colors.white,
+              ),
+            ),
+            Center(
+              child: Icon(
+                Icons.circle_outlined,
+                size: 50,
+                color: Colors.grey[500],
+              ),
+            )
           ],
+        ).animate().rotate(duration: Duration(minutes: 60), begin: -20),
+      ),
+    );
+  }
+
+  Widget blade() {
+    return InkWell(
+      hoverColor: Colors.transparent,
+      onTap: () {},
+      child: ClipPath(
+        child: Container(
+          decoration: BoxDecoration(
+              border: Border.symmetric(
+                  vertical: BorderSide(color: Colors.grey[400]!, width: 2)),
+              gradient: LinearGradient(colors: [cyan200, cyan300, cyan400])),
+          width: 300,
+          height: 300,
         ),
+        clipper: _Triangle(),
+        clipBehavior: Clip.antiAlias,
       ),
     );
   }
