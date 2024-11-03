@@ -18,8 +18,9 @@ class NinjaStarShape extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  blade(),
-                  Transform.rotate(angle: 180 * pi / 180, child: blade()),
+                  blade('الحالات'),
+                  Transform.rotate(
+                      angle: 180 * pi / 180, child: blade("الفواتير")),
                 ],
               ),
             ),
@@ -27,8 +28,10 @@ class NinjaStarShape extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Transform.rotate(angle: -90 * pi / 180, child: blade()),
-                  Transform.rotate(angle: 90 * pi / 180, child: blade()),
+                  Transform.rotate(
+                      angle: -90 * pi / 180, child: blade("الاحصائيات")),
+                  Transform.rotate(
+                      angle: 90 * pi / 180, child: blade("المخزن")),
                 ],
               ),
             ),
@@ -52,12 +55,18 @@ class NinjaStarShape extends StatelessWidget {
     );
   }
 
-  Widget blade() {
-    return InkWell(
-      hoverColor: Colors.transparent,
-      onTap: () {},
-      child: ClipPath(
+  Widget blade(String data) {
+    return ClipPath(
+      clipper: _Triangle(),
+      clipBehavior: Clip.antiAlias,
+      child: InkWell(
+        hoverColor: Colors.transparent,
+        splashColor: Colors.transparent,
+        highlightColor: Colors.transparent,
+        onTap: () {},
         child: Container(
+          child: Text(data),
+          //Positioned(top: 30, left: 100, child: Text(data)),
           decoration: BoxDecoration(
               border: Border.symmetric(
                   vertical: BorderSide(color: Colors.grey[400]!, width: 2)),
@@ -65,8 +74,6 @@ class NinjaStarShape extends StatelessWidget {
           width: 300,
           height: 300,
         ),
-        clipper: _Triangle(),
-        clipBehavior: Clip.antiAlias,
       ),
     );
   }
