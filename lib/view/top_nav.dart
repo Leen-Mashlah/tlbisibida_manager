@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lambda_dent_dash/constant/components/custom_text.dart';
 import 'package:lambda_dent_dash/constant/constants/constants.dart';
-import 'package:lambda_dent_dash/view/reponsiveness.dart';
 
 AppBar topNavigationBar(BuildContext context) =>
     AppBar(
@@ -33,6 +31,5 @@ AppBar topNavigationBar(BuildContext context) =>
           },
           icon: const Icon(Icons.notifications_none_rounded,  ),
         ),
-     
       ],
     );
