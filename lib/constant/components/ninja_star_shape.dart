@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_shapes/flutter_shapes.dart';
 import 'package:lambda_dent_dash/constant/constants/constants.dart';
 
 class NinjaStarShape extends StatelessWidget {
