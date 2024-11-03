@@ -48,7 +48,7 @@ class NinjaStarShape extends StatelessWidget {
                 size: 50,
                 color: Colors.grey[500],
               ),
-            )
+            ),
           ],
         ).animate().rotate(duration: Duration(minutes: 60), begin: -20),
       ),
@@ -64,15 +64,27 @@ class NinjaStarShape extends StatelessWidget {
         splashColor: Colors.transparent,
         highlightColor: Colors.transparent,
         onTap: () {},
-        child: Container(
-          child: Text(data),
-          //Positioned(top: 30, left: 100, child: Text(data)),
-          decoration: BoxDecoration(
-              border: Border.symmetric(
-                  vertical: BorderSide(color: Colors.grey[400]!, width: 2)),
-              gradient: LinearGradient(colors: [cyan200, cyan300, cyan400])),
-          width: 300,
-          height: 300,
+        child: Stack(
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                  border: Border.symmetric(
+                      vertical: BorderSide(color: Colors.grey[400]!, width: 2)),
+                  gradient:
+                      LinearGradient(colors: [cyan200, cyan300, cyan400])),
+              width: 320,
+              height: 320,
+            ),
+            Positioned(
+                bottom: 90,
+                left: 40,
+                child: Transform.rotate(
+                    angle: 90 * pi / 180,
+                    child: Text(
+                      data,
+                      style: TextStyle(color: Colors.grey[600], fontSize: 18),
+                    )))
+          ],
         ),
       ),
     );
