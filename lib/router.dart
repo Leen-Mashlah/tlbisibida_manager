@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lambda_dent_dash/routes.dart';
 import 'package:lambda_dent_dash/view/bills/bills_page.dart';
+import 'package:lambda_dent_dash/view/cases/cases_list_page.dart';
 import 'package:lambda_dent_dash/view/home_page.dart';
 // import 'package:flutter_web_dashboard/helpers/pages/Complaints/complaints.dart';
 // import 'package:flutter_web_dashboard/helpers/pages/Conditions/conditions.dart';
@@ -21,6 +22,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return _getPageRoute(HomePage());
     case billsPageRoute:
       return _getPageRoute(BillsPage());
+    case casesPageRoute:
+      return _getPageRoute(CasesListPage());
     // case gradesPageRoute:
     //   return _getPageRoute(GradesPage());
     // case incrementPageRoute:

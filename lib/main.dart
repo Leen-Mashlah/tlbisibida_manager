@@ -6,6 +6,8 @@ import 'package:lambda_dent_dash/navigation_controller.dart';
 import 'package:lambda_dent_dash/routes.dart';
 import 'package:lambda_dent_dash/view/authentication/authentication.dart';
 import 'package:lambda_dent_dash/view/bills/bills_page.dart';
+import 'package:lambda_dent_dash/view/cases/cases_list_page.dart';
+import 'package:lambda_dent_dash/view/cases/cases_weekly_calendar.dart';
 import 'package:lambda_dent_dash/view/clients/client_details_page.dart';
 import 'package:lambda_dent_dash/view/clients/clients_screen.dart';
 import 'package:lambda_dent_dash/view/clients/clients_table.dart';
@@ -47,9 +49,9 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.teal,
         primaryColor: cyan300,
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal),
-        scaffoldBackgroundColor: cyan100,
+        scaffoldBackgroundColor: cyan50,
       ),
-      home: (ClientDetailsPage()),
+      home: (SiteLayout()),
     );
   }
 }

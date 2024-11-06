@@ -11,6 +11,9 @@ const clientPageRoute = "/clients";
 const billsPageDisplayName = "Bills";
 const billsPageRoute = "/bills";
 
+const casesPageDisplayName = "Cases";
+const casesPageRoute = "/cases";
+
 const authenticationPageDisplayName = "Bills";
 const authenticationPageRoute = "/";
 

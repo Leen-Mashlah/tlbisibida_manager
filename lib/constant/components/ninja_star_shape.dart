@@ -71,7 +71,7 @@ class NinjaStarShape extends StatelessWidget {
         splashColor: Colors.transparent,
         highlightColor: Colors.transparent,
         onTap: () {
-          navcontrol.navigateTo('billsPageRoute');
+          navcontrol.navigateTo(route);
         },
         child: Stack(
           children: [
