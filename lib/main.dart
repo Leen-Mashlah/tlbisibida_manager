@@ -8,6 +8,7 @@ import 'package:lambda_dent_dash/view/authentication/authentication.dart';
 import 'package:lambda_dent_dash/view/bills/bills_page.dart';
 import 'package:lambda_dent_dash/view/cases/cases_list_page.dart';
 import 'package:lambda_dent_dash/view/cases/cases_weekly_calendar.dart';
+import 'package:lambda_dent_dash/view/cases/case_details.dart';
 import 'package:lambda_dent_dash/view/clients/client_details_page.dart';
 import 'package:lambda_dent_dash/view/clients/clients_screen.dart';
 import 'package:lambda_dent_dash/view/clients/clients_table.dart';
@@ -51,7 +52,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal),
         scaffoldBackgroundColor: cyan50,
       ),
-      home: (SiteLayout()),
+      home: (CaseDetails()),
     );
   }
 }
