@@ -2,13 +2,17 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:get/get.dart';
 import 'package:lambda_dent_dash/constant/constants/constants.dart';
+import 'package:lambda_dent_dash/navigation_controller.dart';
 
 class NinjaStarShape extends StatelessWidget {
   const NinjaStarShape({super.key});
 
   @override
   Widget build(BuildContext context) {
+    NavigationController navcontrol = Get.put(NavigationController());
+
     return Container(
       child: Center(
         child: Stack(
@@ -17,9 +21,10 @@ class NinjaStarShape extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  blade('الحالات'),
+                  blade('الحالات', navcontrol, 'casesPageRoute'),
                   Transform.rotate(
-                      angle: 180 * pi / 180, child: blade("الفواتير")),
+                      angle: 180 * pi / 180,
+                      child: blade("الفواتير", navcontrol, 'billsPageRoute')),
                 ],
               ),
             ),
@@ -28,9 +33,12 @@ class NinjaStarShape extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Transform.rotate(
-                      angle: -90 * pi / 180, child: blade("الاحصائيات")),
+                      angle: -90 * pi / 180,
+                      child: blade(
+                          "الاحصائيات", navcontrol, 'statisticsPageRoute')),
                   Transform.rotate(
-                      angle: 90 * pi / 180, child: blade("المخزن")),
+                      angle: 90 * pi / 180,
+                      child: blade("المخزن", navcontrol, 'inventoryPageRoute')),
                 ],
               ),
             ),
@@ -54,7 +62,7 @@ class NinjaStarShape extends StatelessWidget {
     );
   }
 
-  Widget blade(String data) {
+  Widget blade(String data, NavigationController navcontrol, String route) {
     return ClipPath(
       clipper: _Triangle(),
       clipBehavior: Clip.antiAlias,
@@ -62,7 +70,9 @@ class NinjaStarShape extends StatelessWidget {
         hoverColor: Colors.transparent,
         splashColor: Colors.transparent,
         highlightColor: Colors.transparent,
-        onTap: () {},
+        onTap: () {
+          navcontrol.navigateTo('billsPageRoute');
+        },
         child: Stack(
           children: [
             Container(

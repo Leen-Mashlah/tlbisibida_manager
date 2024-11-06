@@ -1,80 +1,53 @@
+import 'package:lambda_dent_dash/view/authentication/authentication.dart';
+
 const rootRoute = "/";
 
-const employeesPageDisplayName = "Employees";
-const employeesPageRoute = "/employees";
+const homePageDisplayName = "Home";
+const homePageRoute = "/home";
 
-const incrementPageDisplayName = "Increment";
-const incrementPageRoute = "/increment";
+const clientPageDisplayName = "Clients";
+const clientPageRoute = "/clients";
 
-const gradesPageDisplayName = "Grades";
-const gradesPageRoute = "/grades";
+const billsPageDisplayName = "Bills";
+const billsPageRoute = "/bills";
 
-const complaintsPageDisplayName = "Complaints";
-const complaintsPageRoute = "/complaints";
+const authenticationPageDisplayName = "Bills";
+const authenticationPageRoute = "/";
 
-const incentivePageDisplayName = "Incentive";
-const incentivePageRoute = "/incentive";
 
-const incentiveShareDisplayName = "Incentives Share";
-const incentiveShareRoute = "/incentiveshare";
+// class MenuItem {
+//   final String name;
+//   final String route;
 
-const conditionsPageDisplayName = "Conditions";
-const conditionsPageRoute = "/conditions";
+//   MenuItem(this.name, this.route);
+// }
 
-const reportsPageDisplayName = "ٌReports";
-const reportsPageRoute = "/reports";
+// List<MenuItem> sideMenuItemRoutes = [
+//   MenuItem(employeesPageDisplayName, employeesPageRoute),
+//   MenuItem(incrementPageDisplayName, incrementPageRoute),
+//   MenuItem(gradesPageDisplayName, gradesPageRoute),
+//   MenuItem(complaintsPageDisplayName, complaintsPageRoute),
+//   MenuItem(incentivePageDisplayName, incentivePageRoute),
+//   MenuItem(incentiveShareDisplayName, incentiveShareRoute),
+//   MenuItem(conditionsPageDisplayName, conditionsPageRoute),
+//   MenuItem(reportsPageDisplayName, reportsPageRoute),
+//   MenuItem(filesPageDisplayName, filesPageRoute),
+//   MenuItem(aboutPageDisplayName, aboutPageRoute),
+//   // MenuItem(overviewPageDisplayName, overviewPageRoute),
+//   // MenuItem(driversPageDisplayName, driversPageRoute),
+//   // MenuItem(clientsPageDisplayName, clientsPageRoute),
+//   MenuItem(authenticationPageDisplayName, authenticationPageRoute),
+// ];
 
-const filesPageDisplayName = "Files";
-const filesPageRoute = "/files";
+// List<MenuItem> fmSideMenuItemRoutes = [
+//   MenuItem(incrementPageDisplayName, incrementPageRoute),
+//   MenuItem(gradesPageDisplayName, gradesPageRoute),
+//   MenuItem(authenticationPageDisplayName, authenticationPageRoute),
+// ];
 
-const aboutPageDisplayName = "About";
-const aboutPageRoute = "/about";
-
-const overviewPageDisplayName = "Overview";
-const overviewPageRoute = "/overview";
-
-const driversPageDisplayName = "Drivers";
-const driversPageRoute = "/drivers";
-
-const clientsPageDisplayName = "Clients";
-const clientsPageRoute = "/clients";
-
-const authenticationPageDisplayName = "Log out";
-const authenticationPageRoute = "/auth";
-
-class MenuItem {
-  final String name;
-  final String route;
-
-  MenuItem(this.name, this.route);
-}
-
-List<MenuItem> sideMenuItemRoutes = [
-  MenuItem(employeesPageDisplayName, employeesPageRoute),
-  MenuItem(incrementPageDisplayName, incrementPageRoute),
-  MenuItem(gradesPageDisplayName, gradesPageRoute),
-  MenuItem(complaintsPageDisplayName, complaintsPageRoute),
-  MenuItem(incentivePageDisplayName, incentivePageRoute),
-  MenuItem(incentiveShareDisplayName, incentiveShareRoute),
-  MenuItem(conditionsPageDisplayName, conditionsPageRoute),
-  MenuItem(reportsPageDisplayName, reportsPageRoute),
-  MenuItem(filesPageDisplayName, filesPageRoute),
-  MenuItem(aboutPageDisplayName, aboutPageRoute),
-  // MenuItem(overviewPageDisplayName, overviewPageRoute),
-  // MenuItem(driversPageDisplayName, driversPageRoute),
-  // MenuItem(clientsPageDisplayName, clientsPageRoute),
-  MenuItem(authenticationPageDisplayName, authenticationPageRoute),
-];
-
-List<MenuItem> fmSideMenuItemRoutes = [
-  MenuItem(incrementPageDisplayName, incrementPageRoute),
-  MenuItem(gradesPageDisplayName, gradesPageRoute),
-  MenuItem(authenticationPageDisplayName, authenticationPageRoute),
-];
-
-List<MenuItem> hrSideMenuItemRoutes = [
-  MenuItem(employeesPageDisplayName, employeesPageRoute),
-  MenuItem(complaintsPageDisplayName, complaintsPageRoute),
-  MenuItem(aboutPageDisplayName, aboutPageRoute),
-  MenuItem(authenticationPageDisplayName, authenticationPageRoute),
-];
+// List<MenuItem> hrSideMenuItemRoutes = [
+//   MenuItem(employeesPageDisplayName, employeesPageRoute),
+//   MenuItem(complaintsPageDisplayName, complaintsPageRoute),
+//   MenuItem(aboutPageDisplayName, aboutPageRoute),
+//   MenuItem(authenticationPageDisplayName, authenticationPageRoute),
+// ];

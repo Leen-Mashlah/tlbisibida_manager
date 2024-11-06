@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:lambda_dent_dash/constant/constants/constants.dart';
+import 'package:lambda_dent_dash/dio/dio.dart';
+import 'package:lambda_dent_dash/navigation_controller.dart';
+import 'package:lambda_dent_dash/routes.dart';
+import 'package:lambda_dent_dash/view/authentication/authentication.dart';
 import 'package:lambda_dent_dash/view/bills/bills_page.dart';
-import 'package:lambda_dent_dash/view/clients/clients_screen.dart';
 import 'package:lambda_dent_dash/view/site_layout.dart';
 
 void main() {
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  DioHelper.init();
+  Get.put(NavigationController());
+
   runApp(const MyApp());
 }
 
@@ -14,16 +22,31 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
+    return GetMaterialApp(
+      initialRoute: rootRoute,
+      // unknownRoute: GetPage(
+      //     name: '/not-found',
+      //     page: () => const PageNotFound(),
+      //     transition: Transition.fadeIn),
+      getPages: [
+        GetPage(
+            name: rootRoute,
+            page: () {
+              return SiteLayout();
+            }),
+        GetPage(
+            name: authenticationPageRoute, page: () => AuthenticationPage()),
+      ],
+      title: 'LambdaDent Admin Dashboard',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.green,
+        useMaterial3: true,
+        primarySwatch: Colors.teal,
         primaryColor: cyan300,
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.greenAccent),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal),
         scaffoldBackgroundColor: cyan100,
       ),
-      home: (BillsPage()),
+      //home: (BillsPage()),
     );
   }
 }

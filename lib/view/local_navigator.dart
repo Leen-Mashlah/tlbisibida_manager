@@ -7,5 +7,5 @@ import 'package:lambda_dent_dash/routes.dart';
 Navigator localNavigator() => Navigator(
       key: navigationController.navigatorKey,
       onGenerateRoute: generateRoute,
-      initialRoute: employeesPageRoute,
+      initialRoute: homePageRoute,
     );
