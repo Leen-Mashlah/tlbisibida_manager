@@ -45,7 +45,7 @@ class ClientDetailsPage extends StatelessWidget {
                           selected: state
                               .selected(choices[i] == 'cases' ? true : false),
                           onSelected: state
-                              .onSelected(choices[i] == 'bills' ? true : false),
+                              .onSelected(choices[i] == 'cases' ? true : false),
                           label: Text(
                               choices[i] == 'cases' ? 'الحالات' : 'الفواتير'),
                         );
