@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 
 import 'package:lambda_dent_dash/constant/components/custom_text.dart';
 import 'package:lambda_dent_dash/constant/constants/constants.dart';
-import 'package:lambda_dent_dash/view/clients/clients_screen.dart';
+import 'package:lambda_dent_dash/view/bills/components/bill_details_dialog.dart';
 
 /// Example without datasource
 // ignore: must_be_immutable
-class ClientsTable extends StatelessWidget {
+class ClientBillsTable extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -43,21 +43,14 @@ class ClientsTable extends StatelessWidget {
                 DataColumn(
                   label: Center(
                       child: Text(
-                    'اسم الزبون',
+                    'رقم الفاتورة',
                     style: TextStyle(color: cyan300),
                   )),
                 ),
                 DataColumn(
                   label: Center(
                       child: Text(
-                    'رقم الهاتف',
-                    style: TextStyle(color: cyan300),
-                  )),
-                ),
-                DataColumn(
-                  label: Center(
-                      child: Text(
-                    'العنوان',
+                    'تاريخ الفاتورة',
                     style: TextStyle(color: cyan300),
                   )),
                 ),
@@ -71,7 +64,7 @@ class ClientsTable extends StatelessWidget {
                       onPressed: () {
                         showDialog(
                           context: context,
-                          builder: (context) => ClientsPage(),
+                          builder: (context) => BillDetailsDialog(),
                         );
                       },
                       icon: Icon(
@@ -81,10 +74,9 @@ class ClientsTable extends StatelessWidget {
                     ))),
                     DataCell(Center(
                         child: CustomText(
-                      text: 'تحسين',
+                      text: '001',
                     ))),
-                    DataCell(Center(child: CustomText(text: '0992532588'))),
-                    DataCell(Center(child: CustomText(text: 'هونولولو'))),
+                    DataCell(Center(child: CustomText(text: '5/11/2024'))),
                   ],
                 ),
               ),

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:lambda_dent_dash/constant/constants/constants.dart';
 import 'package:lambda_dent_dash/view/bills/bills_page.dart';
+import 'package:lambda_dent_dash/view/clients/client_details_page.dart';
 import 'package:lambda_dent_dash/view/clients/clients_screen.dart';
+import 'package:lambda_dent_dash/view/clients/clients_table.dart';
 import 'package:lambda_dent_dash/view/site_layout.dart';
 
 void main() {
@@ -23,7 +25,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.greenAccent),
         scaffoldBackgroundColor: cyan100,
       ),
-      home: (BillsPage()),
+      home: (ClientDetailsPage()),
     );
   }
 }
