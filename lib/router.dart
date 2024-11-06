@@ -1,6 +1,7 @@
- import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:lambda_dent_dash/routes.dart';
-import 'package:lambda_dent_dash/view/site_layout.dart';
+import 'package:lambda_dent_dash/view/bills/bills_page.dart';
+import 'package:lambda_dent_dash/view/home_page.dart';
 // import 'package:flutter_web_dashboard/helpers/pages/Complaints/complaints.dart';
 // import 'package:flutter_web_dashboard/helpers/pages/Conditions/conditions.dart';
 // import 'package:flutter_web_dashboard/helpers/pages/Employees/employees.dart';
@@ -16,8 +17,10 @@ import 'package:lambda_dent_dash/view/site_layout.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
-    case employeesPageRoute:
-      return _getPageRoute(SiteLayout());
+    case homePageRoute:
+      return _getPageRoute(HomePage());
+    case billsPageRoute:
+      return _getPageRoute(BillsPage());
     // case gradesPageRoute:
     //   return _getPageRoute(GradesPage());
     // case incrementPageRoute:
@@ -38,8 +41,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     //   return _getPageRoute(DriversPage());
     // case clientsPageRoute:
     //   return _getPageRoute(ClientsPage());
-     default:
-       return _getPageRoute(SiteLayout());
+    default:
+      return _getPageRoute(HomePage());
   }
 }
 
