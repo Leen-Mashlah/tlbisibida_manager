@@ -1,33 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:lambda_dent_dash/constant/components/date_picker.dart';
-import 'package:lambda_dent_dash/constant/components/default_button.dart';
-import 'package:lambda_dent_dash/constant/components/default_textfield.dart';
 import 'package:lambda_dent_dash/constant/components/float_button.dart';
 import 'package:lambda_dent_dash/constant/constants/constants.dart';
-import 'package:lambda_dent_dash/view/bills/bills_table.dart';
 import 'package:lambda_dent_dash/view/bills/components/add_bill_dialog.dart';
 import 'package:lambda_dent_dash/view/cases/case_details_table.dart';
-import 'package:lambda_dent_dash/view/clients/clients_table.dart';
 
 class CaseDetails extends StatelessWidget {
   CaseDetails({super.key});
-  TextEditingController _controller = new TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Padding(
-      padding: const EdgeInsets.symmetric(vertical: 30),
-      child: Stack(
-        children: [
-          SingleChildScrollView(
+        body: Stack(
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 15),
+          child: SingleChildScrollView(
               child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 40),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Container(
+                  clipBehavior: Clip.antiAlias,
                   width: 400,
-                  height: 700,
+                  height: 600,
                   decoration: BoxDecoration(
                       color: cyan300,
                       border: Border.all(color: cyan300, width: .5),
@@ -36,7 +31,7 @@ class CaseDetails extends StatelessWidget {
                 ),
                 Container(
                   width: 400,
-                  height: 700,
+                  height: 600,
                   decoration: BoxDecoration(
                       color: cyan300,
                       border: Border.all(color: cyan300, width: .5),
@@ -48,7 +43,7 @@ class CaseDetails extends StatelessWidget {
                       border: Border.all(color: cyan500, width: .5),
                       borderRadius: BorderRadius.circular(50)),
                   width: 400,
-                  height: 700,
+                  height: 600,
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
@@ -88,7 +83,7 @@ class CaseDetails extends StatelessWidget {
                           height: 15,
                         ),
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Column(
                               children: [
@@ -157,7 +152,7 @@ class CaseDetails extends StatelessWidget {
                           height: 15,
                         ),
                         Text(
-                          'تاريخ الإنشاء',
+                          'تاريخ إنشاء الطلب',
                           style: TextStyle(color: cyan600, fontSize: 16),
                         ),
                         Text('6/10/2024'),
@@ -173,10 +168,10 @@ class CaseDetails extends StatelessWidget {
                           height: 15,
                         ),
                         Text(
-                          'تاريخ التوصيل',
+                          'تاريخ التسليم',
                           style: TextStyle(color: cyan600, fontSize: 16),
                         ),
-                        Text('6/10/2024'),
+                        Text('20/10/2024'),
                         SizedBox(
                           height: 15,
                         ),
@@ -189,12 +184,12 @@ class CaseDetails extends StatelessWidget {
                           height: 15,
                         ),
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Column(
                               children: [
                                 Text(
-                                  'تحتاج إلى إعادة',
+                                  ' حالة إعادة',
                                   style:
                                       TextStyle(color: cyan600, fontSize: 16),
                                 ),
@@ -298,19 +293,19 @@ class CaseDetails extends StatelessWidget {
               ],
             ),
           )),
-          Positioned(
-            bottom: 20,
-            right: 20,
-            child: FloatButton(
-                icon: Icons.add,
-                onTap: () {
-                  showDialog(
-                      context: context, builder: (context) => AddBillDialog());
-                },
-                color: cyan300),
+        ),
+        Positioned(
+          bottom: 20,
+          right: 20,
+          child: FloatButton(
+            icon: Icons.add,
+            onTap: () {
+              showDialog(
+                  context: context, builder: (context) => AddBillDialog());
+            },
           ),
-        ],
-      ),
+        ),
+      ],
     ));
   }
 }

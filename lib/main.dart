@@ -5,12 +5,9 @@ import 'package:lambda_dent_dash/dio/dio.dart';
 import 'package:lambda_dent_dash/navigation_controller.dart';
 import 'package:lambda_dent_dash/routes.dart';
 import 'package:lambda_dent_dash/view/authentication/authentication.dart';
-import 'package:lambda_dent_dash/view/bills/bills_page.dart';
-import 'package:lambda_dent_dash/view/cases/cases_list_page.dart';
+
 import 'package:lambda_dent_dash/view/cases/case_details.dart';
-import 'package:lambda_dent_dash/view/clients/client_details_page.dart';
-import 'package:lambda_dent_dash/view/clients/clients_screen.dart';
-import 'package:lambda_dent_dash/view/clients/clients_table.dart';
+
 import 'package:lambda_dent_dash/view/site_layout.dart';
 
 void main() {
@@ -51,7 +48,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal),
         scaffoldBackgroundColor: cyan50,
       ),
-      home: (CaseDetails()),
+      home: (SiteLayout()),
     );
   }
 }

@@ -5,10 +5,10 @@ AppBar topNavigationBar(BuildContext context) => AppBar(
       scrolledUnderElevation: 1,
       leading: Image.asset(
         'assets/logo_v2.png',
-        width: 32,
-        height: 32,
+        width: 24,
+        height: 24,
       ),
-      title: Text('data,'),
+      title: Text('Page Title'),
       iconTheme: const IconThemeData(color: cyan500),
       elevation: 0,
       backgroundColor: cyan100,
