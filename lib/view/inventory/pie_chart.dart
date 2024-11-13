@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'package:lambda_dent_dash/constant/constants/constants.dart';
 import 'package:lambda_dent_dash/view/inventory/secondary_chart.dart';
 
 class InteractiveDonutChart extends StatefulWidget {
@@ -30,7 +31,7 @@ class _InteractiveDonutChartState extends State<InteractiveDonutChart> {
             ),
             borderData: FlBorderData(show: false),
             sectionsSpace: 0,
-            centerSpaceRadius: 200,
+            centerSpaceRadius: 180,
             sections: showingSections(),
           ),
         ),
@@ -48,7 +49,7 @@ class _InteractiveDonutChartState extends State<InteractiveDonutChart> {
       switch (i) {
         case 0:
           return PieChartSectionData(
-            color: Colors.blue,
+            color: cyan500,
             value: 40,
             title: '40%',
             radius: radius,
@@ -56,7 +57,7 @@ class _InteractiveDonutChartState extends State<InteractiveDonutChart> {
           );
         case 1:
           return PieChartSectionData(
-            color: Colors.yellow,
+            color: cyan400,
             value: 30,
             title: '30%',
             radius: radius,
@@ -64,7 +65,7 @@ class _InteractiveDonutChartState extends State<InteractiveDonutChart> {
           );
         case 2:
           return PieChartSectionData(
-            color: Colors.pink,
+            color: cyan300,
             value: 15,
             title: '15%',
             radius: radius,
@@ -72,7 +73,7 @@ class _InteractiveDonutChartState extends State<InteractiveDonutChart> {
           );
         case 3:
           return PieChartSectionData(
-            color: Colors.green,
+            color: cyan200,
             value: 15,
             title: '15%',
             radius: radius,
