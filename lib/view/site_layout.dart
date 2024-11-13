@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lambda_dent_dash/constant/components/ninja_star_shape.dart';
 import 'package:lambda_dent_dash/view/cases/cases_list_page.dart';
-import 'package:lambda_dent_dash/view/cases/cases_weekly_calendar.dart';
 import 'package:lambda_dent_dash/view/home_page.dart';
 import 'package:lambda_dent_dash/view/local_navigator.dart';
 import 'package:lambda_dent_dash/view/reponsiveness.dart';
