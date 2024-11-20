@@ -1,5 +1,7 @@
+import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:lambda_dent_dash/constant/components/default_textfield.dart';
 import 'package:lambda_dent_dash/constant/constants/constants.dart';
 import 'package:lambda_dent_dash/view/inventory/pie_chart.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
@@ -134,74 +136,242 @@ class InventoryPage extends StatelessWidget {
 
   Widget itemcard(BuildContext context, List info, int index,
       {VoidCallback? onTap}) {
-    return InkWell(
-      onTap: onTap,
-      child: Card(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(11.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+    return FlipCard(
+        fill: Fill
+            .fillBack, // Fill the back side of the card to make in the same size as the front.
+        direction: FlipDirection.HORIZONTAL, // default
+        side: CardSide.FRONT, // The side to initially display.
+        front: Container(
+            child: Card(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(11.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Text(
+                      info[index]['name'],
+                      style: TextStyle(color: cyan500, fontSize: 18),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      height: .5,
+                      width: 100,
+                      color: cyan200,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                        height: 170,
+                        child: PercentCircle(context, info[index])),
+                  ],
+                ),
+              ),
+              Row(
+                //mainAxisAlignment: MainAxisAlignment.,
                 children: [
-                  Text(
-                    info[index]['name'],
-                    style: TextStyle(color: cyan500, fontSize: 18),
+                  Expanded(
+                    child: InkWell(
+                      onTap: () {
+                        showDialog(
+                            context: context,
+                            builder: (context) {
+                              return Dialog(
+                                  child: Container(
+                                height: 500,
+                                width: 500,
+                                color: cyan500,
+                              ));
+                            });
+                      },
+                      child: Container(
+                        height: 50,
+                        decoration: BoxDecoration(
+                          color: Colors.red[100],
+                        ),
+                        child: Icon(
+                          Icons.delete_outline_rounded,
+                          color: Colors.redAccent,
+                        ),
+                      ),
+                    ),
                   ),
-                  SizedBox(
-                    height: 10,
+                  Expanded(
+                    child: InkWell(
+                      onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (context) {
+                            TextEditingController _namecontroller =
+                                new TextEditingController();
+                            return Dialog(
+                              child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 30, vertical: 15),
+                                  child: SingleChildScrollView(
+                                      child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceAround,
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                        Text('تعديل عنصر'),
+                                        SizedBox(
+                                          height: 20,
+                                        ),
+                                        defaultTextField(
+                                          _namecontroller,
+                                          context,
+                                          'اسم العنصر',
+                                        )
+                                      ]))),
+                            );
+                          },
+                        );
+                      },
+                      child: Container(
+                        height: 50,
+                        decoration: BoxDecoration(
+                          color: cyan200,
+                        ),
+                        child: Icon(
+                          Icons.edit_rounded,
+                          color: cyan400,
+                        ),
+                      ),
+                    ),
                   ),
-                  Container(
-                    height: .5,
-                    width: 100,
-                    color: cyan200,
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Container(
-                      height: 170, child: PercentCircle(context, info[index])),
                 ],
               ),
-            ),
-            Row(
-              //mainAxisAlignment: MainAxisAlignment.,
+            ],
+          ),
+        )),
+        back: Container(
+          child: Card(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Expanded(
-                  child: InkWell(
-                    child: Container(
-                      height: 50,
-                      decoration: BoxDecoration(
-                        color: Colors.red[100],
+                Padding(
+                  padding: const EdgeInsets.all(11.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Text(
+                        info[index]['name'],
+                        style: TextStyle(color: cyan500, fontSize: 18),
                       ),
-                      child: Icon(
-                        Icons.delete_outline_rounded,
-                        color: Colors.redAccent,
+                      SizedBox(
+                        height: 10,
                       ),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: InkWell(
-                    child: Container(
-                      height: 50,
-                      decoration: BoxDecoration(
+                      Container(
+                        height: .5,
+                        width: 100,
                         color: cyan200,
                       ),
-                      child: Icon(
-                        Icons.edit_rounded,
-                        color: cyan400,
+                      SizedBox(
+                        height: 10,
+                      ),
+                      ClipPath(
+                        clipper: _TriangleCard(),
+                        clipBehavior: Clip.antiAlias,
+                        child: Container(
+                            height: 170,
+                            width: 250,
+                            color: cyan50,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Text('سعر العنصر الواحد/قطعة'),
+                                Text(
+                                  '50.000',
+                                  style: TextStyle(color: cyan400),
+                                ),
+                                Text('تاريخ آخر شراء'),
+                                Text(
+                                  '2/5/2024',
+                                  style: TextStyle(color: cyan300),
+                                ),
+                                Text('الحد الادنى'),
+                                Text(
+                                  '50',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w600,
+                                      color:
+                                          Color.fromARGB(255, 228, 132, 132)),
+                                ),
+                              ],
+                            )),
+                      ),
+                    ],
+                  ),
+                ),
+                Row(
+                  //mainAxisAlignment: MainAxisAlignment.,
+                  children: [
+                    Expanded(
+                      child: InkWell(
+                        onTap: () {
+                          showDialog(
+                              context: context,
+                              builder: (context) {
+                                return Dialog(
+                                    child: Container(
+                                  height: 500,
+                                  width: 500,
+                                  color: cyan500,
+                                ));
+                              });
+                        },
+                        child: Container(
+                          height: 50,
+                          decoration: BoxDecoration(
+                            color: Colors.red[100],
+                          ),
+                          child: Icon(
+                            Icons.delete_outline_rounded,
+                            color: Colors.redAccent,
+                          ),
+                        ),
                       ),
                     ),
-                  ),
+                    Expanded(
+                      child: InkWell(
+                        onTap: () {
+                          showDialog(
+                            context: context,
+                            builder: (context) {
+                              return Dialog(
+                                child: Container(
+                                  height: 500,
+                                  width: 500,
+                                  color: cyan500,
+                                ),
+                              );
+                            },
+                          );
+                        },
+                        child: Container(
+                          height: 50,
+                          decoration: BoxDecoration(
+                            color: cyan200,
+                          ),
+                          child: Icon(
+                            Icons.edit_rounded,
+                            color: cyan400,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
-          ],
-        ),
-      ),
-    );
+          ),
+        ));
   }
 
   Widget PercentCircle(BuildContext context, Map page_info) {
@@ -248,4 +418,28 @@ class InventoryPage extends StatelessWidget {
       ),
     );
   }
+}
+
+class _TriangleCard extends CustomClipper<Path> {
+  // _Triangle(int x,int y){}
+  @override
+  Path getClip(Size size) {
+    final Path path = Path();
+    //0,0
+    path.lineTo(0, 0);
+    path.lineTo(size.width / 3, size.height);
+    path.lineTo(size.width * 2 / 3, size.height);
+    path.lineTo(size.width, 0);
+    path.lineTo(0, 0);
+    // path.lineTo(size.width/2, 0);
+    // path.lineTo(size.width, size.height);
+    // path.lineTo(0, size.height);
+    //   path.lineTo(size.width / 2, 0);
+
+    path.close();
+    return path;
+  }
+
+  @override
+  bool shouldReclip(covariant CustomClipper<Path> oldClipper) => false;
 }
