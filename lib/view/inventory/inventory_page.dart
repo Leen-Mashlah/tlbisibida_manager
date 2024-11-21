@@ -1,6 +1,8 @@
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:lambda_dent_dash/constant/components/default_button.dart';
 import 'package:lambda_dent_dash/constant/components/default_textfield.dart';
 import 'package:lambda_dent_dash/constant/constants/constants.dart';
 import 'package:lambda_dent_dash/view/inventory/pie_chart.dart';
@@ -172,81 +174,7 @@ class InventoryPage extends StatelessWidget {
                   ],
                 ),
               ),
-              Row(
-                //mainAxisAlignment: MainAxisAlignment.,
-                children: [
-                  Expanded(
-                    child: InkWell(
-                      onTap: () {
-                        showDialog(
-                            context: context,
-                            builder: (context) {
-                              return Dialog(
-                                  child: Container(
-                                height: 500,
-                                width: 500,
-                                color: cyan500,
-                              ));
-                            });
-                      },
-                      child: Container(
-                        height: 50,
-                        decoration: BoxDecoration(
-                          color: Colors.red[100],
-                        ),
-                        child: Icon(
-                          Icons.delete_outline_rounded,
-                          color: Colors.redAccent,
-                        ),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: InkWell(
-                      onTap: () {
-                        showDialog(
-                          context: context,
-                          builder: (context) {
-                            TextEditingController _namecontroller =
-                                new TextEditingController();
-                            return Dialog(
-                              child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 30, vertical: 15),
-                                  child: SingleChildScrollView(
-                                      child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceAround,
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: [
-                                        Text('تعديل عنصر'),
-                                        SizedBox(
-                                          height: 20,
-                                        ),
-                                        defaultTextField(
-                                          _namecontroller,
-                                          context,
-                                          'اسم العنصر', 
-                                        )
-                                      ]))),
-                            );
-                          },
-                        );
-                      },
-                      child: Container(
-                        height: 50,
-                        decoration: BoxDecoration(
-                          color: cyan200,
-                        ),
-                        child: Icon(
-                          Icons.edit_rounded,
-                          color: cyan400,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+              bottomActionButtons(context),
             ],
           ),
         )),
@@ -309,69 +237,234 @@ class InventoryPage extends StatelessWidget {
                     ],
                   ),
                 ),
-                Row(
-                  //mainAxisAlignment: MainAxisAlignment.,
-                  children: [
-                    Expanded(
-                      child: InkWell(
-                        onTap: () {
-                          showDialog(
-                              context: context,
-                              builder: (context) {
-                                return Dialog(
-                                    child: Container(
-                                  height: 500,
-                                  width: 500,
-                                  color: cyan500,
-                                ));
-                              });
-                        },
-                        child: Container(
-                          height: 50,
-                          decoration: BoxDecoration(
-                            color: Colors.red[100],
-                          ),
-                          child: Icon(
-                            Icons.delete_outline_rounded,
-                            color: Colors.redAccent,
-                          ),
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: InkWell(
-                        onTap: () {
-                          showDialog(
-                            context: context,
-                            builder: (context) {
-                              return Dialog(
-                                child: Container(
-                                  height: 500,
-                                  width: 500,
-                                  color: cyan500,
-                                ),
-                              );
-                            },
-                          );
-                        },
-                        child: Container(
-                          height: 50,
-                          decoration: BoxDecoration(
-                            color: cyan200,
-                          ),
-                          child: Icon(
-                            Icons.edit_rounded,
-                            color: cyan400,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                bottomActionButtons(context),
               ],
             ),
           ),
         ));
+  }
+
+  Row bottomActionButtons(BuildContext context) {
+    return Row(
+      children: [
+        Expanded(
+          child: InkWell(
+            onTap: () {
+              showDialog(
+                  context: context,
+                  builder: (context) {
+                    return itemDeleteConfirmationDialog(context);
+                  });
+            },
+            child: Container(
+              height: 50,
+              decoration: BoxDecoration(color: redbackground),
+              child: Icon(Icons.delete_outline_rounded, color: redmain),
+            ),
+          ),
+        ),
+        Expanded(
+          child: InkWell(
+            onTap: () {
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return itemAddEditDialog(context);
+                },
+              );
+            },
+            child: Container(
+              height: 50,
+              decoration: BoxDecoration(
+                color: cyan200,
+              ),
+              child: Icon(
+                Icons.edit_rounded,
+                color: cyan400,
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Dialog itemDeleteConfirmationDialog(BuildContext context) {
+    return Dialog(
+        child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Container(
+                decoration: BoxDecoration(
+                    border: Border.all(width: 2, color: redmid),
+                    borderRadius: BorderRadius.circular(20)),
+                width: MediaQuery.of(context).size.width / 4,
+                //height: MediaQuery.of(context).size.height / 1.3,
+                child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'حذف مادة',
+                            style: TextStyle(
+                                color: redmain,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          Container(
+                            height: .5,
+                            width: 100,
+                            color: redbackground,
+                            margin: EdgeInsets.symmetric(vertical: 10),
+                          ),
+                          Text('هل أنت متأكد من حذف هذه المادة؟'),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          redButton(
+                              text: 'تأكيد الحذف',
+                              function: () {
+                                Navigator.of(context).pop();
+                              })
+                        ])))));
+  }
+
+  Dialog itemAddEditDialog(BuildContext context) {
+    TextEditingController _itemnamecontroller =
+        TextEditingController(text: 'سماكة 10');
+    TextEditingController _itemunitcontroller =
+        TextEditingController(text: 'بلوكة');
+    TextEditingController _itemstandardquantitycontroller =
+        TextEditingController(text: '50');
+    TextEditingController _itemminimumquantitycontroller =
+        TextEditingController(text: '10');
+    final TextEditingController catmenuController = TextEditingController();
+    final TextEditingController subcatmenuController = TextEditingController();
+
+    return Dialog(
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Container(
+            decoration: BoxDecoration(
+                border: Border.all(width: 2, color: cyan200),
+                borderRadius: BorderRadius.circular(20)),
+            width: MediaQuery.of(context).size.width / 4,
+            height: MediaQuery.of(context).size.height / 1.3,
+            child: CustomScrollView(slivers: [
+              SliverFillRemaining(
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 8.0, horizontal: 32),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Text(
+                        'تعديل مادة',
+                        style: TextStyle(
+                            color: cyan400,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      Container(
+                        height: .5,
+                        width: 100,
+                        color: cyan200,
+                        margin: EdgeInsets.symmetric(vertical: 5),
+                      ),
+                      DropdownMenu<String>(
+                          //initialSelection: menuItems.first,
+                          width: MediaQuery.of(context).size.width / 4 - 16,
+                          controller: catmenuController,
+                          hintText: "اختر الصنف",
+                          initialSelection: 'صنف1',
+                          requestFocusOnTap: true,
+                          enableFilter: true,
+                          inputDecorationTheme: InputDecorationTheme(
+                            border: OutlineInputBorder(
+                                borderSide: const BorderSide(
+                                    color: cyan200, width: 1.0),
+                                borderRadius: StandardBorderRadius),
+                          ),
+                          menuStyle: MenuStyle(
+                              backgroundColor: WidgetStatePropertyAll(cyan100)),
+                          label: const Text('الصنف الرئيسي'),
+                          dropdownMenuEntries: [
+                            DropdownMenuEntry(
+                                value: 'صنف1', label: 'بلوكات زيركون'),
+                            DropdownMenuEntry(
+                                value: 'صنف2', label: 'بلوكات اكريل مؤقت'),
+                            DropdownMenuEntry(
+                                value: 'صنف3', label: 'بودرة خزف'),
+                            DropdownMenuEntry(value: 'صنف4', label: 'شمع'),
+                          ]),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      DropdownMenu<String>(
+                          //initialSelection: menuItems.first,
+                          //width: MediaQuery.of(context).size.width - 16.0,
+                          width: MediaQuery.of(context).size.width / 4 - 16,
+                          controller: subcatmenuController,
+                          hintText: "اختر الصنف",
+                          initialSelection: 'صنف1',
+                          requestFocusOnTap: true,
+                          enableFilter: true,
+                          inputDecorationTheme: InputDecorationTheme(
+                            border: OutlineInputBorder(
+                                borderSide: const BorderSide(
+                                    color: cyan200, width: 1.0),
+                                borderRadius: StandardBorderRadius),
+                          ),
+                          menuStyle: MenuStyle(
+                              backgroundColor: WidgetStatePropertyAll(cyan100)),
+                          label: const Text('الصنف الفرعي'),
+                          dropdownMenuEntries: [
+                            DropdownMenuEntry(value: 'صنف1', label: 'صيني'),
+                            DropdownMenuEntry(value: 'صنف2', label: 'ألماني'),
+                            DropdownMenuEntry(
+                                value: 'صنف3', label: 'ملتي لاير'),
+                            DropdownMenuEntry(
+                                value: 'صنف4', label: 'عالي شفوفية'),
+                            DropdownMenuEntry(value: 'صنف5', label: 'كتيم'),
+                          ]),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      defaultTextField(
+                        _itemnamecontroller,
+                        context,
+                        'اسم المادة',
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      defaultTextField(_itemunitcontroller, context, 'الواحدة'),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      defaultTextField(_itemstandardquantitycontroller, context,
+                          'الكمية القياسية'),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      defaultTextField(_itemminimumquantitycontroller, context,
+                          'الحد الأدنى للكمية'),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      defaultButton(
+                          text: 'تعديل',
+                          function: () {
+                            Navigator.of(context).pop();
+                          })
+                    ],
+                  ),
+                ),
+              ),
+            ])),
+      ),
+    );
   }
 
   Widget PercentCircle(BuildContext context, Map page_info) {

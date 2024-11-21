@@ -16,6 +16,11 @@ const Color cyan400 = Color.fromARGB(255, 41, 157, 144);
 const Color cyan500 = Color.fromARGB(255, 18, 124, 114);
 const Color cyan600 = Color.fromARGB(255, 11, 71, 65);
 
+//Danger Reds
+const Color redbackground = Color.fromARGB(255, 255, 205, 210);
+const Color redmid = Color.fromARGB(255, 221, 126, 136);
+const Color redmain = Color.fromARGB(255, 255, 82, 82);
+
 //Backgrounds
 const Color bgdark = Color.fromARGB(255, 14, 16, 30);
 const Color bglight = Color.fromARGB(255, 241, 255, 253);
