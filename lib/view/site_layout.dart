@@ -4,6 +4,7 @@ import 'package:lambda_dent_dash/view/cases/case_details.dart';
 import 'package:lambda_dent_dash/view/cases/cases_list_page.dart';
 import 'package:lambda_dent_dash/view/home_page.dart';
 import 'package:lambda_dent_dash/view/inventory/inventory_page.dart';
+import 'package:lambda_dent_dash/view/inventory/payments_log_page.dart';
 import 'package:lambda_dent_dash/view/local_navigator.dart';
 import 'package:lambda_dent_dash/view/reponsiveness.dart';
 import 'package:lambda_dent_dash/view/top_nav.dart';
@@ -19,7 +20,7 @@ class SiteLayout extends StatelessWidget {
       extendBodyBehindAppBar: false,
       appBar: topNavigationBar(context),
       body: ResponsiveWidget(
-        largeScreen: InventoryPage(),
+        largeScreen: PaymentsLogPage(),
       ),
     );
   }
