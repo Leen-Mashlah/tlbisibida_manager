@@ -2,10 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:lambda_dent_dash/constant/constants/constants.dart';
 // import 'package:power_overload/Shared/constants.dart';
 
-Widget FloatButton({VoidCallback? onTap, IconData? icon, Color? color}) {
+Widget FloatButton(
+    {VoidCallback? onTap,
+    // ValueChanged<bool>? hoverfunction,
+    IconData? icon,
+    Color? color}) {
   return Container(
     child: InkWell(
       onTap: onTap,
+      // onHover: hoverfunction,
       borderRadius: BorderRadius.circular(15),
       child: Container(
         width: 52.0,

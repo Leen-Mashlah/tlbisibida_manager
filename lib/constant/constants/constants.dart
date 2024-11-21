@@ -7,6 +7,7 @@ const Color blacktext = Colors.black;
 
 //Cyan Primaries
 const Color cyan50 = Color.fromARGB(255, 211, 241, 238);
+const Color cyan50op = Color.fromARGB(150, 211, 241, 238);
 const Color cyan100 = Color.fromARGB(255, 179, 240, 232);
 const Color cyan_navbar_600 = Color.fromARGB(150, 11, 71, 65);
 const Color cyan_navbar_300 = Color.fromARGB(150, 48, 195, 177);

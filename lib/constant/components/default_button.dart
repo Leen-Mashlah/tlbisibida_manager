@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:lambda_dent_dash/constant/constants/constants.dart';
+
 // import 'package:power_overload/Shared/constants.dart';
 Widget defaultButton({
   double width = 150,
   required String text,
   required VoidCallback function,
+  ValueChanged<bool>? hoverfunction,
   double heigh = 60,
   double? textsize,
 }) {
@@ -20,6 +22,7 @@ Widget defaultButton({
     height: heigh,
     child: TextButton(
       onPressed: function,
+      onHover: hoverfunction,
       child: Text(
         text,
         style: TextStyle(fontSize: textsize),
