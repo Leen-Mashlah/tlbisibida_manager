@@ -226,7 +226,7 @@ class InventoryPage extends StatelessWidget {
                                         defaultTextField(
                                           _namecontroller,
                                           context,
-                                          'اسم العنصر',
+                                          'اسم العنصر', 
                                         )
                                       ]))),
                             );
