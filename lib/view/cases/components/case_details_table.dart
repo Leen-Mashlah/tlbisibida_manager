@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 
 import 'package:lambda_dent_dash/constant/components/custom_text.dart';
 import 'package:lambda_dent_dash/constant/constants/constants.dart';
-import 'package:lambda_dent_dash/view/bills/components/bill_details_dialog.dart';
 
 /// Example without datasource
 // ignore: must_be_immutable
 class CaseDetailsTable extends StatelessWidget {
+  const CaseDetailsTable({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -15,9 +16,9 @@ class CaseDetailsTable extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.white,
           border: Border.all(color: cyan200, width: .5),
-          boxShadow: [
+          boxShadow: const [
             BoxShadow(
-                offset: const Offset(0, 6), color: Colors.grey, blurRadius: 12)
+                offset: Offset(0, 6), color: Colors.grey, blurRadius: 12)
           ],
           borderRadius: BorderRadius.circular(8),
         ),
@@ -54,7 +55,7 @@ class CaseDetailsTable extends StatelessWidget {
           ],
           rows: List<DataRow>.generate(
             20,
-            (index) => DataRow(
+            (index) => const DataRow(
               cells: [
                 DataCell(Center(
                     child: CustomText(

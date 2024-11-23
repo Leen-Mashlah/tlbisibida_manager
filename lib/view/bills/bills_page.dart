@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:lambda_dent_dash/constant/components/date_picker.dart';
-import 'package:lambda_dent_dash/constant/components/default_button.dart';
 import 'package:lambda_dent_dash/constant/components/default_textfield.dart';
 import 'package:lambda_dent_dash/constant/components/float_button.dart';
-import 'package:lambda_dent_dash/constant/constants/constants.dart';
 import 'package:lambda_dent_dash/view/bills/bills_table.dart';
 import 'package:lambda_dent_dash/view/bills/components/add_bill_dialog.dart';
-import 'package:lambda_dent_dash/view/clients/clients_table.dart';
 
 class BillsPage extends StatelessWidget {
   BillsPage({super.key});
-  TextEditingController _controller = new TextEditingController();
+  final TextEditingController _controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,25 +17,25 @@ class BillsPage extends StatelessWidget {
           SingleChildScrollView(
               child: Column(
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   SizedBox(
-                    child: defaultTextField(_controller, context, 'بحث',
-                        postfixicon: Icon(Icons.search_rounded)),
                     height: 40,
                     width: 200,
+                    child: defaultTextField(_controller, context, 'بحث',
+                        postfixicon: const Icon(Icons.search_rounded)),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 30,
                   ),
                   DropdownButton(
-                    icon: Icon(Icons.sort),
-                    hint: Text("الترتيب حسب"),
-                    items: [
+                    icon: const Icon(Icons.sort),
+                    hint: const Text("الترتيب حسب"),
+                    items: const [
                       DropdownMenuItem(value: 'BL1', child: Text('اسم الزبون')),
                       DropdownMenuItem(
                           value: 'BL2', child: Text('رقم الفاتورة')),
@@ -47,25 +43,26 @@ class BillsPage extends StatelessWidget {
                     ],
                     onChanged: (value) {},
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 30,
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
-              BillsTable(),
+              const BillsTable(),
             ],
           )),
           Positioned(
             bottom: 20,
             right: 20,
-            child: FloatButton(
+            child: floatButton(
               icon: Icons.add,
               onTap: () {
                 showDialog(
-                    context: context, builder: (context) => AddBillDialog());
+                    context: context,
+                    builder: (context) => const AddBillDialog());
               },
             ),
           ),

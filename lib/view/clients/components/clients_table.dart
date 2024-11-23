@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 
 import 'package:lambda_dent_dash/constant/components/custom_text.dart';
 import 'package:lambda_dent_dash/constant/constants/constants.dart';
-import 'package:lambda_dent_dash/view/bills/components/bill_details_dialog.dart';
+import 'package:lambda_dent_dash/view/clients/clients_screen.dart';
 
 /// Example without datasource
 // ignore: must_be_immutable
-class ClientBillsTable extends StatelessWidget {
+class ClientsTable extends StatelessWidget {
+  const ClientsTable({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -15,9 +17,9 @@ class ClientBillsTable extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.white,
           border: Border.all(color: cyan200, width: .5),
-          boxShadow: [
+          boxShadow: const [
             BoxShadow(
-                offset: const Offset(0, 6), color: Colors.grey, blurRadius: 12)
+                offset: Offset(0, 6), color: Colors.grey, blurRadius: 12)
           ],
           borderRadius: BorderRadius.circular(8),
         ),
@@ -43,14 +45,21 @@ class ClientBillsTable extends StatelessWidget {
                 DataColumn(
                   label: Center(
                       child: Text(
-                    'رقم الفاتورة',
+                    'اسم الزبون',
                     style: TextStyle(color: cyan300),
                   )),
                 ),
                 DataColumn(
                   label: Center(
                       child: Text(
-                    'تاريخ الفاتورة',
+                    'رقم الهاتف',
+                    style: TextStyle(color: cyan300),
+                  )),
+                ),
+                DataColumn(
+                  label: Center(
+                      child: Text(
+                    'العنوان',
                     style: TextStyle(color: cyan300),
                   )),
                 ),
@@ -64,19 +73,20 @@ class ClientBillsTable extends StatelessWidget {
                       onPressed: () {
                         showDialog(
                           context: context,
-                          builder: (context) => BillDetailsDialog(),
+                          builder: (context) => const ClientsPage(),
                         );
                       },
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.arrow_circle_left_outlined,
                         color: cyan300,
                       ),
                     ))),
-                    DataCell(Center(
+                    const DataCell(Center(
                         child: CustomText(
-                      text: '001',
+                      text: 'تحسين',
                     ))),
-                    DataCell(Center(child: CustomText(text: '5/11/2024'))),
+                    const DataCell(Center(child: CustomText(text: '0992532588'))),
+                    const DataCell(Center(child: CustomText(text: 'هونولولو'))),
                   ],
                 ),
               ),

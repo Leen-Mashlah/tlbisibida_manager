@@ -1,5 +1,6 @@
+// ignore_for_file: prefer_interpolation_to_compose_strings, prefer_adjacent_string_concatenation
+
 import 'package:flutter/material.dart';
-import 'package:lambda_dent_dash/constant/components/date_picker.dart';
 import 'package:lambda_dent_dash/constant/components/default_button.dart';
 import 'package:lambda_dent_dash/constant/constants/constants.dart';
 
@@ -18,18 +19,18 @@ class BillDetailsDialog extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text(
+              const Text(
                 'تفاصيل الفاتورة',
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 20),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               SizedBox(
                 width: 600,
                 child: ListView.separated(
-                    physics: BouncingScrollPhysics(),
+                    physics: const BouncingScrollPhysics(),
                     shrinkWrap: true,
                     itemBuilder: (BuildContext context, int index) =>
                         listItemBuilder(context, index),
@@ -37,7 +38,7 @@ class BillDetailsDialog extends StatelessWidget {
                     separatorBuilder: (BuildContext context, int index) =>
                         Container()),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Row(
@@ -50,8 +51,8 @@ class BillDetailsDialog extends StatelessWidget {
                           width: 1,
                         ),
                         borderRadius: BorderRadius.circular(20)),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
+                    child: const Padding(
+                      padding: EdgeInsets.symmetric(
                           horizontal: 18, vertical: 12),
                       child: Text(
                         '3.000.000',
@@ -61,16 +62,16 @@ class BillDetailsDialog extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 20,
                   ),
-                  Text(
+                  const Text(
                     'الفاتورة النهائية',
                     style: TextStyle(fontSize: 18),
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               defaultButton(
@@ -97,7 +98,7 @@ listItemBuilder(context, index) {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Text(
+            const Text(
               //controller.billsListModel!.data[index].case_id.toString(),
               '001',
               style: TextStyle(fontSize: 18, color: cyan600),
@@ -105,7 +106,7 @@ listItemBuilder(context, index) {
             ),
             Column(
               children: [
-                Text('Patient Name:' +
+                const Text('Patient Name:' +
                     ' ' +
                     //controller.billsListModel!.data[index].patient_name
                     'Rokaia'),
@@ -115,7 +116,7 @@ listItemBuilder(context, index) {
                     '09/12/2024'.toString().substring(0, 10)),
               ],
             ),
-            Text('Bill: ' +
+            const Text('Bill: ' +
                 //controller.billsListModel!.data[index].total_price.toString()
                 '3,000,000'),
             //style: TextStyle(fontSize: 22, color: cyan400),

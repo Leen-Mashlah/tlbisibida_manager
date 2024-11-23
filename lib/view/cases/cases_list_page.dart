@@ -11,7 +11,7 @@ class CasesListPage extends StatelessWidget {
       body: Stack(
         children: [
           Center(
-            child: Container(
+            child: SizedBox(
               height: 500,
               width: 1000,
               child: Row(
@@ -22,10 +22,10 @@ class CasesListPage extends StatelessWidget {
                     //   width: 50,
                     //   color: cyan400,
                     // ),
-                    _column('To Do', Icon(Icons.checklist), cyan400),
-                    _column('In Progress', Icon(Icons.work_history_rounded),
+                    _column('To Do', const Icon(Icons.checklist), cyan400),
+                    _column('In Progress', const Icon(Icons.work_history_rounded),
                         Colors.amber),
-                    _column('Need Confirmation', Icon(Icons.warning_rounded),
+                    _column('Need Confirmation', const Icon(Icons.warning_rounded),
                         Colors.redAccent),
                     // _columnEntity(),
                   ]),
@@ -34,7 +34,7 @@ class CasesListPage extends StatelessWidget {
           Positioned(
             bottom: 20,
             right: 20,
-            child: FloatButton(
+            child: floatButton(
               icon: Icons.add,
               onTap: () {},
             ),
@@ -67,7 +67,7 @@ Widget _column(String title, Widget icon, Color color) {
                       height: 25,
                       decoration: BoxDecoration(
                           color: color, borderRadius: BorderRadius.circular(5)),
-                      child: Center(
+                      child: const Center(
                           child: Text(
                         '5',
                         style: TextStyle(color: white),
@@ -82,7 +82,7 @@ Widget _column(String title, Widget icon, Color color) {
           },
           itemCount: 5,
           separatorBuilder: (context, index) {
-            return SizedBox(
+            return const SizedBox(
               height: 25,
             );
           },
@@ -110,22 +110,22 @@ Widget _itembuilder(
                 decoration: BoxDecoration(
                     color: color, borderRadius: BorderRadius.circular(5)),
                 child: icon),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
-            Text('Client Name'),
-            SizedBox(
+            const Text('Client Name'),
+            const SizedBox(
               height: 10,
             ),
-            Text('Patient Name'),
-            SizedBox(
+            const Text('Patient Name'),
+            const SizedBox(
               height: 10,
             ),
             Container(
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5), color: cyan100),
-              child: Padding(
-                padding: const EdgeInsets.all(4.0),
+              child: const Padding(
+                padding: EdgeInsets.all(4.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [

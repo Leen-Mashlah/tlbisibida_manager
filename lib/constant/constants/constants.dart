@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 import 'package:flutter/material.dart';
 
 // Text colors
@@ -27,8 +29,8 @@ const Color bgdark = Color.fromARGB(255, 14, 16, 30);
 const Color bglight = Color.fromARGB(255, 241, 255, 253);
 
 //Radius
-BorderRadius StandardBorderRadius = BorderRadius.circular(30.0);
-BorderRadius ActiveBorderRadius = BorderRadius.circular(10.0);
+BorderRadius standardBorderRadius = BorderRadius.circular(30.0);
+BorderRadius activeBorderRadius = BorderRadius.circular(10.0);
 
 //String baseUrl = "http://192.168.34.100:8000/api";
 

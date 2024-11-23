@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:lambda_dent_dash/constant/components/float_button.dart';
 import 'package:lambda_dent_dash/constant/constants/constants.dart';
 import 'package:lambda_dent_dash/view/bills/components/add_bill_dialog.dart';
-import 'package:lambda_dent_dash/view/cases/case_details_table.dart';
+import 'package:lambda_dent_dash/view/cases/components/case_details_table.dart';
 
 class CaseDetails extends StatelessWidget {
-  CaseDetails({super.key});
+  const CaseDetails({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +27,7 @@ class CaseDetails extends StatelessWidget {
                       color: cyan300,
                       border: Border.all(color: cyan300, width: .5),
                       borderRadius: BorderRadius.circular(50)),
-                  child: CaseDetailsTable(),
+                  child: const CaseDetailsTable(),
                 ),
                 Container(
                   width: 400,
@@ -47,15 +47,15 @@ class CaseDetails extends StatelessWidget {
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
-                        SizedBox(
+                        const SizedBox(
                           height: 15,
                         ),
-                        Text(
+                        const Text(
                           'اسم الزبون',
                           style: TextStyle(color: cyan600, fontSize: 16),
                         ),
-                        Text('تحسين التحسيني'),
-                        SizedBox(
+                        const Text('تحسين التحسيني'),
+                        const SizedBox(
                           height: 15,
                         ),
                         Container(
@@ -63,15 +63,15 @@ class CaseDetails extends StatelessWidget {
                           height: .3,
                           color: cyan300,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 15,
                         ),
-                        Text(
+                        const Text(
                           'اسم المريض',
                           style: TextStyle(color: cyan600, fontSize: 16),
                         ),
-                        Text('تحسين التحسيني'),
-                        SizedBox(
+                        const Text('تحسين التحسيني'),
+                        const SizedBox(
                           height: 15,
                         ),
                         Container(
@@ -79,13 +79,13 @@ class CaseDetails extends StatelessWidget {
                           height: .3,
                           color: cyan300,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 15,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            Column(
+                            const Column(
                               children: [
                                 Text(
                                   'العمر',
@@ -109,7 +109,7 @@ class CaseDetails extends StatelessWidget {
                             // SizedBox(
                             //   width: 10,
                             // ),
-                            Column(
+                            const Column(
                               children: [
                                 Text(
                                   'الجنس',
@@ -124,7 +124,7 @@ class CaseDetails extends StatelessWidget {
                             ),
                           ],
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 15,
                         ),
                         Container(
@@ -132,15 +132,15 @@ class CaseDetails extends StatelessWidget {
                           height: .3,
                           color: cyan300,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 15,
                         ),
-                        Text(
+                        const Text(
                           'اللون',
                           style: TextStyle(color: cyan600, fontSize: 16),
                         ),
-                        Text('B2'),
-                        SizedBox(
+                        const Text('B2'),
+                        const SizedBox(
                           height: 15,
                         ),
                         Container(
@@ -148,15 +148,15 @@ class CaseDetails extends StatelessWidget {
                           height: .3,
                           color: cyan300,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 15,
                         ),
-                        Text(
+                        const Text(
                           'تاريخ إنشاء الطلب',
                           style: TextStyle(color: cyan600, fontSize: 16),
                         ),
-                        Text('6/10/2024'),
-                        SizedBox(
+                        const Text('6/10/2024'),
+                        const SizedBox(
                           height: 15,
                         ),
                         Container(
@@ -164,15 +164,15 @@ class CaseDetails extends StatelessWidget {
                           height: .3,
                           color: cyan300,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 15,
                         ),
-                        Text(
+                        const Text(
                           'تاريخ التسليم',
                           style: TextStyle(color: cyan600, fontSize: 16),
                         ),
-                        Text('20/10/2024'),
-                        SizedBox(
+                        const Text('20/10/2024'),
+                        const SizedBox(
                           height: 15,
                         ),
                         Container(
@@ -180,13 +180,13 @@ class CaseDetails extends StatelessWidget {
                           height: .3,
                           color: cyan300,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 15,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            Column(
+                            const Column(
                               children: [
                                 Text(
                                   ' حالة إعادة',
@@ -210,7 +210,7 @@ class CaseDetails extends StatelessWidget {
                             // SizedBox(
                             //   width: 10,
                             // ),
-                            Column(
+                            const Column(
                               children: [
                                 Text(
                                   'تحتاج إلى تجربة',
@@ -225,7 +225,7 @@ class CaseDetails extends StatelessWidget {
                             ),
                           ],
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 15,
                         ),
                         Container(
@@ -233,14 +233,14 @@ class CaseDetails extends StatelessWidget {
                           height: .3,
                           color: cyan300,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 15,
                         ),
-                        Text(
+                        const Text(
                           'الملاحظات',
                           style: TextStyle(color: cyan600, fontSize: 16),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 8,
                         ),
                         Container(
@@ -248,13 +248,13 @@ class CaseDetails extends StatelessWidget {
                               border: Border.all(color: cyan300, width: .3),
                               borderRadius: BorderRadius.circular(20)),
                           width: 250,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
+                          child: const Padding(
+                            padding: EdgeInsets.all(8.0),
                             child: Text(
                                 'تىتى لااتنا الااالا انم قيقي صغقه يقخميغف غفبفغي غفبغفبف فغبغفبف غفبفب فبفغب هعلالا 44 ممغع برفالؤ غبفبفب عغنلا '),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 15,
                         ),
                         Container(
@@ -262,14 +262,14 @@ class CaseDetails extends StatelessWidget {
                           height: .3,
                           color: cyan300,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 15,
                         ),
-                        Text(
+                        const Text(
                           'التعليقات',
                           style: TextStyle(color: cyan600, fontSize: 16),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 8,
                         ),
                         Container(
@@ -277,13 +277,13 @@ class CaseDetails extends StatelessWidget {
                               border: Border.all(color: cyan300, width: .3),
                               borderRadius: BorderRadius.circular(20)),
                           width: 250,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
+                          child: const Padding(
+                            padding: EdgeInsets.all(8.0),
                             child: Text(
                                 'تىتى لااتنا الااالا انم قيقي صغقه يقخميغف غفبفغي غفبغفبف فغبغفبف غفبفب فبفغب هعلالا 44 ممغع برفالؤ غبفبفب عغنلا '),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 15,
                         ),
                       ],
@@ -297,11 +297,11 @@ class CaseDetails extends StatelessWidget {
         Positioned(
           bottom: 20,
           right: 20,
-          child: FloatButton(
+          child: floatButton(
             icon: Icons.add,
             onTap: () {
               showDialog(
-                  context: context, builder: (context) => AddBillDialog());
+                  context: context, builder: (context) => const AddBillDialog());
             },
           ),
         ),

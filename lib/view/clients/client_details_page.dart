@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 
 import 'package:lambda_dent_dash/constant/constants/constants.dart';
 
-import 'package:lambda_dent_dash/view/clients/client_bills_table.dart';
-import 'package:lambda_dent_dash/view/clients/client_cases_table.dart';
+import 'package:lambda_dent_dash/view/clients/components/client_bills_table.dart';
+import 'package:lambda_dent_dash/view/clients/components/client_cases_table.dart';
 // import 'package:lambda_dent_dash/view/clients/clients_table.dart';
 
 class ClientDetailsPage extends StatelessWidget {
   ClientDetailsPage({super.key});
   List choices = ['cases', 'bills'];
-  ValueNotifier<bool> _iscase = ValueNotifier<bool>(true);
+  final ValueNotifier<bool> _iscase = ValueNotifier<bool>(true);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class ClientDetailsPage extends StatelessWidget {
       child: SingleChildScrollView(
           child: Column(
         children: [
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           Padding(
@@ -28,7 +28,7 @@ class ClientDetailsPage extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Container(
+                SizedBox(
                   width: 300,
                   child: InlineChoice<bool>.single(
                       value: _iscase.value,
@@ -41,7 +41,7 @@ class ClientDetailsPage extends StatelessWidget {
                       itemBuilder: (state, i) {
                         return ChoiceChip(
                           selectedColor: cyan200,
-                          side: BorderSide(color: cyan300),
+                          side: const BorderSide(color: cyan300),
                           selected: state
                               .selected(choices[i] == 'cases' ? true : false),
                           onSelected: state
@@ -62,10 +62,10 @@ class ClientDetailsPage extends StatelessWidget {
                             vertical: 5,
                           ))),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 30,
                 ),
-                Row(
+                const Row(
                   children: [
                     Text(
                       '3.000.000',
@@ -77,10 +77,10 @@ class ClientDetailsPage extends StatelessWidget {
                     Icon(Icons.credit_card_rounded)
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 30,
                 ),
-                Row(
+                const Row(
                   children: [
                     Row(
                       children: [
@@ -146,13 +146,13 @@ class ClientDetailsPage extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           AnimatedBuilder(
               animation: _iscase,
               builder: (context, child) =>
-                  !_iscase.value ? ClientBillsTable() : ClientCasesTable()),
+                  !_iscase.value ? const ClientBillsTable() : const ClientCasesTable()),
         ],
       )),
     ));

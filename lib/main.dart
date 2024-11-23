@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lambda_dent_dash/constant/constants/constants.dart';
-import 'package:lambda_dent_dash/dio/dio.dart';
-import 'package:lambda_dent_dash/navigation_controller.dart';
-import 'package:lambda_dent_dash/routes.dart';
+import 'package:lambda_dent_dash/services/dio/dio.dart';
+import 'package:lambda_dent_dash/services/navigation/navigation_controller.dart';
+import 'package:lambda_dent_dash/services/navigation/routes.dart';
 import 'package:lambda_dent_dash/view/authentication/authentication.dart';
-
-import 'package:lambda_dent_dash/view/cases/case_details.dart';
-
-import 'package:lambda_dent_dash/view/site_layout.dart';
+import 'package:lambda_dent_dash/constant/components/site_layout.dart';
 
 void main() {
+  // ignore: unused_local_variable
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   DioHelper.init();
   Get.put(NavigationController());

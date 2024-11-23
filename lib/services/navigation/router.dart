@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:lambda_dent_dash/routes.dart';
+import 'package:lambda_dent_dash/services/navigation/routes.dart';
 import 'package:lambda_dent_dash/view/bills/bills_page.dart';
 import 'package:lambda_dent_dash/view/cases/cases_list_page.dart';
-import 'package:lambda_dent_dash/view/home_page.dart';
+import 'package:lambda_dent_dash/view/home/home_page.dart';
 // import 'package:flutter_web_dashboard/helpers/pages/Complaints/complaints.dart';
 // import 'package:flutter_web_dashboard/helpers/pages/Conditions/conditions.dart';
 // import 'package:flutter_web_dashboard/helpers/pages/Employees/employees.dart';
@@ -19,11 +19,11 @@ import 'package:lambda_dent_dash/view/home_page.dart';
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
     case homePageRoute:
-      return _getPageRoute(HomePage());
+      return _getPageRoute(const HomePage());
     case billsPageRoute:
       return _getPageRoute(BillsPage());
     case casesPageRoute:
-      return _getPageRoute(CasesListPage());
+      return _getPageRoute(const CasesListPage());
     // case gradesPageRoute:
     //   return _getPageRoute(GradesPage());
     // case incrementPageRoute:
@@ -45,7 +45,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     // case clientsPageRoute:
     //   return _getPageRoute(ClientsPage());
     default:
-      return _getPageRoute(HomePage());
+      return _getPageRoute(const HomePage());
   }
 }
 

@@ -13,7 +13,7 @@ Widget defaultButton({
   return Container(
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(30),
-      gradient: LinearGradient(
+      gradient: const LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: <Color>[cyan400, cyan300, cyan100]),
@@ -23,18 +23,18 @@ Widget defaultButton({
     child: TextButton(
       onPressed: function,
       onHover: hoverfunction,
-      child: Text(
-        text,
-        style: TextStyle(fontSize: textsize),
-      ),
       style: ButtonStyle(
         foregroundColor: WidgetStateProperty.all(Colors.white),
         shape: WidgetStateProperty.all<RoundedRectangleBorder>(
           RoundedRectangleBorder(
-            borderRadius: StandardBorderRadius,
+            borderRadius: standardBorderRadius,
             //  side: BorderSide(color: Colors.white),
           ),
         ),
+      ),
+      child: Text(
+        text,
+        style: TextStyle(fontSize: textsize),
       ),
     ),
   );
@@ -50,7 +50,7 @@ Widget redButton({
   return Container(
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(30),
-      gradient: LinearGradient(
+      gradient: const LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: <Color>[redmain, redmid, redbackground]),
@@ -59,18 +59,18 @@ Widget redButton({
     height: heigh,
     child: TextButton(
       onPressed: function,
-      child: Text(
-        text,
-        style: TextStyle(fontSize: textsize),
-      ),
       style: ButtonStyle(
         foregroundColor: WidgetStateProperty.all(Colors.white),
         shape: WidgetStateProperty.all<RoundedRectangleBorder>(
           RoundedRectangleBorder(
-            borderRadius: StandardBorderRadius,
+            borderRadius: standardBorderRadius,
             //  side: BorderSide(color: Colors.white),
           ),
         ),
+      ),
+      child: Text(
+        text,
+        style: TextStyle(fontSize: textsize),
       ),
     ),
   );

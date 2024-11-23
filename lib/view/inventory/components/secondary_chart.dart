@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class SecondaryDonutChart extends StatelessWidget {
   final int index;
 
-  SecondaryDonutChart({required this.index});
+  const SecondaryDonutChart({super.key, required this.index});
 
   @override
   Widget build(BuildContext context) {
@@ -32,13 +32,13 @@ class SecondaryDonutChart extends StatelessWidget {
               value: 50,
               title: '50%',
               radius: 50,
-              titleStyle: TextStyle(fontSize: 12, color: Colors.white)),
+              titleStyle: const TextStyle(fontSize: 12, color: Colors.white)),
           PieChartSectionData(
               color: Colors.blue[300],
               value: 50,
               title: '50%',
               radius: 50,
-              titleStyle: TextStyle(fontSize: 12, color: Colors.white)),
+              titleStyle: const TextStyle(fontSize: 12, color: Colors.white)),
         ];
       case 1:
         return [
@@ -47,19 +47,19 @@ class SecondaryDonutChart extends StatelessWidget {
               value: 30,
               title: '30%',
               radius: 50,
-              titleStyle: TextStyle(fontSize: 12, color: Colors.black)),
+              titleStyle: const TextStyle(fontSize: 12, color: Colors.black)),
           PieChartSectionData(
               color: Colors.yellow[300],
               value: 30,
               title: '30%',
               radius: 50,
-              titleStyle: TextStyle(fontSize: 12, color: Colors.black)),
+              titleStyle: const TextStyle(fontSize: 12, color: Colors.black)),
           PieChartSectionData(
               color: Colors.yellow[700],
               value: 40,
               title: '40%',
               radius: 50,
-              titleStyle: TextStyle(fontSize: 12, color: Colors.black)),
+              titleStyle: const TextStyle(fontSize: 12, color: Colors.black)),
         ];
       case 2:
         return [
@@ -68,25 +68,25 @@ class SecondaryDonutChart extends StatelessWidget {
               value: 25,
               title: '25%',
               radius: 50,
-              titleStyle: TextStyle(fontSize: 12, color: Colors.white)),
+              titleStyle: const TextStyle(fontSize: 12, color: Colors.white)),
           PieChartSectionData(
               color: Colors.pink[300],
               value: 25,
               title: '25%',
               radius: 50,
-              titleStyle: TextStyle(fontSize: 12, color: Colors.white)),
+              titleStyle: const TextStyle(fontSize: 12, color: Colors.white)),
           PieChartSectionData(
               color: Colors.pink[500],
               value: 25,
               title: '25%',
               radius: 50,
-              titleStyle: TextStyle(fontSize: 12, color: Colors.white)),
+              titleStyle: const TextStyle(fontSize: 12, color: Colors.white)),
           PieChartSectionData(
               color: Colors.pink[700],
               value: 25,
               title: '25%',
               radius: 50,
-              titleStyle: TextStyle(fontSize: 12, color: Colors.white)),
+              titleStyle: const TextStyle(fontSize: 12, color: Colors.white)),
         ];
       case 3:
         return [
@@ -95,13 +95,13 @@ class SecondaryDonutChart extends StatelessWidget {
               value: 60,
               title: '60%',
               radius: 50,
-              titleStyle: TextStyle(fontSize: 12, color: Colors.black)),
+              titleStyle: const TextStyle(fontSize: 12, color: Colors.black)),
           PieChartSectionData(
               color: Colors.green[700],
               value: 40,
               title: '40%',
               radius: 50,
-              titleStyle: TextStyle(fontSize: 12, color: Colors.white)),
+              titleStyle: const TextStyle(fontSize: 12, color: Colors.white)),
         ];
       default:
         return [];

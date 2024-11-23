@@ -59,7 +59,7 @@ class CommonCard extends StatelessWidget {
             color:
                 Theme.of(context).cardTheme.shadowColor ?? Colors.transparent,
             blurRadius: 13,
-            offset: Offset(0, 8),
+            offset: const Offset(0, 8),
             spreadRadius: -3,
           )
         ],

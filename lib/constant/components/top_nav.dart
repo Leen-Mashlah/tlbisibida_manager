@@ -8,7 +8,7 @@ AppBar topNavigationBar(BuildContext context) => AppBar(
         width: 24,
         height: 24,
       ),
-      title: Text('Page Title'),
+      title: const Text('Page Title'),
       iconTheme: const IconThemeData(color: cyan500),
       elevation: 0,
       backgroundColor: cyan100,

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
 import 'package:lambda_dent_dash/constant/constants/constants.dart';
-import 'package:lambda_dent_dash/navigation_controller.dart';
+import 'package:lambda_dent_dash/services/navigation/navigation_controller.dart';
 
 class NinjaStarShape extends StatelessWidget {
   const NinjaStarShape({super.key});
@@ -13,52 +13,50 @@ class NinjaStarShape extends StatelessWidget {
   Widget build(BuildContext context) {
     NavigationController navcontrol = Get.put(NavigationController());
 
-    return Container(
-      child: Center(
-        child: Stack(
-          children: [
-            Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  blade('الحالات', navcontrol, 'casesPageRoute'),
-                  Transform.rotate(
-                      angle: 180 * pi / 180,
-                      child: blade("الفواتير", navcontrol, 'billsPageRoute')),
-                ],
-              ),
+    return Center(
+      child: Stack(
+        children: [
+          Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                blade('الحالات', navcontrol, 'casesPageRoute'),
+                Transform.rotate(
+                    angle: 180 * pi / 180,
+                    child: blade("الفواتير", navcontrol, 'billsPageRoute')),
+              ],
             ),
-            Center(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Transform.rotate(
-                      angle: -90 * pi / 180,
-                      child: blade(
-                          "الاحصائيات", navcontrol, 'statisticsPageRoute')),
-                  Transform.rotate(
-                      angle: 90 * pi / 180,
-                      child: blade("المخزن", navcontrol, 'inventoryPageRoute')),
-                ],
-              ),
+          ),
+          Center(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Transform.rotate(
+                    angle: -90 * pi / 180,
+                    child: blade(
+                        "الاحصائيات", navcontrol, 'statisticsPageRoute')),
+                Transform.rotate(
+                    angle: 90 * pi / 180,
+                    child: blade("المخزن", navcontrol, 'inventoryPageRoute')),
+              ],
             ),
-            Center(
-              child: Icon(
-                Icons.circle,
-                size: 50,
-                color: Colors.white,
-              ),
+          ),
+          const Center(
+            child: Icon(
+              Icons.circle,
+              size: 50,
+              color: Colors.white,
             ),
-            Center(
-              child: Icon(
-                Icons.circle_outlined,
-                size: 50,
-                color: Colors.grey[500],
-              ),
+          ),
+          Center(
+            child: Icon(
+              Icons.circle_outlined,
+              size: 50,
+              color: Colors.grey[500],
             ),
-          ],
-        ).animate().rotate(duration: Duration(minutes: 60), begin: -20),
-      ),
+          ),
+        ],
+      ).animate().rotate(duration: const Duration(minutes: 60), begin: -20),
     );
   }
 
@@ -80,7 +78,7 @@ class NinjaStarShape extends StatelessWidget {
                   border: Border.symmetric(
                       vertical: BorderSide(color: Colors.grey[400]!, width: 2)),
                   gradient:
-                      LinearGradient(colors: [cyan200, cyan300, cyan400])),
+                      const LinearGradient(colors: [cyan200, cyan300, cyan400])),
               width: 320,
               height: 320,
             ),

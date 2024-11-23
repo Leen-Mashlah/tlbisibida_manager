@@ -8,6 +8,8 @@ import 'package:lambda_dent_dash/view/bills/components/bill_details_dialog.dart'
 /// Example without datasource
 // ignore: must_be_immutable
 class BillsTable extends StatelessWidget {
+  const BillsTable({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -15,9 +17,9 @@ class BillsTable extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.white,
           border: Border.all(color: cyan200, width: .5),
-          boxShadow: [
+          boxShadow: const [
             BoxShadow(
-                offset: const Offset(0, 6), color: Colors.grey, blurRadius: 12)
+                offset: Offset(0, 6), color: Colors.grey, blurRadius: 12)
           ],
           borderRadius: BorderRadius.circular(8),
         ),
@@ -69,19 +71,19 @@ class BillsTable extends StatelessWidget {
                     DataCell(Center(
                         child: IconButton(
                       onPressed: () {
-                        showDialog(context: context, builder:(context) => BillDetailsDialog(), );
+                        showDialog(context: context, builder:(context) => const BillDetailsDialog(), );
                       },
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.arrow_circle_left_outlined,
                         color: cyan300,
                       ),
                     ))),
-                    DataCell(Center(
+                    const DataCell(Center(
                         child: CustomText(
                       text: '001',
                     ))),
-                    DataCell(Center(child: CustomText(text: 'تحسين'))),
-                    DataCell(Center(child: CustomText(text: '5/11/2024'))),
+                    const DataCell(Center(child: CustomText(text: 'تحسين'))),
+                    const DataCell(Center(child: CustomText(text: '5/11/2024'))),
                   ],
                 ),
               ),

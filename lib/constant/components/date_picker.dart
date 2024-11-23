@@ -3,8 +3,8 @@ import 'package:lambda_dent_dash/constant/constants/constants.dart';
 // import 'package:power_overload/Shared/constants.dart';
 
 Widget datePicker(BuildContext context) {
-  DateTime _dateTime = DateTime.now();
-  void _showDatePicker() {
+  DateTime dateTime = DateTime.now();
+  void getDatePicker() {
     showDatePicker(
       //barrierColor: green400,
       context: context,
@@ -12,7 +12,7 @@ Widget datePicker(BuildContext context) {
       firstDate: DateTime(2000),
       lastDate: DateTime(2050),
     ).then((value) {
-      value != null ? _dateTime = value : _dateTime = DateTime.now();
+      value != null ? dateTime = value : dateTime = DateTime.now();
     });
   }
 
@@ -23,24 +23,20 @@ Widget datePicker(BuildContext context) {
       color: cyan100,
       elevation: 1,
       shape: RoundedRectangleBorder(
-          side: BorderSide(color: cyan400, width: 2),
+          side: const BorderSide(color: cyan400, width: 2),
           borderRadius: BorderRadius.circular(20)),
       child: InkWell(
-        onTap: _showDatePicker,
+        onTap: getDatePicker,
         child: Padding(
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                _dateTime.year.toString() +
-                    '/' +
-                    _dateTime.month.toString() +
-                    '/' +
-                    _dateTime.day.toString(),
-                style: TextStyle(fontSize: 20),
+                '${dateTime.year}/${dateTime.month}/${dateTime.day}',
+                style: const TextStyle(fontSize: 20),
               ),
-              Icon(Icons.calendar_month_outlined),
+              const Icon(Icons.calendar_month_outlined),
             ],
           ),
         ),

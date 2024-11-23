@@ -26,15 +26,15 @@ Widget defaultTextField(
       suffixIcon: postfixicon,
       enabledBorder: OutlineInputBorder(
           borderSide: const BorderSide(color: Colors.grey, width: 2.0),
-          borderRadius: StandardBorderRadius),
+          borderRadius: standardBorderRadius),
       focusedBorder: OutlineInputBorder(
         borderSide:
             BorderSide(color: Theme.of(context).primaryColor, width: 3.0),
-        borderRadius: StandardBorderRadius,
+        borderRadius: standardBorderRadius,
       ),
       errorBorder: OutlineInputBorder(
         borderSide: const BorderSide(color: Colors.redAccent, width: 2.0),
-        borderRadius: ActiveBorderRadius,
+        borderRadius: activeBorderRadius,
       ),
     ),
   );

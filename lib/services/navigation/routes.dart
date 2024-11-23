@@ -1,4 +1,3 @@
-import 'package:lambda_dent_dash/view/authentication/authentication.dart';
 
 const rootRoute = "/";
 

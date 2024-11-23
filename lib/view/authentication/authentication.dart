@@ -10,6 +10,8 @@ class AuthenticationPage extends StatelessWidget {
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
 
+  AuthenticationPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

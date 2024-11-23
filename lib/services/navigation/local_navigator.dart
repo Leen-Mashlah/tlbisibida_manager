@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
-import 'package:lambda_dent_dash/controllers.dart';
-import 'package:lambda_dent_dash/router.dart';
-import 'package:lambda_dent_dash/routes.dart';
+import 'package:lambda_dent_dash/services/navigation/controllers.dart';
+import 'package:lambda_dent_dash/services/navigation/router.dart';
+import 'package:lambda_dent_dash/services/navigation/routes.dart';
 
 
 Navigator localNavigator() => Navigator(
