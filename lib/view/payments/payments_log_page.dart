@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:info_popup/info_popup.dart';
 import 'package:lambda_dent_dash/constant/components/float_button.dart';
 import 'package:lambda_dent_dash/constant/constants/constants.dart';
+import 'package:lambda_dent_dash/view/clients/components/payments_log_dialog.dart';
 import 'package:lambda_dent_dash/view/payments/components/dialogs/add_constant_payment_dialog.dart';
 import 'package:lambda_dent_dash/view/payments/components/payments_log_table.dart';
 
@@ -27,13 +28,13 @@ class PaymentsLogPage extends StatelessWidget {
               PaymentsLogTable(),
             ],
           )),
-          addPaymentButton(context),
+          addconstantpayment(context),
         ],
       ),
     ));
   }
 
-  Positioned addPaymentButton(BuildContext context) {
+  Positioned addconstantpayment(BuildContext context) {
     return Positioned(
       bottom: 40,
       right: 45,
@@ -74,7 +75,7 @@ class PaymentsLogPage extends StatelessWidget {
           onTap: () {
             showDialog(
                 context: context,
-                builder: (context) => AddConstantPaymentDialog());
+                builder: (context) => paymentLogDialog(context));
           },
           child: floatButton(
             icon: Icons.add,
