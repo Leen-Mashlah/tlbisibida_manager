@@ -1,10 +1,14 @@
 import 'package:choice/choice.dart';
 import 'package:flutter/material.dart';
+import 'package:info_popup/info_popup.dart';
+import 'package:lambda_dent_dash/constant/components/float_button.dart';
 
 import 'package:lambda_dent_dash/constant/constants/constants.dart';
 
 import 'package:lambda_dent_dash/view/clients/components/client_bills_table.dart';
 import 'package:lambda_dent_dash/view/clients/components/client_cases_table.dart';
+import 'package:lambda_dent_dash/view/clients/components/payments_log_dialog.dart';
+import 'package:lambda_dent_dash/view/payments/components/dialogs/add_constant_payment_dialog.dart';
 // import 'package:lambda_dent_dash/view/clients/clients_table.dart';
 
 class ClientDetailsPage extends StatelessWidget {
@@ -65,16 +69,25 @@ class ClientDetailsPage extends StatelessWidget {
                 const SizedBox(
                   width: 30,
                 ),
-                const Row(
+                Row(
                   children: [
-                    Text(
-                      '3.000.000',
-                      style: TextStyle(fontSize: 18),
-                    ),
-                    SizedBox(
+                    // TextButton(
+                    //     onPressed: () {
+                    //       showDialog(
+                    //         context: context,
+                    //         builder: (context) => paymentLogDialog(context),
+                    //       );
+                    //     },
+                    //     child: const Text('300.000.000')),
+                    showpaymentlog(context),
+                    // Text(
+                    //   '3.000.000',
+                    //   style: TextStyle(fontSize: 18),
+                    // ),
+                    const SizedBox(
                       width: 10,
                     ),
-                    Icon(Icons.credit_card_rounded)
+                    const Icon(Icons.credit_card_rounded)
                   ],
                 ),
                 const SizedBox(
@@ -151,10 +164,50 @@ class ClientDetailsPage extends StatelessWidget {
           ),
           AnimatedBuilder(
               animation: _iscase,
-              builder: (context, child) =>
-                  !_iscase.value ? const ClientBillsTable() : const ClientCasesTable()),
+              builder: (context, child) => !_iscase.value
+                  ? const ClientBillsTable()
+                  : const ClientCasesTable()),
         ],
       )),
     ));
+  }
+
+  Positioned showpaymentlog(BuildContext context) {
+    return Positioned(
+      // bottom: 505,
+      // right: 100,
+      child: InfoPopupWidget(
+        enabledAutomaticConstraint: false,
+        arrowTheme: const InfoPopupArrowTheme(arrowSize: Size(0, 0)),
+        contentOffset: const Offset(0, 0),
+        customContent: () => Container(
+          decoration: const BoxDecoration(
+              color: cyan50op,
+              borderRadius: BorderRadius.horizontal(
+                  left: Radius.elliptical(53, 100),
+                  right: Radius.elliptical(25, 40))),
+          padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+          height: 60,
+          child: const Text(
+            'سجل الدفعات',
+            style: TextStyle(color: cyan500),
+          ),
+        ),
+        child: InkWell(
+            onTap: () {
+              showDialog(
+                  context: context,
+                  builder: (context) => AddConstantPaymentDialog());
+            },
+            child: TextButton(
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) => paymentLogDialog(context),
+                  );
+                },
+                child: const Text('300.000.000'))),
+      ),
+    );
   }
 }
