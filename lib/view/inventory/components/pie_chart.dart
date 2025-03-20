@@ -38,6 +38,25 @@ class _InteractiveDonutChartState extends State<InteractiveDonutChart> {
           ),
         ),
         if (touchedIndex != -1) SecondaryDonutChart(index: touchedIndex),
+        IconButton(
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (context) => Dialog(
+                  child: Container(
+                    child: Text('teeeeeee'),
+                    width: 500,
+                    height: 500,
+                    color: cyan100,
+                  ),
+                ),
+              );
+            },
+            icon: Icon(
+              Icons.settings,
+              color: cyan400,
+              size: 100,
+            )),
       ],
     );
   }
@@ -53,7 +72,18 @@ class _InteractiveDonutChartState extends State<InteractiveDonutChart> {
           return PieChartSectionData(
             color: cyan500,
             value: 40,
-            title: '40%',
+            title: 'Blocks',
+            badgeWidget: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(Icons.ac_unit),
+                SizedBox(
+                  width: 50,
+                ),
+                Icon(Icons.ac_unit),
+              ],
+            ),
             radius: radius,
             titleStyle: TextStyle(fontSize: fontSize, color: Colors.white),
           );
