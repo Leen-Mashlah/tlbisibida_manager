@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:lambda_dent_dash/constant/components/custom_text.dart';
 import 'package:lambda_dent_dash/constant/constants/constants.dart';
 
-/// Example without datasource
-// ignore: must_be_immutable
 class CaseDetailsTable extends StatelessWidget {
   const CaseDetailsTable({super.key});
 
