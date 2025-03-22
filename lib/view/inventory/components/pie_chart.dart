@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:lambda_dent_dash/constant/constants/constants.dart';
+import 'package:lambda_dent_dash/view/inventory/components/dialogs/cat_management_dialog.dart';
 import 'package:lambda_dent_dash/view/inventory/components/secondary_chart.dart';
 
 class InteractiveDonutChart extends StatefulWidget {
@@ -41,16 +42,8 @@ class _InteractiveDonutChartState extends State<InteractiveDonutChart> {
         IconButton(
             onPressed: () {
               showDialog(
-                context: context,
-                builder: (context) => Dialog(
-                  child: Container(
-                    child: Text('teeeeeee'),
-                    width: 500,
-                    height: 500,
-                    color: cyan100,
-                  ),
-                ),
-              );
+                  context: context,
+                  builder: (context) => CatManagementDialog(context));
             },
             icon: Icon(
               Icons.settings,

@@ -20,7 +20,7 @@ class SiteLayout extends StatelessWidget {
       extendBodyBehindAppBar: false,
       appBar: topNavigationBar(context),
       body: ResponsiveWidget(
-        largeScreen: CaseDetails(),
+        largeScreen: InventoryPage(),
       ),
     );
   }
