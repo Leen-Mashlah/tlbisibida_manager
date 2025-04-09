@@ -17,8 +17,7 @@ class ItemLogTable extends StatelessWidget {
           color: Colors.white,
           border: Border.all(color: cyan200, width: .5),
           boxShadow: const [
-            BoxShadow(
-                offset: Offset(0, 6), color: Colors.grey, blurRadius: 12)
+            BoxShadow(offset: Offset(0, 6), color: Colors.grey, blurRadius: 12)
           ],
           borderRadius: BorderRadius.circular(8),
         ),
@@ -34,21 +33,35 @@ class ItemLogTable extends StatelessWidget {
             DataColumn(
               label: Center(
                   child: Text(
-                'رقم السن',
+                'القيمة السابقة',
                 style: TextStyle(color: cyan300),
               )),
             ),
             DataColumn(
               label: Center(
                   child: Text(
-                'العلاج',
+                'الفرق',
                 style: TextStyle(color: cyan300),
               )),
             ),
             DataColumn(
               label: Center(
                   child: Text(
-                'مادة العلاج',
+                'القيمة الجديدة',
+                style: TextStyle(color: cyan300),
+              )),
+            ),
+            DataColumn(
+              label: Center(
+                  child: Text(
+                'السعر',
+                style: TextStyle(color: cyan300),
+              )),
+            ),
+            DataColumn(
+              label: Center(
+                  child: Text(
+                'التاريخ',
                 style: TextStyle(color: cyan300),
               )),
             ),
@@ -59,10 +72,12 @@ class ItemLogTable extends StatelessWidget {
               cells: [
                 DataCell(Center(
                     child: CustomText(
-                  text: '11',
+                  text: '50',
                 ))),
-                DataCell(Center(child: CustomText(text: 'دمية'))),
-                DataCell(Center(child: CustomText(text: 'زيركون'))),
+                DataCell(Center(child: CustomText(text: '+300'))),
+                DataCell(Center(child: CustomText(text: '350'))),
+                DataCell(Center(child: CustomText(text: '1000'))),
+                DataCell(Center(child: CustomText(text: '7/8/2024'))),
               ],
             ),
           ),
