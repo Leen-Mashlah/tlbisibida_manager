@@ -43,7 +43,7 @@ class CaseDetails extends StatelessWidget {
                                 border: Border.all(color: cyan300, width: .5),
                                 borderRadius: BorderRadius.circular(50)),
                             child: Image.asset(
-                              fit: BoxFit.cover,
+                              fit: BoxFit.fill,
                               'diagram.jpg',
                               errorBuilder: (context, error, stackTrace) {
                                 return Icon(Icons.do_not_disturb_outlined);
@@ -66,10 +66,10 @@ class CaseDetails extends StatelessWidget {
                                 height: 15,
                               ),
                               const Text(
-                                'اسم الزبون',
+                                'اسم الطبيب',
                                 style: TextStyle(color: cyan600, fontSize: 16),
                               ),
-                              const Text('تحسين التحسيني'),
+                              const Text('د. محمود الزحيلي'),
                               const SizedBox(
                                 height: 15,
                               ),
@@ -85,7 +85,7 @@ class CaseDetails extends StatelessWidget {
                                 'اسم المريض',
                                 style: TextStyle(color: cyan600, fontSize: 16),
                               ),
-                              const Text('تحسين التحسيني'),
+                              const Text('تحسين النعسان'),
                               const SizedBox(
                                 height: 15,
                               ),
@@ -108,7 +108,7 @@ class CaseDetails extends StatelessWidget {
                                         style: TextStyle(
                                             color: cyan600, fontSize: 16),
                                       ),
-                                      Text('11'),
+                                      Text('20'),
                                       SizedBox(
                                         height: 10,
                                       ),
@@ -132,7 +132,7 @@ class CaseDetails extends StatelessWidget {
                                         style: TextStyle(
                                             color: cyan600, fontSize: 16),
                                       ),
-                                      Text('أنثى'),
+                                      Text('ذكر'),
                                       SizedBox(
                                         height: 10,
                                       ),

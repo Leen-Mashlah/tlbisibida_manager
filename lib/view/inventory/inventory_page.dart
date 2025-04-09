@@ -204,27 +204,48 @@ class InventoryPage extends StatelessWidget {
                           height: 170,
                           width: 250,
                           color: cyan50,
-                          child: const Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Text('سعر العنصر الواحد/قطعة'),
-                              Text(
-                                '50.000',
-                                style: TextStyle(color: cyan400),
-                              ),
-                              Text('تاريخ آخر شراء'),
-                              Text(
-                                '2/5/2024',
-                                style: TextStyle(color: cyan300),
-                              ),
-                              Text('الحد الادنى'),
-                              Text(
-                                '50',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w600,
-                                    color: Color.fromARGB(255, 228, 132, 132)),
-                              ),
-                            ],
+                          child: SingleChildScrollView(
+                            child: const Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Text('سعر العنصر الواحد/قطعة'),
+                                Text(
+                                  '50.000',
+                                  style: TextStyle(color: cyan400),
+                                ),
+                                Text('تاريخ آخر شراء'),
+                                Text(
+                                  '2/5/2024',
+                                  style: TextStyle(color: cyan300),
+                                ),
+                                Text('الحد الادنى'),
+                                Text('الحد الادنى'),
+                                Text('الحد الادنى'),
+                                Text('الحد الادنى'),
+                                Text('الحد الادنى'),
+                                Text('الحد الادنى'),
+                                Text('الحد الادنى'),
+                                Text('الحد الادنى'),
+                                Text('الحد الادنى'),
+                                Text('الحد الادنى'),
+                                Text('الحد الادنى'),
+                                Text('الحد الادنى'),
+                                Text('الحد الادنى'),
+                                Text('الحد الادنى'),
+                                Text('الحد الادنى'),
+                                Text('الحد الادنى'),
+                                Text('الحد الادنى'),
+                                Text('الحد الادنى'),
+                                Text('الحد الادنى'),
+                                Text(
+                                  '50',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w600,
+                                      color:
+                                          Color.fromARGB(255, 228, 132, 132)),
+                                ),
+                              ],
+                            ),
                           )),
                     ),
                   ],
