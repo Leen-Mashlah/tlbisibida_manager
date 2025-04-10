@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lambda_dent_dash/view/clients/components/clients_table.dart';
+import 'package:lambda_dent_dash/view/clients/components/clients_table_req.dart';
 
 class ClientsPage extends StatelessWidget {
   const ClientsPage({super.key});
@@ -19,7 +20,7 @@ class ClientsPage extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
-              ClientsTable(),
+              ClientsReqTable(),
             ],
           )),
         ],
