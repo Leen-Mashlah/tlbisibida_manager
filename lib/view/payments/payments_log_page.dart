@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:info_popup/info_popup.dart';
+import 'package:lambda_dent_dash/constant/components/searchbar.dart';
 // import 'package:info_popup/info_popup.dart';
 import 'package:lambda_dent_dash/constant/components/float_button.dart';
 import 'package:lambda_dent_dash/constant/constants/constants.dart';
@@ -17,12 +18,13 @@ class PaymentsLogPage extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Stack(
         children: [
-          const SingleChildScrollView(
+          SingleChildScrollView(
               child: Column(
             children: [
               SizedBox(
                 height: 20,
               ),
+              Searchbar(context),
               SizedBox(
                 height: 20,
               ),
