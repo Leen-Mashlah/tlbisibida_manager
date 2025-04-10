@@ -66,17 +66,6 @@ class _InteractiveDonutChartState extends State<InteractiveDonutChart> {
             color: cyan500,
             value: 40,
             title: 'Blocks',
-            badgeWidget: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Icon(Icons.ac_unit),
-                SizedBox(
-                  width: 50,
-                ),
-                Icon(Icons.ac_unit),
-              ],
-            ),
             radius: radius,
             titleStyle: TextStyle(fontSize: fontSize, color: Colors.white),
           );
