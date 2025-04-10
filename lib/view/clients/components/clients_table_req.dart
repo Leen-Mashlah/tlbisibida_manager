@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:lambda_dent_dash/constant/components/custom_text.dart';
 import 'package:lambda_dent_dash/constant/constants/constants.dart';
 import 'package:lambda_dent_dash/view/clients/clients_page.dart';
+import 'package:lambda_dent_dash/view/clients/components/confirm_add_dialog%20.dart';
 
 /// Example without datasource
 // ignore: must_be_immutable
@@ -37,14 +38,14 @@ class ClientsReqTable extends StatelessWidget {
                 DataColumn(
                   label: Center(
                       child: Text(
-                    'التفاصيل',
+                    'تأكيد الإضافة',
                     style: TextStyle(color: cyan300),
                   )),
                 ),
                 DataColumn(
                   label: Center(
                       child: Text(
-                    'اسم الزبون',
+                    'تاريخ إرسال الطلب',
                     style: TextStyle(color: cyan300),
                   )),
                 ),
@@ -62,6 +63,13 @@ class ClientsReqTable extends StatelessWidget {
                     style: TextStyle(color: cyan300),
                   )),
                 ),
+                DataColumn(
+                  label: Center(
+                      child: Text(
+                    'اسم الطبيب',
+                    style: TextStyle(color: cyan300),
+                  )),
+                ),
               ],
               rows: List<DataRow>.generate(
                 50,
@@ -71,22 +79,25 @@ class ClientsReqTable extends StatelessWidget {
                         child: IconButton(
                       onPressed: () {
                         showDialog(
-                          context: context,
-                          builder: (context) => const ClientsPage(),
-                        );
+                            context: context,
+                            builder: (context) {
+                              return confirmAddDialog(context);
+                            });
                       },
                       icon: const Icon(
-                        Icons.arrow_circle_left_outlined,
+                        Icons.check_circle_outline,
                         color: cyan300,
                       ),
                     ))),
+                    const DataCell(
+                        Center(child: CustomText(text: '9/10/2024'))),
+                    const DataCell(
+                        Center(child: CustomText(text: '0992532588'))),
+                    const DataCell(Center(child: CustomText(text: 'هونولولو'))),
                     const DataCell(Center(
                         child: CustomText(
                       text: 'تحسين',
                     ))),
-                    const DataCell(
-                        Center(child: CustomText(text: '0992532588'))),
-                    const DataCell(Center(child: CustomText(text: 'هونولولو'))),
                   ],
                 ),
               ),
