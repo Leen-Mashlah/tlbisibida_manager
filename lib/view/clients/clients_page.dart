@@ -74,7 +74,7 @@ class ClientsPage extends StatelessWidget {
               AnimatedBuilder(
                   animation: _showregisteredlist,
                   builder: (context, child) => !_showregisteredlist.value
-                      ? const ClientRequestsTable()
+                      ? const ClientsReqTable()
                       : const ClientsTable()),
             ],
           )),
