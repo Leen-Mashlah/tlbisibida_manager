@@ -1,4 +1,6 @@
 
+import 'package:lambda_dent_dash/view/clients/client_details_page.dart';
+
 const rootRoute = "/";
 
 const homePageDisplayName = "Home";
@@ -6,6 +8,9 @@ const homePageRoute = "/home";
 
 const clientPageDisplayName = "Clients";
 const clientPageRoute = "/clients";
+
+const clientDetailsPageDisplayName = "Client Details";
+const clientDetailsPageRoute = "/client_details";
 
 const billsPageDisplayName = "Bills";
 const billsPageRoute = "/bills";
@@ -15,6 +20,7 @@ const casesPageRoute = "/cases";
 
 const authenticationPageDisplayName = "Bills";
 const authenticationPageRoute = "/";
+
 
 
 // class MenuItem {

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 import 'package:lambda_dent_dash/constant/components/custom_text.dart';
 import 'package:lambda_dent_dash/constant/constants/constants.dart';
-import 'package:lambda_dent_dash/view/clients/clients_page.dart';
 
 /// Example without datasource
 // ignore: must_be_immutable
@@ -18,8 +17,7 @@ class ClientsTable extends StatelessWidget {
           color: Colors.white,
           border: Border.all(color: cyan200, width: .5),
           boxShadow: const [
-            BoxShadow(
-                offset: Offset(0, 6), color: Colors.grey, blurRadius: 12)
+            BoxShadow(offset: Offset(0, 6), color: Colors.grey, blurRadius: 12)
           ],
           borderRadius: BorderRadius.circular(8),
         ),
@@ -63,6 +61,20 @@ class ClientsTable extends StatelessWidget {
                     style: TextStyle(color: cyan300),
                   )),
                 ),
+                DataColumn(
+                  label: Center(
+                      child: Text(
+                    'تاريخ الانضمام',
+                    style: TextStyle(color: cyan300),
+                  )),
+                ),
+                DataColumn(
+                  label: Center(
+                      child: Text(
+                    'الرصيد',
+                    style: TextStyle(color: cyan300),
+                  )),
+                ),
               ],
               rows: List<DataRow>.generate(
                 50,
@@ -71,10 +83,7 @@ class ClientsTable extends StatelessWidget {
                     DataCell(Center(
                         child: IconButton(
                       onPressed: () {
-                        showDialog(
-                          context: context,
-                          builder: (context) => const ClientsPage(),
-                        );
+                        Navigator.pushNamed(context, '/client_details');
                       },
                       icon: const Icon(
                         Icons.arrow_circle_left_outlined,
@@ -85,8 +94,12 @@ class ClientsTable extends StatelessWidget {
                         child: CustomText(
                       text: 'تحسين',
                     ))),
-                    const DataCell(Center(child: CustomText(text: '0992532588'))),
+                    const DataCell(
+                        Center(child: CustomText(text: '0992532588'))),
                     const DataCell(Center(child: CustomText(text: 'هونولولو'))),
+                    const DataCell(
+                        Center(child: CustomText(text: '10/4/2024'))),
+                    const DataCell(Center(child: CustomText(text: '350000'))),
                   ],
                 ),
               ),

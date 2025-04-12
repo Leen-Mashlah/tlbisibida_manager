@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 import 'package:lambda_dent_dash/constant/components/custom_text.dart';
 import 'package:lambda_dent_dash/constant/constants/constants.dart';
-import 'package:lambda_dent_dash/view/clients/clients_page.dart';
 import 'package:lambda_dent_dash/view/clients/components/confirm_add_dialog%20.dart';
 
 /// Example without datasource
