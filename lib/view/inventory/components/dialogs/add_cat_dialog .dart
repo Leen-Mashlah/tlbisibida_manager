@@ -4,7 +4,6 @@ import 'package:lambda_dent_dash/constant/components/default_textfield.dart';
 import 'package:lambda_dent_dash/constant/constants/constants.dart';
 
 Dialog addCatDialog(BuildContext context) {
-  TextEditingController itemnamecontroller = TextEditingController();
   TextEditingController itemstandardquantitycontroller =
       TextEditingController();
 

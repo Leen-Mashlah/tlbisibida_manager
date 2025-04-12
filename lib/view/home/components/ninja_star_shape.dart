@@ -4,15 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
 import 'package:lambda_dent_dash/constant/constants/constants.dart';
-import 'package:lambda_dent_dash/services/navigation/navigation_controller.dart';
+import 'package:lambda_dent_dash/services/navigation/controllers.dart';
+import 'package:lambda_dent_dash/services/navigation/navigation_service.dart';
+import 'package:lambda_dent_dash/services/navigation/routes.dart';
 
 class NinjaStarShape extends StatelessWidget {
   const NinjaStarShape({super.key});
 
   @override
   Widget build(BuildContext context) {
-    NavigationController navcontrol = Get.put(NavigationController());
-
     return Center(
       child: Stack(
         children: [
@@ -20,10 +20,10 @@ class NinjaStarShape extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                blade('الحالات', navcontrol, 'casesPageRoute'),
+                blade('الحالات', 'casesPageRoute'),
                 Transform.rotate(
                     angle: 180 * pi / 180,
-                    child: blade("الفواتير", navcontrol, 'billsPageRoute')),
+                    child: blade("الفواتير", billsPageRoute)),
               ],
             ),
           ),
@@ -33,11 +33,10 @@ class NinjaStarShape extends StatelessWidget {
               children: [
                 Transform.rotate(
                     angle: -90 * pi / 180,
-                    child: blade(
-                        "الاحصائيات", navcontrol, 'statisticsPageRoute')),
+                    child: blade("الاحصائيات", 'statisticsPageRoute')),
                 Transform.rotate(
                     angle: 90 * pi / 180,
-                    child: blade("المخزن", navcontrol, 'inventoryPageRoute')),
+                    child: blade("المخزن", 'inventoryPageRoute')),
               ],
             ),
           ),
@@ -60,7 +59,7 @@ class NinjaStarShape extends StatelessWidget {
     );
   }
 
-  Widget blade(String data, NavigationController navcontrol, String route) {
+  Widget blade(String data, String route) {
     return ClipPath(
       clipper: _Triangle(),
       clipBehavior: Clip.antiAlias,
@@ -69,7 +68,7 @@ class NinjaStarShape extends StatelessWidget {
         splashColor: Colors.transparent,
         highlightColor: Colors.transparent,
         onTap: () {
-          navcontrol.navigateTo(route);
+          locator<NavigationService>().navigateTo(route);
         },
         child: Stack(
           children: [
@@ -77,8 +76,8 @@ class NinjaStarShape extends StatelessWidget {
               decoration: BoxDecoration(
                   border: Border.symmetric(
                       vertical: BorderSide(color: Colors.grey[400]!, width: 2)),
-                  gradient:
-                      const LinearGradient(colors: [cyan200, cyan300, cyan400])),
+                  gradient: const LinearGradient(
+                      colors: [cyan200, cyan300, cyan400])),
               width: 320,
               height: 320,
             ),

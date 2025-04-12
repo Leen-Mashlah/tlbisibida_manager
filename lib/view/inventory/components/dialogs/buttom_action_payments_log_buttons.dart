@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lambda_dent_dash/constant/constants/constants.dart';
 import 'package:lambda_dent_dash/view/inventory/components/dialogs/add_quantity_for_item_dialog.dart';
-import 'package:lambda_dent_dash/view/inventory/components/dialogs/item_add_edit_dialog.dart';
-import 'package:lambda_dent_dash/view/inventory/components/dialogs/item_delete_dialog.dart';
 import 'package:lambda_dent_dash/view/inventory/components/dialogs/item_log_dialog.dart';
 
 Row bottomActionPaymentsLogButtons(BuildContext context) {

@@ -8,9 +8,6 @@ Dialog paymentLogDialog(BuildContext context) {
   TextEditingController itemnamecontroller = TextEditingController();
   TextEditingController itemunitcontroller = TextEditingController();
 
-  final TextEditingController catmenuController = TextEditingController();
-  final TextEditingController subcatmenuController = TextEditingController();
-
   return Dialog(
     child: Padding(
       padding: const EdgeInsets.all(16.0),

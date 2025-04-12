@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 import 'package:lambda_dent_dash/constant/components/custom_text.dart';
 import 'package:lambda_dent_dash/constant/constants/constants.dart';
-import 'package:lambda_dent_dash/view/clients/clients_page.dart';
 
 /// Example without datasource
 // ignore: must_be_immutable
@@ -83,7 +82,9 @@ class ClientsTable extends StatelessWidget {
                   cells: [
                     DataCell(Center(
                         child: IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/client_details');
+                      },
                       icon: const Icon(
                         Icons.arrow_circle_left_outlined,
                         color: cyan300,
