@@ -1,7 +1,9 @@
+import 'clinic_details.dart';
+
 class SubscribedClinicsResponse {
   bool? status;
   int? successCode;
-  List<SubscribedClinic>? subscribedClinics;
+  List<ClinicDetails>? subscribedClinics; 
   String? successMessage;
 
   SubscribedClinicsResponse(
@@ -14,9 +16,10 @@ class SubscribedClinicsResponse {
     status = json['status'];
     successCode = json['success_code'];
     if (json['subscribed-clinics'] != null) {
-      subscribedClinics = <SubscribedClinic>[];
+      subscribedClinics = <ClinicDetails>[]; 
       json['subscribed-clinics'].forEach((v) {
-        subscribedClinics!.add(SubscribedClinic.fromJson(v));
+        subscribedClinics!
+            .add(ClinicDetails.fromJson(v)); 
       });
     }
     successMessage = json['success_message'];
@@ -31,35 +34,6 @@ class SubscribedClinicsResponse {
           subscribedClinics!.map((v) => v.toJson()).toList();
     }
     data['success_message'] = successMessage;
-    return data;
-  }
-}
-
-class SubscribedClinic {
-  int? id;
-  String? fullName;
-  int? phone;
-  String? address;
-  String? registerDate;
-
-  SubscribedClinic(
-      {this.id, this.fullName, this.phone, this.address, this.registerDate});
-
-  SubscribedClinic.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    fullName = json['full_name'];
-    phone = json['phone'];
-    address = json['address'];
-    registerDate = json['register_date'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['full_name'] = fullName;
-    data['phone'] = phone;
-    data['address'] = address;
-    data['register_date'] = registerDate;
     return data;
   }
 }
