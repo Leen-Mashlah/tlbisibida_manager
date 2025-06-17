@@ -1,7 +1,7 @@
 class SubscribedLabsResponse {
   bool? status;
   int? successCode;
-  List<SubscribedLab>? subscribedLabs;
+  List<Lab>? subscribedLabs;
   String? successMessage;
 
   SubscribedLabsResponse(
@@ -14,9 +14,9 @@ class SubscribedLabsResponse {
     status = json['status'];
     successCode = json['success_code'];
     if (json['subscribed-labs'] != null) {
-      subscribedLabs = <SubscribedLab>[];
+      subscribedLabs = <Lab>[];
       json['subscribed-labs'].forEach((v) {
-        subscribedLabs!.add(SubscribedLab.fromJson(v));
+        subscribedLabs!.add(Lab.fromJson(v));
       });
     }
     successMessage = json['success_message'];
@@ -34,21 +34,21 @@ class SubscribedLabsResponse {
   }
 }
 
-class SubscribedLab {
+class Lab {
   int? id;
   String? labName;
   LabPhone? labPhone;
   String? labAddress;
   String? registerDate;
 
-  SubscribedLab(
+  Lab(
       {this.id,
       this.labName,
       this.labPhone,
       this.labAddress,
       this.registerDate});
 
-  SubscribedLab.fromJson(Map<String, dynamic> json) {
+  Lab.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     labName = json['lab_name'];
     labPhone =

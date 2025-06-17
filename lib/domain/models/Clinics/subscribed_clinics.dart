@@ -6,13 +6,10 @@ class SubscribedClinicsResponse {
   List<ClinicDetails>? subscribedClinics; 
   String? successMessage;
 
-  SubscribedClinicsResponse(
-      {this.status,
-      this.successCode,
-      this.subscribedClinics,
-      this.successMessage});
+  ClinicsResponse(
+      {this.status, this.successCode, this.Clinics, this.successMessage});
 
-  SubscribedClinicsResponse.fromJson(Map<String, dynamic> json) {
+  ClinicsResponse.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     successCode = json['success_code'];
     if (json['subscribed-clinics'] != null) {
@@ -29,9 +26,8 @@ class SubscribedClinicsResponse {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['status'] = status;
     data['success_code'] = successCode;
-    if (subscribedClinics != null) {
-      data['subscribed-clinics'] =
-          subscribedClinics!.map((v) => v.toJson()).toList();
+    if (Clinics != null) {
+      data['subscribed-clinics'] = Clinics!.map((v) => v.toJson()).toList();
     }
     data['success_message'] = successMessage;
     return data;
