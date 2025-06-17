@@ -1,8 +1,6 @@
 // common_models.dart
 
-
-
-import '../lab_phone';
+import 'lab_phone';
 
 class LabDetails {
   int? id;

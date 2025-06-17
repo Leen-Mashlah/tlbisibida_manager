@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:lambda_dent_dash/domain/models/subscribed_clinics.dart';
-import 'package:lambda_dent_dash/domain/models/subscribed_labs.dart';
+import 'package:lambda_dent_dash/domain/models/Clinics/clinic_details.dart';
+import 'package:lambda_dent_dash/domain/models/Labs/lab_details.dart';
+
 import 'package:lambda_dent_dash/domain/repo/manager_repo.dart';
 import 'package:lambda_dent_dash/services/dio/dio.dart';
 
@@ -52,25 +53,25 @@ class DbManagerRepo implements ManagerRepo {
   }
 
   @override
-  Future<List<Clinic>> getHistoryClinics() {
+  Future<List<ClinicDetails>> getHistoryClinics() {
     // TODO: implement getHistoryClinics
     throw UnimplementedError();
   }
 
   @override
-  Future<List<Lab>> getHistoryLabs() {
+  Future<List<LabDetails>> getHistoryLabs() {
     // TODO: implement getHistoryLabs
     throw UnimplementedError();
   }
 
   @override
-  Future<List<Clinic>> getSubscribedClinics() {
+  Future<List<ClinicDetails>> getSubscribedClinics() {
     // TODO: implement getSubscribedClinics
     throw UnimplementedError();
   }
 
   @override
-  Future<List<Lab>> getSubscribedLabs() {
+  Future<List<LabDetails>> getSubscribedLabs() {
     // TODO: implement getSubscribedLabs
     throw UnimplementedError();
   }
