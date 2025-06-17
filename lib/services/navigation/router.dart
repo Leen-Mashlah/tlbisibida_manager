@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lambda_dent_dash/services/navigation/routes.dart';
-import 'package:lambda_dent_dash/view/bills/bills_page.dart';
-import 'package:lambda_dent_dash/view/cases/cases_list_page.dart';
-import 'package:lambda_dent_dash/view/clients/client_details_page.dart';
-import 'package:lambda_dent_dash/view/clients/clients_page.dart';
-import 'package:lambda_dent_dash/view/home/home_page.dart';
+import 'package:lambda_dent_dash/presentation/clients_history/clients_his_page.dart';
+import 'package:lambda_dent_dash/presentation/clients_log/clients_log_page.dart';
+import 'package:lambda_dent_dash/presentation/clients_req/clients_req_page.dart';
 // import 'package:flutter_web_dashboard/helpers/pages/Complaints/complaints.dart';
 // import 'package:flutter_web_dashboard/helpers/pages/Conditions/conditions.dart';
 // import 'package:flutter_web_dashboard/helpers/pages/Employees/employees.dart';
@@ -22,16 +20,13 @@ Route<dynamic> generateRoute(RouteSettings settings) {
   print('generateRoute: ${settings.name}');
 
   switch (settings.name) {
-    case homePageRoute:
-      return _getPageRoute(const HomePage());
-    case billsPageRoute:
-      return _getPageRoute(BillsPage());
-    case casesPageRoute:
-      return _getPageRoute(const CasesListPage());
-    case clientPageRoute:
-      return _getPageRoute((ClientsPage()));
-    case clientDetailsPageRoute:
-      return _getPageRoute((ClientDetailsPage()));
+    case clientsLogPageRoute:
+      return _getPageRoute((ClientsLogPage()));
+    case clientsReqPageRoute:
+      return _getPageRoute((ClientsReqPage()));
+    case clientsHistoryPageRoute:
+      return _getPageRoute((ClientsHistoryPage()));
+
     // case gradesPageRoute:
     //   return _getPageRoute(GradesPage());
     // case incrementPageRoute:
@@ -53,7 +48,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     // case clientsPageRoute:
     //   return _getPageRoute(ClientsPage());
     default:
-      return _getPageRoute(const HomePage());
+      return _getPageRoute(ClientsLogPage());
   }
 }
 
