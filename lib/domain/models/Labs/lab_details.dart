@@ -1,11 +1,11 @@
 // common_models.dart
 
-import 'lab_phone';
+import 'lab_phone.dart';
 
 class LabDetails {
   int? id;
   String? labName;
-  LabPhone? labPhone;
+  String? labPhone;
   String? labAddress;
   String? registerDate;
 
@@ -20,8 +20,7 @@ class LabDetails {
   LabDetails.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     labName = json['lab_name'];
-    labPhone =
-        json['lab_phone'] != null ? LabPhone.fromJson(json['lab_phone']) : null;
+    labPhone = json['lab_phone']['home'];
     labAddress = json['lab_address'];
     registerDate = json['register_date'];
   }
@@ -30,9 +29,8 @@ class LabDetails {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     data['lab_name'] = labName;
-    if (labPhone != null) {
-      data['lab_phone'] = labPhone!.toJson();
-    }
+    data['lab_phone'] = labPhone;
+
     data['lab_address'] = labAddress;
     data['register_date'] = registerDate;
     return data;

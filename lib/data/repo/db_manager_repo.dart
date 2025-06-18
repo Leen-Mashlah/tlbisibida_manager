@@ -1,4 +1,9 @@
 import 'package:dio/dio.dart';
+import 'package:get/get.dart';
+import 'package:lambda_dent_dash/data/models/Clinics/db_clinic_history.dart';
+import 'package:lambda_dent_dash/data/models/Clinics/db_subscribed_clinics.dart';
+import 'package:lambda_dent_dash/data/models/Labs/db_lab_history.dart';
+import 'package:lambda_dent_dash/data/models/Labs/db_subscribed_labs.dart';
 import 'package:lambda_dent_dash/domain/models/Clinics/clinic_details.dart';
 import 'package:lambda_dent_dash/domain/models/Labs/lab_details.dart';
 
@@ -52,27 +57,59 @@ class DbManagerRepo implements ManagerRepo {
     ).catchError((error) {});
   }
 
+  DBHistoryClinicsResponse? dbHistoryClinicsResponse;
   @override
-  Future<List<ClinicDetails>> getHistoryClinics() {
-    // TODO: implement getHistoryClinics
-    throw UnimplementedError();
+  Future<List<ClinicDetails>> getHistoryClinics() async {
+    await DioHelper.getData('clinics/null-subscription', token: '')
+        .then((value) {
+      dbHistoryClinicsResponse = DBHistoryClinicsResponse.fromJson(value?.data);
+    }).catchError((error) {
+      print('error: ' + error.toString());
+    });
+    List<ClinicDetails> cliniclist = [];
+    for (var clinic in dbHistoryClinicsResponse!.notSubscribedClinics!) {
+      cliniclist.add(clinic.todomain());
+    }
+    return cliniclist;
   }
 
+  DBHistoryLabsResponse? dbHistoryLabsResponse;
   @override
-  Future<List<LabDetails>> getHistoryLabs() {
-    // TODO: implement getHistoryLabs
-    throw UnimplementedError();
+  Future<List<LabDetails>> getHistoryLabs() async {
+    await DioHelper.getData('labs/null-subscription', token: '').then((value) {
+      dbHistoryLabsResponse = DBHistoryLabsResponse.fromJson(value?.data);
+    });
+    List<LabDetails> lablist = [];
+    for (var lab in dbHistoryLabsResponse!.subscribedNotSubscribeLabs!) {
+      lablist.add(lab.todomain());
+    }
+    return lablist;
   }
 
+  DBSubscribedClinicsResponse? dbSubscribedClinicsResponse;
   @override
-  Future<List<ClinicDetails>> getSubscribedClinics() {
-    // TODO: implement getSubscribedClinics
-    throw UnimplementedError();
+  Future<List<ClinicDetails>> getSubscribedClinics() async {
+    await DioHelper.getData('subscribed-clinics', token: '').then((value) {
+      dbSubscribedClinicsResponse =
+          DBSubscribedClinicsResponse.fromJson(value?.data);
+    });
+    List<ClinicDetails> cliniclist = [];
+    for (var clnc in dbSubscribedClinicsResponse!.subscribedClinics!) {
+      cliniclist.add(clnc.todomain());
+    }
+    return cliniclist;
   }
 
+  DBSubscribedLabsResponse? dbSubscribedLabsResponse;
   @override
-  Future<List<LabDetails>> getSubscribedLabs() {
-    // TODO: implement getSubscribedLabs
-    throw UnimplementedError();
+  Future<List<LabDetails>> getSubscribedLabs() async {
+    await DioHelper.getData('subcribed-labs', token: '').then((value) {
+      dbSubscribedLabsResponse = DBSubscribedLabsResponse.fromJson(value!.data);
+    });
+    List<LabDetails> lablist = [];
+    for (var labdet in dbSubscribedLabsResponse!.subscribedLabs!) {
+      lablist.add(labdet.todomain());
+    }
+    return lablist;
   }
 }
