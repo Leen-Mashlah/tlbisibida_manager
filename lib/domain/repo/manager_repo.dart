@@ -11,4 +11,6 @@ abstract class ManagerRepo {
   Future<List<ClinicDetails>> getSubscribedClinics();
   Future<List<LabDetails>> getHistoryLabs();
   Future<List<ClinicDetails>> getHistoryClinics();
+  Future<List<ClinicDetails>> getnewClinics();
+  Future<List<LabDetails>> getnewLabs();
 }

@@ -1,8 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:lambda_dent_dash/data/models/Clinics/db_clinic_history.dart';
+import 'package:lambda_dent_dash/data/models/Clinics/db_clinic_join_request.dart';
 import 'package:lambda_dent_dash/data/models/Clinics/db_subscribed_clinics.dart';
 import 'package:lambda_dent_dash/data/models/Labs/db_lab_history.dart';
+import 'package:lambda_dent_dash/data/models/Labs/db_lab_join_request.dart';
 import 'package:lambda_dent_dash/data/models/Labs/db_subscribed_labs.dart';
 import 'package:lambda_dent_dash/domain/models/Clinics/clinic_details.dart';
 import 'package:lambda_dent_dash/domain/models/Labs/lab_details.dart';
@@ -111,5 +113,33 @@ class DbManagerRepo implements ManagerRepo {
       lablist.add(labdet.todomain());
     }
     return lablist;
+  }
+
+  DBLabsJoinRequestResponse? dbLabsJoinRequestResponse;
+  @override
+  Future<List<LabDetails>> getnewLabs() async {
+    await DioHelper.getData('new-labs', token: '').then((value) {
+      dbLabsJoinRequestResponse =
+          DBLabsJoinRequestResponse.fromJson(value!.data);
+    });
+    List<LabDetails> lablist = [];
+    for (var labdet in dbLabsJoinRequestResponse!.labsJoinRequest!) {
+      lablist.add(labdet.todomain());
+    }
+    return lablist;
+  }
+
+  DBClinicJoinRequestResponse? dbClinicJoinRequestResponse;
+  @override
+  Future<List<ClinicDetails>> getnewClinics() async {
+    await DioHelper.getData('new-clinics', token: '').then((value) {
+      dbClinicJoinRequestResponse =
+          DBClinicJoinRequestResponse.fromJson(value!.data);
+    });
+    List<ClinicDetails> clilist = [];
+    for (var labdet in dbClinicJoinRequestResponse!.joinOrdersClinics!) {
+      clilist.add(labdet.todomain());
+    }
+    return clilist;
   }
 }
