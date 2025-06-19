@@ -1,17 +1,21 @@
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:lambda_dent_dash/constant/components/custom_text.dart';
 import 'package:lambda_dent_dash/constant/constants/constants.dart';
+import 'package:lambda_dent_dash/presentation/clients_req/c_r_cubit.dart';
 
 /// Example without datasource
 // ignore: must_be_immutable
 class ClientsLabReqTable extends StatelessWidget {
-  const ClientsLabReqTable({super.key});
+  const ClientsLabReqTable(BuildContext context, {super.key});
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.read<ReqCubit>();
+
     return Center(
       child: Container(
         decoration: BoxDecoration(
@@ -78,12 +82,13 @@ class ClientsLabReqTable extends StatelessWidget {
                 ),
               ],
               rows: List<DataRow>.generate(
-                50,
+                cubit.lablist.length,
                 (index) => DataRow(
                   cells: [
                     DataCell(Center(
                         child: IconButton(
                       onPressed: () {
+                        cubit.lablist[index].id!;
                         // showDialog(
                         //   context: context,
                         //   builder: (context) => const BillDetailsDialog(),
@@ -94,15 +99,19 @@ class ClientsLabReqTable extends StatelessWidget {
                         color: cyan300,
                       ),
                     ))),
-                    const DataCell(Center(child: CustomText(text: '6 أشهر'))),
-                    const DataCell(
-                        Center(child: CustomText(text: '9/10/2024'))),
-                    const DataCell(Center(child: CustomText(text: 'هونولولو'))),
-                    const DataCell(
-                        Center(child: CustomText(text: '0992532588'))),
-                    const DataCell(Center(
+                    DataCell(Center(child: CustomText(text: '6 أشهر'))),
+                    DataCell(Center(
                         child: CustomText(
-                      text: 'تحسين',
+                            text: cubit.lablist[index].registerDate!))),
+                    DataCell(Center(
+                        child: CustomText(
+                            text: cubit.lablist[index].labAddress!))),
+                    DataCell(Center(
+                        child:
+                            CustomText(text: cubit.lablist[index].labPhone!))),
+                    DataCell(Center(
+                        child: CustomText(
+                      text: cubit.lablist[index].labName!,
                     ))),
                   ],
                 ),

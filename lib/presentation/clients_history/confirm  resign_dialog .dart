@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lambda_dent_dash/constant/components/default_button.dart';
 import 'package:lambda_dent_dash/constant/components/default_textfield.dart';
 import 'package:lambda_dent_dash/constant/constants/constants.dart';
+import 'package:lambda_dent_dash/presentation/clients_history/c_h_cubit.dart';
 
-Dialog ConfirmResignDialog(BuildContext context) {
-  TextEditingController itemstandardquantitycontroller =
-      TextEditingController();
+Dialog ConfirmResignDialog(BuildContext context, int id, bool isLab) {
+  TextEditingController monthscontroller = TextEditingController();
 
   return Dialog(
     child: Padding(
@@ -49,8 +50,8 @@ Dialog ConfirmResignDialog(BuildContext context) {
                         ),
                         SizedBox(
                           width: 150,
-                          child: defaultTextField(
-                              itemstandardquantitycontroller, context, ''),
+                          child:
+                              defaultTextField(monthscontroller, context, ''),
                         ),
                         const SizedBox(
                           width: 20,
@@ -64,6 +65,11 @@ Dialog ConfirmResignDialog(BuildContext context) {
                     defaultButton(
                         text: 'تم',
                         function: () {
+                          isLab
+                              ? context.read<HisCubit>().labrenew(
+                                  int.parse(monthscontroller.text), id)
+                              : context.read<HisCubit>().clirenew(
+                                  int.parse(monthscontroller.text), id);
                           Navigator.of(context).pop();
                         })
                   ],

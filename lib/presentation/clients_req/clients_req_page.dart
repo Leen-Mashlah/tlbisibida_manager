@@ -68,8 +68,8 @@ class ClientsReqPage extends StatelessWidget {
               AnimatedBuilder(
                   animation: _showregisteredlist,
                   builder: (context, child) => !_showregisteredlist.value
-                      ? const ClientsLabReqTable()
-                      : const ClientsDocReqTable()),
+                      ? ClientsLabReqTable(context)
+                      : ClientsDocReqTable(context)),
             ],
           )),
           // Positioned(

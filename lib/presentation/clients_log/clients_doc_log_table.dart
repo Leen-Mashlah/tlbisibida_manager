@@ -7,7 +7,7 @@ import 'package:lambda_dent_dash/constant/constants/constants.dart';
 /// Example without datasource
 // ignore: must_be_immutable
 class ClientsDocLogTable extends StatelessWidget {
-  const ClientsDocLogTable({super.key});
+  const ClientsDocLogTable(BuildContext contex, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -36,21 +36,7 @@ class ClientsDocLogTable extends StatelessWidget {
                 DataColumn(
                   label: Center(
                       child: Text(
-                    ' تاريخ نهاية الاشتراك',
-                    style: TextStyle(color: cyan300),
-                  )),
-                ),
-                DataColumn(
-                  label: Center(
-                      child: Text(
-                    'تاريخ بداية الاشتراك ',
-                    style: TextStyle(color: cyan300),
-                  )),
-                ),
-                DataColumn(
-                  label: Center(
-                      child: Text(
-                    'العنوان',
+                    'اسم الطبيب ',
                     style: TextStyle(color: cyan300),
                   )),
                 ),
@@ -64,7 +50,21 @@ class ClientsDocLogTable extends StatelessWidget {
                 DataColumn(
                   label: Center(
                       child: Text(
-                    'اسم الطبيب ',
+                    'العنوان',
+                    style: TextStyle(color: cyan300),
+                  )),
+                ),
+                DataColumn(
+                  label: Center(
+                      child: Text(
+                    'تاريخ بداية الاشتراك ',
+                    style: TextStyle(color: cyan300),
+                  )),
+                ),
+                DataColumn(
+                  label: Center(
+                      child: Text(
+                    ' تاريخ نهاية الاشتراك',
                     style: TextStyle(color: cyan300),
                   )),
                 ),

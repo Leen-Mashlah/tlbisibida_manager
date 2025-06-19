@@ -1,17 +1,20 @@
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lambda_dent_dash/constant/components/custom_text.dart';
 import 'package:lambda_dent_dash/constant/constants/constants.dart';
+import 'package:lambda_dent_dash/presentation/clients_history/c_h_cubit.dart';
 import 'package:lambda_dent_dash/presentation/clients_history/confirm%20%20resign_dialog%20.dart';
 
 /// Example without datasource
 // ignore: must_be_immutable
 class ClientsLabHisTable extends StatelessWidget {
-  const ClientsLabHisTable({super.key});
+  ClientsLabHisTable(BuildContext context, {super.key});
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.read<HisCubit>();
     return Center(
       child: Container(
         decoration: BoxDecoration(
@@ -78,7 +81,7 @@ class ClientsLabHisTable extends StatelessWidget {
                 ),
               ],
               rows: List<DataRow>.generate(
-                50,
+                cubit.lablist.length,
                 (index) => DataRow(
                   cells: [
                     DataCell(Center(
@@ -86,7 +89,8 @@ class ClientsLabHisTable extends StatelessWidget {
                       onPressed: () {
                         showDialog(
                           context: context,
-                          builder: (context) => ConfirmResignDialog(context),
+                          builder: (context) => ConfirmResignDialog(
+                              context, cubit.lablist[index].id!, true),
                         );
                       },
                       icon: const Icon(
@@ -94,15 +98,22 @@ class ClientsLabHisTable extends StatelessWidget {
                         color: cyan300,
                       ),
                     ))),
-                    // const DataCell(Center(child: CustomText(text: '6 أشهر'))),
-                    const DataCell(
-                        Center(child: CustomText(text: '9/10/2024'))),
-                    const DataCell(Center(child: CustomText(text: 'هونولولو'))),
-                    const DataCell(
-                        Center(child: CustomText(text: '0992532588'))),
-                    const DataCell(Center(
+                    //date
+                    DataCell(Center(
                         child: CustomText(
-                      text: 'تحسين',
+                            text: cubit.lablist[index].registerDate!))),
+                    //city
+                    DataCell(Center(
+                        child: CustomText(
+                            text: cubit.lablist[index].labAddress!))),
+                    //number
+                    DataCell(Center(
+                        child:
+                            CustomText(text: cubit.lablist[index].labPhone!))),
+                    //name
+                    DataCell(Center(
+                        child: CustomText(
+                      text: cubit.lablist[index].labName!,
                     ))),
                   ],
                 ),

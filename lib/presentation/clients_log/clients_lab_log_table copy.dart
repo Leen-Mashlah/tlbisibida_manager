@@ -1,16 +1,20 @@
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:lambda_dent_dash/constant/components/custom_text.dart';
 import 'package:lambda_dent_dash/constant/constants/constants.dart';
+import 'package:lambda_dent_dash/presentation/clients_log/c_l_cubit.dart';
 
 /// Example without datasource
 // ignore: must_be_immutable
 class ClientsLabLogTable extends StatelessWidget {
-  const ClientsLabLogTable({super.key});
+  const ClientsLabLogTable(BuildContext context, {super.key});
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.read<LogCubit>();
+
     return Center(
       child: Container(
         decoration: BoxDecoration(
@@ -36,21 +40,7 @@ class ClientsLabLogTable extends StatelessWidget {
                 DataColumn(
                   label: Center(
                       child: Text(
-                    ' تاريخ نهاية الاشتراك',
-                    style: TextStyle(color: cyan300),
-                  )),
-                ),
-                DataColumn(
-                  label: Center(
-                      child: Text(
-                    'تاريخ بداية الاشتراك ',
-                    style: TextStyle(color: cyan300),
-                  )),
-                ),
-                DataColumn(
-                  label: Center(
-                      child: Text(
-                    'العنوان',
+                    'اسم المخبر ',
                     style: TextStyle(color: cyan300),
                   )),
                 ),
@@ -64,22 +54,41 @@ class ClientsLabLogTable extends StatelessWidget {
                 DataColumn(
                   label: Center(
                       child: Text(
-                    'اسم المخبر ',
+                    'العنوان',
+                    style: TextStyle(color: cyan300),
+                  )),
+                ),
+                DataColumn(
+                  label: Center(
+                      child: Text(
+                    'تاريخ بداية الاشتراك ',
+                    style: TextStyle(color: cyan300),
+                  )),
+                ),
+                DataColumn(
+                  label: Center(
+                      child: Text(
+                    ' تاريخ نهاية الاشتراك',
                     style: TextStyle(color: cyan300),
                   )),
                 ),
               ],
               rows: List<DataRow>.generate(
-                50,
-                (index) => const DataRow(
+                cubit.lablist.length,
+                (index) => DataRow(
                   cells: [
+                    //name
                     DataCell(Center(
                         child: CustomText(
-                      text: 'تحسين',
+                      text: cubit.lablist[index].labName!,
                     ))),
-                    DataCell(Center(child: CustomText(text: 'هونولولو'))),
-                    DataCell(Center(child: CustomText(text: '0992532588'))),
-                    DataCell(Center(child: CustomText(text: '9/10/2024'))),
+                    //address
+                    DataCell(Center(child: CustomText(text: cubit.lablist[index].labAddress!))),
+                    //num
+                    DataCell(Center(child: CustomText(text: cubit.lablist[index].labPhone!))),
+                    //f date
+                    DataCell(Center(child: CustomText(text: cubit.lablist[index].registerDate!))),
+                    //l date
                     DataCell(Center(child: CustomText(text: '9/10/2025'))),
                   ],
                 ),

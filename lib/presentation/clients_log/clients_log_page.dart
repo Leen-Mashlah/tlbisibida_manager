@@ -67,8 +67,8 @@ class ClientsLogPage extends StatelessWidget {
               AnimatedBuilder(
                   animation: _showregisteredlist,
                   builder: (context, child) => !_showregisteredlist.value
-                      ? const ClientsLabLogTable()
-                      : const ClientsDocLogTable()),
+                      ? ClientsLabLogTable(context)
+                      : ClientsDocLogTable(context)),
             ],
           )),
           // Positioned(
