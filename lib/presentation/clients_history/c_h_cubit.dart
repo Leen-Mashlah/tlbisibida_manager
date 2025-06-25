@@ -25,13 +25,13 @@ class HisCubit extends Cubit<String> {
   }
 
   //Renew
-  Future<void> clirenew(int month, int id) async {
-    await repo.renewclinics(month, id);
+  Future<void> renew(int month, int id) async {
+    await repo.renew(month, id);
     emit('clirenewed');
   }
 
-  Future<void> labrenew(int month, int id) async {
-    await repo.renewlabs(month, id);
-    emit('labrenewed');
-  }
+  // Future<void> labrenew(int month, int id) async {
+  //   await repo.renewlabs(month, id);
+  //   emit('labrenewed');
+  // }
 }

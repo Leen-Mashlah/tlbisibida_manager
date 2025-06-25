@@ -83,13 +83,21 @@ class ClientsLabLogTable extends StatelessWidget {
                       text: cubit.lablist[index].labName!,
                     ))),
                     //address
-                    DataCell(Center(child: CustomText(text: cubit.lablist[index].labAddress!))),
+                    DataCell(Center(
+                        child: CustomText(
+                            text: cubit.lablist[index].labAddress!))),
                     //num
-                    DataCell(Center(child: CustomText(text: cubit.lablist[index].labPhone!))),
+                    DataCell(Center(
+                        child: CustomText(
+                            text: cubit.lablist[index].labPhone![0]))),
                     //f date
-                    DataCell(Center(child: CustomText(text: cubit.lablist[index].registerDate!))),
+                    DataCell(Center(
+                        child: CustomText(
+                            text: cubit.lablist[index].subscriptionFrom!))),
                     //l date
-                    DataCell(Center(child: CustomText(text: '9/10/2025'))),
+                    DataCell(Center(
+                        child: CustomText(
+                            text: cubit.lablist[index].subscriptionTo!))),
                   ],
                 ),
               ),

@@ -90,7 +90,9 @@ class ClientsLabHisTable extends StatelessWidget {
                         showDialog(
                           context: context,
                           builder: (context) => ConfirmResignDialog(
-                              context, cubit.lablist[index].id!, true),
+                            context,
+                            cubit.lablist[index].subscriptionId!,
+                          ),
                         );
                       },
                       icon: const Icon(
@@ -101,15 +103,15 @@ class ClientsLabHisTable extends StatelessWidget {
                     //date
                     DataCell(Center(
                         child: CustomText(
-                            text: cubit.lablist[index].registerDate!))),
+                            text: cubit.lablist[index].subscriptionTo!))),
                     //city
                     DataCell(Center(
                         child: CustomText(
                             text: cubit.lablist[index].labAddress!))),
                     //number
                     DataCell(Center(
-                        child:
-                            CustomText(text: cubit.lablist[index].labPhone!))),
+                        child: CustomText(
+                            text: cubit.lablist[index].labPhone![0]))),
                     //name
                     DataCell(Center(
                         child: CustomText(

@@ -15,9 +15,9 @@ class DBLabsJoinRequestResponse {
   DBLabsJoinRequestResponse.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     successCode = json['success_code'];
-    if (json['labs-join-Request'] != null) {
+    if (json['labs_register_requests'] != null) {
       labsJoinRequest = <DBLabDetails>[]; // <--- Using LabDetails
-      json['labs-join-Request'].forEach((v) {
+      json['labs_register_requests'].forEach((v) {
         labsJoinRequest!.add(DBLabDetails.fromJson(v)); // <--- Using LabDetails
       });
     }
@@ -29,7 +29,7 @@ class DBLabsJoinRequestResponse {
     data['status'] = status;
     data['success_code'] = successCode;
     if (labsJoinRequest != null) {
-      data['labs-join-Request'] =
+      data['labs_register_requests'] =
           labsJoinRequest!.map((v) => v.toJson()).toList();
     }
     data['success_message'] = successMessage;

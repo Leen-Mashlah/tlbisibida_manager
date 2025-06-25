@@ -5,7 +5,7 @@ import 'package:lambda_dent_dash/constant/components/default_textfield.dart';
 import 'package:lambda_dent_dash/constant/constants/constants.dart';
 import 'package:lambda_dent_dash/presentation/clients_history/c_h_cubit.dart';
 
-Dialog ConfirmResignDialog(BuildContext context, int id, bool isLab) {
+Dialog ConfirmResignDialog(BuildContext context, int id) {
   TextEditingController monthscontroller = TextEditingController();
 
   return Dialog(
@@ -65,11 +65,10 @@ Dialog ConfirmResignDialog(BuildContext context, int id, bool isLab) {
                     defaultButton(
                         text: 'تم',
                         function: () {
-                          isLab
-                              ? context.read<HisCubit>().labrenew(
-                                  int.parse(monthscontroller.text), id)
-                              : context.read<HisCubit>().clirenew(
-                                  int.parse(monthscontroller.text), id);
+                          context
+                              .read<HisCubit>()
+                              .renew(int.parse(monthscontroller.text), id);
+
                           Navigator.of(context).pop();
                         })
                   ],

@@ -16,9 +16,9 @@ class DBHistoryClinicsResponse {
   DBHistoryClinicsResponse.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     successCode = json['success_code'];
-    if (json['not-subscribed-clinics'] != null) {
+    if (json['non_subscribed_clinics'] != null) {
       notSubscribedClinics = <DBClinicDetails>[];
-      json['not-subscribed-clinics'].forEach((v) {
+      json['non_subscribed_clinics'].forEach((v) {
         notSubscribedClinics!.add(DBClinicDetails.fromJson(v));
       });
     }
@@ -30,7 +30,7 @@ class DBHistoryClinicsResponse {
     data['status'] = status;
     data['success_code'] = successCode;
     if (notSubscribedClinics != null) {
-      data['not-subscribed-clinics'] =
+      data['non_subscribed_clinics'] =
           notSubscribedClinics!.map((v) => v.toJson()).toList();
     }
     data['success_message'] = successMessage;

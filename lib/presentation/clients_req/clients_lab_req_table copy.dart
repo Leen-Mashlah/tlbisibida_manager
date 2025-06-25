@@ -99,7 +99,9 @@ class ClientsLabReqTable extends StatelessWidget {
                         color: cyan300,
                       ),
                     ))),
-                    DataCell(Center(child: CustomText(text: '6 أشهر'))),
+                    DataCell(Center(
+                        child: CustomText(
+                            text: cubit.lablist[index].duration.toString()))),
                     DataCell(Center(
                         child: CustomText(
                             text: cubit.lablist[index].registerDate!))),
@@ -107,8 +109,8 @@ class ClientsLabReqTable extends StatelessWidget {
                         child: CustomText(
                             text: cubit.lablist[index].labAddress!))),
                     DataCell(Center(
-                        child:
-                            CustomText(text: cubit.lablist[index].labPhone!))),
+                        child: CustomText(
+                            text: cubit.lablist[index].labPhone![0]))),
                     DataCell(Center(
                         child: CustomText(
                       text: cubit.lablist[index].labName!,

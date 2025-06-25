@@ -16,9 +16,9 @@ class DBHistoryLabsResponse {
   DBHistoryLabsResponse.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     successCode = json['success_code'];
-    if (json['subscribed-not-subscribe-labs'] != null) {
+    if (json['non_subscribed_labs'] != null) {
       subscribedNotSubscribeLabs = <DBLabDetails>[];
-      json['subscribed-not-subscribe-labs'].forEach((v) {
+      json['non_subscribed_labs'].forEach((v) {
         subscribedNotSubscribeLabs!
             .add(DBLabDetails.fromJson(v)); // Using LabDetails
       });
@@ -31,7 +31,7 @@ class DBHistoryLabsResponse {
     data['status'] = status;
     data['success_code'] = successCode;
     if (subscribedNotSubscribeLabs != null) {
-      data['subscribed-not-subscribe-labs'] =
+      data['non_subscribed_labs'] =
           subscribedNotSubscribeLabs!.map((v) => v.toJson()).toList();
     }
     data['success_message'] = successMessage;

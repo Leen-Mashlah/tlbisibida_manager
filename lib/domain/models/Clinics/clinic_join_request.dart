@@ -1,13 +1,11 @@
 import 'clinic_details.dart';
 
-class 
-ClinicJoinRequestResponse {
+class ClinicJoinRequestResponse {
   bool? status;
   int? successCode;
   List<ClinicDetails>? joinOrdersClinics;
   String? successMessage;
 
-  
   ClinicJoinRequestResponse({
     this.status,
     this.successCode,
@@ -15,15 +13,13 @@ ClinicJoinRequestResponse {
     this.successMessage,
   });
 
-  
   ClinicJoinRequestResponse.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     successCode = json['success_code'];
-    if (json['join-orders-clinics'] != null) {
+    if (json['clinics_register_requests'] != null) {
       joinOrdersClinics = <ClinicDetails>[];
-      json['join-orders-clinics'].forEach((v) {
-        joinOrdersClinics!
-            .add(ClinicDetails.fromJson(v));
+      json['clinics_register_requests'].forEach((v) {
+        joinOrdersClinics!.add(ClinicDetails.fromJson(v));
       });
     }
     successMessage = json['success_message'];
@@ -34,7 +30,7 @@ ClinicJoinRequestResponse {
     data['status'] = status;
     data['success_code'] = successCode;
     if (joinOrdersClinics != null) {
-      data['join-orders-clinics'] =
+      data['clinics_register_requests'] =
           joinOrdersClinics!.map((v) => v.toJson()).toList();
     }
     data['success_message'] = successMessage;

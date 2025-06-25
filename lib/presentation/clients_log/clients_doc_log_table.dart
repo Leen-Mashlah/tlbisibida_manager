@@ -1,16 +1,21 @@
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:lambda_dent_dash/constant/components/custom_text.dart';
 import 'package:lambda_dent_dash/constant/constants/constants.dart';
 
+import 'c_l_cubit.dart';
+
 /// Example without datasource
 // ignore: must_be_immutable
 class ClientsDocLogTable extends StatelessWidget {
-  const ClientsDocLogTable(BuildContext contex, {super.key});
+  const ClientsDocLogTable(BuildContext context, {super.key});
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.read<LogCubit>();
+
     return Center(
       child: Container(
         decoration: BoxDecoration(
@@ -70,17 +75,25 @@ class ClientsDocLogTable extends StatelessWidget {
                 ),
               ],
               rows: List<DataRow>.generate(
-                50,
-                (index) => const DataRow(
+                cubit.clilist.length,
+                (index) => DataRow(
                   cells: [
                     DataCell(Center(
                         child: CustomText(
-                      text: 'تحسين',
+                      text: cubit.clilist[index].fullName!,
                     ))),
-                    DataCell(Center(child: CustomText(text: 'هونولولو'))),
-                    DataCell(Center(child: CustomText(text: '0992532588'))),
-                    DataCell(Center(child: CustomText(text: '9/10/2024'))),
-                    DataCell(Center(child: CustomText(text: '9/10/2025'))),
+                    DataCell(Center(
+                        child:
+                            CustomText(text: cubit.clilist[index].address!))),
+                    DataCell(Center(
+                        child: CustomText(
+                            text: cubit.clilist[index].phone.toString()))),
+                    DataCell(Center(
+                        child: CustomText(
+                            text: cubit.clilist[index].subscriptionFrom!))),
+                    DataCell(Center(
+                        child: CustomText(
+                            text: cubit.clilist[index].subscriptionTo!))),
                   ],
                 ),
               ),

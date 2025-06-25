@@ -6,23 +6,20 @@ class HistoryClinicsResponse {
   List<ClinicDetails>? notSubscribedClinics;
   String? successMessage;
 
-  HistoryClinicsResponse
-({
+  HistoryClinicsResponse({
     this.status,
     this.successCode,
     this.notSubscribedClinics,
     this.successMessage,
   });
 
-  HistoryClinicsResponse
-.fromJson(Map<String, dynamic> json) {
+  HistoryClinicsResponse.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     successCode = json['success_code'];
-    if (json['not-subscribed-clinics'] != null) {
+    if (json['non_subscribed_clinics'] != null) {
       notSubscribedClinics = <ClinicDetails>[];
-      json['not-subscribed-clinics'].forEach((v) {
-        notSubscribedClinics!
-            .add(ClinicDetails.fromJson(v));
+      json['non_subscribed_clinics'].forEach((v) {
+        notSubscribedClinics!.add(ClinicDetails.fromJson(v));
       });
     }
     successMessage = json['success_message'];
@@ -33,7 +30,7 @@ class HistoryClinicsResponse {
     data['status'] = status;
     data['success_code'] = successCode;
     if (notSubscribedClinics != null) {
-      data['not-subscribed-clinics'] =
+      data['non_subscribed_clinics'] =
           notSubscribedClinics!.map((v) => v.toJson()).toList();
     }
     data['success_message'] = successMessage;

@@ -91,7 +91,9 @@ class ClientsDocHisTable extends StatelessWidget {
                         showDialog(
                           context: context,
                           builder: (context) => ConfirmResignDialog(
-                              context, cubit.clilist[index].id!, false),
+                            context,
+                            cubit.clilist[index].subscriptionId!,
+                          ),
                         );
                       },
                       icon: const Icon(
@@ -102,7 +104,7 @@ class ClientsDocHisTable extends StatelessWidget {
                     //date
                     DataCell(Center(
                         child: CustomText(
-                            text: cubit.clilist[index].registerDate!))),
+                            text: cubit.clilist[index].subscriptionTo!))),
                     //city
                     DataCell(Center(
                         child:

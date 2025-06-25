@@ -82,13 +82,13 @@ class ClientsDocReqTable extends StatelessWidget {
                 ),
               ],
               rows: List<DataRow>.generate(
-                cubit.lablist.length,
+                cubit.clilist.length,
                 (index) => DataRow(
                   cells: [
                     DataCell(Center(
                         child: IconButton(
                       onPressed: () {
-                        cubit.cliconfirm(cubit.lablist[index].id!);
+                        cubit.cliconfirm(cubit.clilist[index].id!);
                       },
                       icon: const Icon(
                         CupertinoIcons.checkmark_seal,
@@ -98,23 +98,23 @@ class ClientsDocReqTable extends StatelessWidget {
                     //mddi
                     DataCell(Center(
                         child: CustomText(
-                            text: cubit.lablist[index].registerDate!))),
+                            text: cubit.clilist[index].duration.toString()))),
                     //date
                     DataCell(Center(
                         child: CustomText(
-                            text: cubit.lablist[index].registerDate!))),
+                            text: cubit.clilist[index].registerDate!))),
                     //add
                     DataCell(Center(
-                        child: CustomText(
-                            text: cubit.lablist[index].labAddress!))),
+                        child:
+                            CustomText(text: cubit.clilist[index].address!))),
                     //num
                     DataCell(Center(
-                        child:
-                            CustomText(text: cubit.lablist[index].labPhone!))),
+                        child: CustomText(
+                            text: cubit.clilist[index].phone.toString()))),
                     //name
                     DataCell(Center(
                         child: CustomText(
-                      text: cubit.lablist[index].labName!,
+                      text: cubit.clilist[index].fullName!,
                     ))),
                   ],
                 ),

@@ -38,26 +38,25 @@ class DbManagerRepo implements ManagerRepo {
   }
 
   @override
-  Future<void> renewlabs(int month, int id) {
+  Future<void> renew(int months, int id) {
     return DioHelper.postData(
-        "renew-subscription-of-lab?lab_id=$id&months=$month&subscription_value=0",
-        {}).then(
+        'renew-subscription', {'subscription_id': id, 'months': months}).then(
       (value) {
         if (value?.data['status']) {}
       },
     ).catchError((error) {});
   }
 
-  @override
-  Future<void> renewclinics(int month, int id) {
-    return DioHelper.postData(
-        "renew-subscription-of-clinic?dentist_id=$id&months=$month&subscription_value=0",
-        {}).then(
-      (value) {
-        if (value?.data['status']) {}
-      },
-    ).catchError((error) {});
-  }
+  // @override
+  // Future<void> renewclinics(int month, int id) {
+  //   return DioHelper.postData(
+  //       "renew-subscription-of-clinic?dentist_id=$id&months=$month&subscription_value=0",
+  //       {}).then(
+  //     (value) {
+  //       if (value?.data['status']) {}
+  //     },
+  //   ).catchError((error) {});
+  // }
 
   DBHistoryClinicsResponse? dbHistoryClinicsResponse;
   @override
