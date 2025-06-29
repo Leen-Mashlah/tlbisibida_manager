@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:lambda_dent_dash/data/repo/db_manager_repo.dart';
+import 'package:lambda_dent_dash/domain/repo/manager_repo.dart';
+import 'package:lambda_dent_dash/presentation/clients_log/log_provider.dart';
+import 'package:lambda_dent_dash/services/navigation/controllers.dart';
 import 'package:lambda_dent_dash/services/navigation/routes.dart';
 import 'package:lambda_dent_dash/presentation/clients_history/clients_his_page.dart';
 import 'package:lambda_dent_dash/presentation/clients_log/clients_log_page.dart';
@@ -18,10 +22,11 @@ import 'package:lambda_dent_dash/presentation/clients_req/clients_req_page.dart'
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   print('generateRoute: ${settings.name}');
-
+  DbManagerRepo _managerrepo = locator<DbManagerRepo>();
   switch (settings.name) {
     case clientsLogPageRoute:
-      return _getPageRoute((ClientsLogPage()));
+      return _getPageRoute(
+          LogProvider(repo: _managerrepo, child: ClientsLogPage()));
     case clientsReqPageRoute:
       return _getPageRoute((ClientsReqPage()));
     case clientsHistoryPageRoute:
@@ -48,7 +53,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     // case clientsPageRoute:
     //   return _getPageRoute(ClientsPage());
     default:
-      return _getPageRoute(ClientsLogPage());
+      return _getPageRoute(
+          LogProvider(repo: _managerrepo, child: ClientsLogPage()));
   }
 }
 

@@ -19,7 +19,7 @@ class SiteLayout extends StatelessWidget {
         largeScreen: Navigator(
           key: locator<NavigationService>().navigatorKey,
           onGenerateRoute: generateRoute,
-          initialRoute: "/client_req",
+          initialRoute: "/client_log",
         ),
       ),
     );

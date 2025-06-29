@@ -14,13 +14,23 @@ class LogCubit extends Cubit<String> {
   //load
   List<LabDetails> lablist = [];
   Future<void> labload() async {
-    lablist = await repo.getSubscribedLabs();
-    emit('labsloaded');
+    try {
+      lablist = await repo.getSubscribedLabs();
+    } on Exception catch (e) {
+      emit('error');
+      print(e.toString());
+    }
+    lablist.isNotEmpty ? emit('labsloaded') : emit('error');
   }
 
   List<ClinicDetails> clilist = [];
   Future<void> cliload() async {
-    clilist = await repo.getSubscribedClinics();
-    emit('cliloaded');
+    try {
+      clilist = await repo.getSubscribedClinics();
+    } on Exception catch (e) {
+      emit('error');
+      print(e.toString());
+    }
+    clilist.isNotEmpty ? emit('cliloaded') : emit('error');
   }
 }

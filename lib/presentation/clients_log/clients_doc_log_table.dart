@@ -10,7 +10,7 @@ import 'c_l_cubit.dart';
 /// Example without datasource
 // ignore: must_be_immutable
 class ClientsDocLogTable extends StatelessWidget {
-  const ClientsDocLogTable(BuildContext context, {super.key});
+  const ClientsDocLogTable({super.key});
 
   @override
   Widget build(BuildContext context) {

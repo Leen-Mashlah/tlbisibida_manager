@@ -1,5 +1,4 @@
-import 'package:dio/dio.dart';
-import 'package:get/get.dart';
+import 'package:lambda_dent_dash/constant/constants/constants.dart';
 import 'package:lambda_dent_dash/data/models/Clinics/db_clinic_history.dart';
 import 'package:lambda_dent_dash/data/models/Clinics/db_clinic_join_request.dart';
 import 'package:lambda_dent_dash/data/models/Clinics/db_subscribed_clinics.dart';
@@ -90,7 +89,7 @@ class DbManagerRepo implements ManagerRepo {
   DBSubscribedClinicsResponse? dbSubscribedClinicsResponse;
   @override
   Future<List<ClinicDetails>> getSubscribedClinics() async {
-    await DioHelper.getData('subscribed-clinics', token: '').then((value) {
+    await DioHelper.getData('subscribed-clinics', token: testtoken).then((value) {
       dbSubscribedClinicsResponse =
           DBSubscribedClinicsResponse.fromJson(value?.data);
     });
@@ -104,7 +103,7 @@ class DbManagerRepo implements ManagerRepo {
   DBSubscribedLabsResponse? dbSubscribedLabsResponse;
   @override
   Future<List<LabDetails>> getSubscribedLabs() async {
-    await DioHelper.getData('subcribed-labs', token: '').then((value) {
+    await DioHelper.getData('subcribed-labs', token: testtoken).then((value) {
       dbSubscribedLabsResponse = DBSubscribedLabsResponse.fromJson(value!.data);
     });
     List<LabDetails> lablist = [];

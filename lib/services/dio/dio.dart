@@ -1,19 +1,23 @@
 import 'package:dio/dio.dart';
+import 'package:lambda_dent_dash/constant/constants/constants.dart';
 
 class DioHelper {
   static Dio? dio;
   static init() {
-    dio =
-        Dio(BaseOptions(baseUrl: 'http://127.0.0.1:8000/api/admin/', headers: {
-      'Accept': 'application/json',
-    }));
+    dio = Dio(BaseOptions(
+      baseUrl: baseUrl,
+      headers: {
+        'Accept': 'application/json',
+      },
+      receiveDataWhenStatusError: true,
+    ));
   }
 
   static Future<Response?> getData(String url,
       {Map<String, dynamic>? query, String? token}) async {
     dio?.options.headers = {
       'Accept': 'application/json',
-      'Authorization': token,
+      'Authorization': testtoken,
     };
     return await dio?.get(url, queryParameters: query);
   }

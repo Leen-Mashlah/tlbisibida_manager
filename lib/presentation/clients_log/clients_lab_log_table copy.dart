@@ -9,7 +9,7 @@ import 'package:lambda_dent_dash/presentation/clients_log/c_l_cubit.dart';
 /// Example without datasource
 // ignore: must_be_immutable
 class ClientsLabLogTable extends StatelessWidget {
-  const ClientsLabLogTable(BuildContext context, {super.key});
+  const ClientsLabLogTable({super.key});
 
   @override
   Widget build(BuildContext context) {
