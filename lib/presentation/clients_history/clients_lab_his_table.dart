@@ -10,7 +10,7 @@ import 'package:lambda_dent_dash/presentation/clients_history/confirm_register_d
 /// Example without datasource
 // ignore: must_be_immutable
 class ClientsLabHisTable extends StatelessWidget {
-  ClientsLabHisTable(BuildContext context, {super.key});
+  const ClientsLabHisTable({super.key});
 
   @override
   Widget build(BuildContext context) {

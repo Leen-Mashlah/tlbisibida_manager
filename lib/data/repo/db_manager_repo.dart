@@ -71,11 +71,9 @@ class DbManagerRepo implements ManagerRepo {
   DBHistoryClinicsResponse? dbHistoryClinicsResponse;
   @override
   Future<List<ClinicDetails>> getHistoryClinics() async {
-    await DioHelper.getData('clinics/null-subscription', token: '')
+    await DioHelper.getData('clinics/null-subscription', token: testtoken)
         .then((value) {
       dbHistoryClinicsResponse = DBHistoryClinicsResponse.fromJson(value?.data);
-    }).catchError((error) {
-      print('error: ' + error.toString());
     });
     List<ClinicDetails> cliniclist = [];
     for (var clinic in dbHistoryClinicsResponse!.notSubscribedClinics!) {
@@ -87,7 +85,7 @@ class DbManagerRepo implements ManagerRepo {
   DBHistoryLabsResponse? dbHistoryLabsResponse;
   @override
   Future<List<LabDetails>> getHistoryLabs() async {
-    await DioHelper.getData('labs/null-subscription', token: '').then((value) {
+    await DioHelper.getData('labs/null-subscription', token: testtoken).then((value) {
       dbHistoryLabsResponse = DBHistoryLabsResponse.fromJson(value?.data);
     });
     List<LabDetails> lablist = [];

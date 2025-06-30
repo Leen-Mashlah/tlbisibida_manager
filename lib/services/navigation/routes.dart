@@ -1,10 +1,10 @@
 const rootRoute = "/";
 
-const clientsLogDisplayName = "Client Log";
+const clientsLogDisplayName = "سجل الزبائن المشتركين";
 const clientsLogPageRoute = "/client_log";
 
-const clientsReqDisplayName = "Client Req";
+const clientsReqDisplayName = "طلبات الاستراك";
 const clientsReqPageRoute = "/client_req";
 
-const clientsHistoryDisplayName = "Client History";
+const clientsHistoryDisplayName = "سجل الزبائن غير المجددين";
 const clientsHistoryPageRoute = "/client_his";

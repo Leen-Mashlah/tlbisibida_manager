@@ -11,25 +11,44 @@ class HisCubit extends Cubit<String> {
     labload();
   }
 
-  //load
+//Load
   List<LabDetails> lablist = [];
   Future<void> labload() async {
-    lablist = await repo.getHistoryLabs();
-    emit('labsloaded');
+    try {
+      lablist = await repo.getHistoryLabs();
+    } on Exception catch (e) {
+      emit('error');
+      print(e.toString());
+    }
+    lablist.isNotEmpty ? emit('labsloaded') : emit('error');
   }
 
   List<ClinicDetails> clilist = [];
   Future<void> cliload() async {
-    clilist = await repo.getHistoryClinics();
-    emit('cliloaded');
+    try {
+      clilist = await repo.getHistoryClinics();
+    } on Exception catch (e) {
+      emit('error');
+      print(e.toString());
+    }
+    clilist.isNotEmpty ? emit('cliloaded') : emit('error');
   }
 
   //Renew
   Future<void> renew(int month, int id) async {
-    await repo.renew(month, id);
-    emit('clirenewed');
+    bool status = false;
+    try {
+      status = await repo.renew(month, id);
+    } on Exception catch (e) {
+      emit('error');
+      print(e.toString());
+    }
+    if (status) {
+      emit('confirmed');
+    } else {
+      emit('error');
+    }
   }
-
   // Future<void> labrenew(int month, int id) async {
   //   await repo.renewlabs(month, id);
   //   emit('labrenewed');

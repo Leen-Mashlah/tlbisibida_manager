@@ -3,8 +3,8 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:lambda_dent_dash/constant/constants/constants.dart';
 import 'package:lambda_dent_dash/services/dio/dio.dart';
 import 'package:lambda_dent_dash/services/navigation/controllers.dart';
+import 'package:lambda_dent_dash/services/navigation/navigation_service.dart';
 import 'package:lambda_dent_dash/services/navigation/router.dart';
-import 'package:lambda_dent_dash/services/navigation/routes.dart';
 import 'package:lambda_dent_dash/constant/components/site_layout.dart';
 
 void main() {
@@ -12,7 +12,13 @@ void main() {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   DioHelper.init();
   setupLocator();
+
+  final navigationService = locator<NavigationService>();
   runApp(const MyApp());
+  
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+    navigationService.init();
+  });
 }
 
 class MyApp extends StatelessWidget {
@@ -22,8 +28,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      
-      initialRoute: rootRoute,
       onGenerateRoute: (settings) => generateRoute(settings),
       title: 'LambdaDent Admin Dashboard',
       locale: const Locale('ar'),
@@ -44,7 +48,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal),
         scaffoldBackgroundColor: cyan50,
       ),
-      home: (SiteLayout()),
+      home: SiteLayout(),
     );
   }
 }
