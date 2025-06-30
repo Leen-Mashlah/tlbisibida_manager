@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lambda_dent_dash/constant/constants/constants.dart';
 import 'package:lambda_dent_dash/presentation/clients_history/c_h_cubit.dart';
 import 'package:lambda_dent_dash/presentation/clients_history/clients_doc_his_table.dart';
-import 'package:lambda_dent_dash/presentation/clients_history/clients_lab_his_table%20copy.dart';
+import 'package:lambda_dent_dash/presentation/clients_history/clients_lab_his_table.dart';
 
 class ClientsHistoryPage extends StatelessWidget {
   ClientsHistoryPage({super.key});

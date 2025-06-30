@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lambda_dent_dash/constant/components/custom_text.dart';
 import 'package:lambda_dent_dash/constant/constants/constants.dart';
 import 'package:lambda_dent_dash/presentation/clients_history/c_h_cubit.dart';
-import 'package:lambda_dent_dash/presentation/clients_history/confirm%20%20resign_dialog%20.dart';
+import 'package:lambda_dent_dash/presentation/clients_history/confirm_register_dialog.dart';
 
 /// Example without datasource
 // ignore: must_be_immutable
@@ -90,7 +90,7 @@ class ClientsDocHisTable extends StatelessWidget {
                       onPressed: () {
                         showDialog(
                           context: context,
-                          builder: (context) => ConfirmResignDialog(
+                          builder: (context) => ConfirmRegisterDialog(
                             context,
                             cubit.clilist[index].subscriptionId!,
                           ),

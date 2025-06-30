@@ -14,24 +14,54 @@ class ReqCubit extends Cubit<String> {
   //load
   List<LabDetails> lablist = [];
   Future<void> labload() async {
-    lablist = await repo.getnewLabs();
-    emit('labsloaded');
+    try {
+      lablist = await repo.getnewLabs();
+    } on Exception catch (e) {
+      emit('error');
+      print(e.toString());
+    }
+    lablist.isNotEmpty ? emit('labsloaded') : emit('error');
   }
 
   List<ClinicDetails> clilist = [];
   Future<void> cliload() async {
-    clilist = await repo.getnewClinics();
-    emit('cliloaded');
+    try {
+      clilist = await repo.getnewClinics();
+    } on Exception catch (e) {
+      emit('error');
+      print(e.toString());
+    }
+    lablist.isNotEmpty ? emit('labsloaded') : emit('error');
   }
 
   //confirm
   Future<void> cliconfirm(int id) async {
-    await repo.confirmclinics(id);
-    emit('confirmed');
+    bool status = false;
+    try {
+      status = await repo.confirmclinics(id);
+    } on Exception catch (e) {
+      emit('error');
+      print(e.toString());
+    }
+    if (status) {
+      emit('confirmed');
+    } else {
+      emit('error');
+    }
   }
 
   Future<void> labconfirm(int id) async {
-    await repo.confirmlabs(id);
-    emit('confirmed');
+    bool status = false;
+    try {
+      status = await repo.confirmlabs(id);
+    } on Exception catch (e) {
+      emit('error');
+      print(e.toString());
+    }
+    if (status) {
+      emit('confirmed');
+    } else {
+      emit('error');
+    }
   }
 }

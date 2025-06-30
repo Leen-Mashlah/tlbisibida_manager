@@ -4,6 +4,7 @@ import 'package:lambda_dent_dash/constant/components/top_nav.dart';
 import 'package:lambda_dent_dash/services/navigation/controllers.dart';
 import 'package:lambda_dent_dash/services/navigation/navigation_service.dart';
 import 'package:lambda_dent_dash/services/navigation/router.dart';
+import 'package:lambda_dent_dash/services/navigation/routes.dart';
 
 class SiteLayout extends StatelessWidget {
   SiteLayout({super.key});
@@ -19,7 +20,7 @@ class SiteLayout extends StatelessWidget {
         largeScreen: Navigator(
           key: locator<NavigationService>().navigatorKey,
           onGenerateRoute: generateRoute,
-          initialRoute: "/client_log",
+          initialRoute: clientsReqPageRoute,
         ),
       ),
     );

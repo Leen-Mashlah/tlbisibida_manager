@@ -4,13 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:lambda_dent_dash/constant/components/custom_text.dart';
+import 'package:lambda_dent_dash/constant/components/default_button.dart';
 import 'package:lambda_dent_dash/constant/constants/constants.dart';
 import 'package:lambda_dent_dash/presentation/clients_req/c_r_cubit.dart';
 
 /// Example without datasource
 // ignore: must_be_immutable
 class ClientsDocReqTable extends StatelessWidget {
-  const ClientsDocReqTable(BuildContext context, {super.key});
+  const ClientsDocReqTable({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -89,6 +90,26 @@ class ClientsDocReqTable extends StatelessWidget {
                         child: IconButton(
                       onPressed: () {
                         cubit.cliconfirm(cubit.clilist[index].id!);
+                        showDialog(
+                          context: context,
+                          builder: (context) => Dialog(
+                            child: Column(
+                              children: [
+                                cubit.state == 'confirmed'
+                                    ? Text('تم القبول بنجاح')
+                                    : Text('حدث خطأ،لم تتم عملية القبول '),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                defaultButton(
+                                    text: 'تم',
+                                    function: () {
+                                      Navigator.of(context).pop();
+                                    }),
+                              ],
+                            ),
+                          ),
+                        );
                       },
                       icon: const Icon(
                         CupertinoIcons.checkmark_seal,

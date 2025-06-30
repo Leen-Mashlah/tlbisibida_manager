@@ -5,7 +5,7 @@ import 'package:lambda_dent_dash/constant/components/default_textfield.dart';
 import 'package:lambda_dent_dash/constant/constants/constants.dart';
 import 'package:lambda_dent_dash/presentation/clients_history/c_h_cubit.dart';
 
-Dialog ConfirmResignDialog(BuildContext context, int id) {
+Dialog ConfirmRegisterDialog(BuildContext context, int id) {
   TextEditingController monthscontroller = TextEditingController();
 
   return Dialog(

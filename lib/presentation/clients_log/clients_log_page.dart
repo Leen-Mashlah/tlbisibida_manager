@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart'; // Import flutter_bloc
 import 'package:lambda_dent_dash/constant/constants/constants.dart';
 import 'package:lambda_dent_dash/presentation/clients_log/clients_doc_log_table.dart';
-import 'package:lambda_dent_dash/presentation/clients_log/clients_lab_log_table%20copy.dart';
+import 'package:lambda_dent_dash/presentation/clients_log/clients_lab_log_table.dart';
 import 'package:lambda_dent_dash/presentation/clients_log/c_l_cubit.dart'; // Import your cubit
 
 class ClientsLogPage extends StatelessWidget {
@@ -100,6 +100,9 @@ class ClientsLogPage extends StatelessWidget {
                             currentLogCubit.lablist.isEmpty) {
                           return const Center(
                               child: Text("No lab requests found."));
+                        } else if (state == 'error') {
+                          return const Center(
+                              child: Text('Data Couldn\'t be loaded'));
                         } else {
                           // Still loading labs
                           return const Center(

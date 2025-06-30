@@ -13,37 +13,48 @@ import 'package:lambda_dent_dash/services/dio/dio.dart';
 
 class DbManagerRepo implements ManagerRepo {
   @override
-  Future<void> confirmlabs(int id) {
-    return DioHelper.updateData(
-      'lab-manager/accept-join-order-of-lab/$id',
-      {},
-    ).then(
+  Future<bool> confirmlabs(int id) async {
+    await DioHelper.updateData('lab-manager/accept-join-order-of-lab/$id', {})
+        .then(
       (value) {
-        if (value?.data['status']) {}
+        if (value?.data['status']) {
+          return true;
+        } else {
+          return false;
+        }
       },
-    ).catchError((error) {});
+    ).catchError((error) {
+      return false;
+    });
+    return false;
   }
 
   @override
-  Future<void> confirmclinics(int id) {
-    return DioHelper.updateData(
-      'clinic/accept-join-order-of-clinic/$id',
-      {},
-    ).then(
+  Future<bool> confirmclinics(int id) async {
+    await DioHelper.updateData('clinic/accept-join-order-of-clinic/$id', {})
+        .then(
       (value) {
-        if (value?.data['status']) {}
+        if (value?.data['status']) return true;
       },
-    ).catchError((error) {});
+    ).catchError((error) {
+      return false;
+    });
+    return false;
   }
 
   @override
-  Future<void> renew(int months, int id) {
-    return DioHelper.postData(
+  Future<bool> renew(int months, int id) async {
+    await DioHelper.postData(
         'renew-subscription', {'subscription_id': id, 'months': months}).then(
       (value) {
-        if (value?.data['status']) {}
+        if (value?.data['status']) {
+          return true;
+        }
       },
-    ).catchError((error) {});
+    ).catchError((error) {
+      return false;
+    });
+    return false;
   }
 
   // @override
@@ -89,7 +100,8 @@ class DbManagerRepo implements ManagerRepo {
   DBSubscribedClinicsResponse? dbSubscribedClinicsResponse;
   @override
   Future<List<ClinicDetails>> getSubscribedClinics() async {
-    await DioHelper.getData('subscribed-clinics', token: testtoken).then((value) {
+    await DioHelper.getData('subscribed-clinics', token: testtoken)
+        .then((value) {
       dbSubscribedClinicsResponse =
           DBSubscribedClinicsResponse.fromJson(value?.data);
     });

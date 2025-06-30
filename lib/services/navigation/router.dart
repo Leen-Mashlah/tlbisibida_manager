@@ -1,60 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:lambda_dent_dash/data/repo/db_manager_repo.dart';
-import 'package:lambda_dent_dash/domain/repo/manager_repo.dart';
+import 'package:lambda_dent_dash/presentation/clients_history/history_provider.dart';
 import 'package:lambda_dent_dash/presentation/clients_log/log_provider.dart';
-import 'package:lambda_dent_dash/services/navigation/controllers.dart';
+import 'package:lambda_dent_dash/presentation/clients_req/req_provider.dart';
 import 'package:lambda_dent_dash/services/navigation/routes.dart';
-import 'package:lambda_dent_dash/presentation/clients_history/clients_his_page.dart';
-import 'package:lambda_dent_dash/presentation/clients_log/clients_log_page.dart';
-import 'package:lambda_dent_dash/presentation/clients_req/clients_req_page.dart';
-// import 'package:flutter_web_dashboard/helpers/pages/Complaints/complaints.dart';
-// import 'package:flutter_web_dashboard/helpers/pages/Conditions/conditions.dart';
-// import 'package:flutter_web_dashboard/helpers/pages/Employees/employees.dart';
-// import 'package:flutter_web_dashboard/helpers/pages/Files/files.dart';
-// import 'package:flutter_web_dashboard/helpers/pages/Grades/grades.dart';
-// import 'package:flutter_web_dashboard/helpers/pages/IncentiveShare/incentive_share.dart';
-// import 'package:flutter_web_dashboard/helpers/pages/Incentives/incentives.dart';
-// import 'package:flutter_web_dashboard/helpers/pages/Increment/Increment.dart';
-// import 'package:flutter_web_dashboard/helpers/pages/clients/clients.dart';
-// import 'package:flutter_web_dashboard/helpers/pages/drivers/drivers.dart';
-// import 'package:flutter_web_dashboard/helpers/pages/overview/overview.dart';
-// import 'package:flutter_web_dashboard/routes.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   print('generateRoute: ${settings.name}');
-  DbManagerRepo _managerrepo = locator<DbManagerRepo>();
   switch (settings.name) {
     case clientsLogPageRoute:
-      return _getPageRoute(
-          LogProvider(repo: _managerrepo, child: ClientsLogPage()));
+      return _getPageRoute(LogProvider());
     case clientsReqPageRoute:
-      return _getPageRoute((ClientsReqPage()));
+      return _getPageRoute((ReqProvider()));
     case clientsHistoryPageRoute:
-      return _getPageRoute((ClientsHistoryPage()));
-
-    // case gradesPageRoute:
-    //   return _getPageRoute(GradesPage());
-    // case incrementPageRoute:
-    //   return _getPageRoute(IncrementPage());
-    // case complaintsPageRoute:
-    //   return _getPageRoute(ComplaintsPage());
-    // case conditionsPageRoute:
-    //   return _getPageRoute(ConditionsPage());
-    // case incentivePageRoute:
-    //   return _getPageRoute(IncentivesPage());
-    // case incentiveShareRoute:
-    //   return _getPageRoute(IncentivesShare());
-    // case filesPageRoute:
-    //   return _getPageRoute(FilesPage());
-    // case overviewPageRoute:
-    //   return _getPageRoute(OverviewPage());
-    // case driversPageRoute:
-    //   return _getPageRoute(DriversPage());
-    // case clientsPageRoute:
-    //   return _getPageRoute(ClientsPage());
+      return _getPageRoute((HistoryProvider()));
     default:
-      return _getPageRoute(
-          LogProvider(repo: _managerrepo, child: ClientsLogPage()));
+      return _getPageRoute(LogProvider());
   }
 }
 

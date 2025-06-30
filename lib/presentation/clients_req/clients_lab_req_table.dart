@@ -2,19 +2,20 @@ import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:lambda_dent_dash/constant/components/custom_text.dart';
 import 'package:lambda_dent_dash/constant/constants/constants.dart';
-import 'package:lambda_dent_dash/presentation/clients_history/c_h_cubit.dart';
-import 'package:lambda_dent_dash/presentation/clients_history/confirm%20%20resign_dialog%20.dart';
+import 'package:lambda_dent_dash/presentation/clients_req/c_r_cubit.dart';
 
 /// Example without datasource
 // ignore: must_be_immutable
-class ClientsLabHisTable extends StatelessWidget {
-  ClientsLabHisTable(BuildContext context, {super.key});
+class ClientsLabReqTable extends StatelessWidget {
+  const ClientsLabReqTable({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.read<HisCubit>();
+    final cubit = context.read<ReqCubit>();
+
     return Center(
       child: Container(
         decoration: BoxDecoration(
@@ -40,21 +41,21 @@ class ClientsLabHisTable extends StatelessWidget {
                 DataColumn(
                   label: Center(
                       child: Text(
-                    ' تجديد الاشتراك',
+                    'تأكيد الطلب',
                     style: TextStyle(color: cyan300),
                   )),
                 ),
-                // DataColumn(
-                //   label: Center(
-                //       child: Text(
-                //     'المدة',
-                //     style: TextStyle(color: cyan300),
-                //   )),
-                // ),
                 DataColumn(
                   label: Center(
                       child: Text(
-                    'تاريخ نهاية الاشتراك ',
+                    'المدة',
+                    style: TextStyle(color: cyan300),
+                  )),
+                ),
+                DataColumn(
+                  label: Center(
+                      child: Text(
+                    'تاريخ الطلب ',
                     style: TextStyle(color: cyan300),
                   )),
                 ),
@@ -87,32 +88,29 @@ class ClientsLabHisTable extends StatelessWidget {
                     DataCell(Center(
                         child: IconButton(
                       onPressed: () {
-                        showDialog(
-                          context: context,
-                          builder: (context) => ConfirmResignDialog(
-                            context,
-                            cubit.lablist[index].subscriptionId!,
-                          ),
-                        );
+                        cubit.lablist[index].id!;
+                        // showDialog(
+                        //   context: context,
+                        //   builder: (context) => const BillDetailsDialog(),
+                        // );
                       },
                       icon: const Icon(
                         CupertinoIcons.checkmark_seal,
                         color: cyan300,
                       ),
                     ))),
-                    //date
                     DataCell(Center(
                         child: CustomText(
-                            text: cubit.lablist[index].subscriptionTo!))),
-                    //city
+                            text: cubit.lablist[index].duration.toString()))),
+                    DataCell(Center(
+                        child: CustomText(
+                            text: cubit.lablist[index].registerDate!))),
                     DataCell(Center(
                         child: CustomText(
                             text: cubit.lablist[index].labAddress!))),
-                    //number
                     DataCell(Center(
                         child: CustomText(
                             text: cubit.lablist[index].labPhone![0]))),
-                    //name
                     DataCell(Center(
                         child: CustomText(
                       text: cubit.lablist[index].labName!,
