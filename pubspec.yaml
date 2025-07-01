@@ -47,7 +47,6 @@ dependencies:
   get_it: ^8.0.3
   pie_menu: ^2.0.2
 
-
 dev_dependencies:
   flutter_test:
     sdk: flutter

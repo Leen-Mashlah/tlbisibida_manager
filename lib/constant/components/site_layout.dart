@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lambda_dent_dash/constant/components/reponsiveness.dart';
 import 'package:lambda_dent_dash/constant/components/top_nav.dart';
+import 'package:lambda_dent_dash/services/Cache/cache_helper.dart';
 import 'package:lambda_dent_dash/services/navigation/controllers.dart';
 import 'package:lambda_dent_dash/services/navigation/navigation_service.dart';
 import 'package:lambda_dent_dash/services/navigation/router.dart';
@@ -22,7 +23,10 @@ class SiteLayout extends StatelessWidget {
           largeScreen: Navigator(
             key: locator<NavigationService>().navigatorKey,
             onGenerateRoute: generateRoute,
-            initialRoute: clientsLogPageRoute,
+            initialRoute: CacheHelper.get('token') == '' ||
+                    CacheHelper.get('tokeb') == null
+                ? authenticationPageRoute
+                : clientsLogPageRoute,
           ),
         ),
       ),

@@ -1,9 +1,10 @@
+// services/navigation/router.dart
 import 'package:flutter/material.dart';
+import 'package:lambda_dent_dash/presentation/authentication/authentication_provider.dart';
 import 'package:lambda_dent_dash/presentation/clients_history/history_provider.dart';
 import 'package:lambda_dent_dash/presentation/clients_log/log_provider.dart';
 import 'package:lambda_dent_dash/presentation/clients_req/req_provider.dart';
-import 'package:lambda_dent_dash/services/navigation/controllers.dart';
-import 'package:lambda_dent_dash/services/navigation/navigation_service.dart';
+
 import 'package:lambda_dent_dash/services/navigation/routes.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
@@ -15,15 +16,18 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return _getPageRoute(ReqProvider(), clientsReqDisplayName);
     case clientsHistoryPageRoute:
       return _getPageRoute(HistoryProvider(), clientsHistoryDisplayName);
+    case authenticationPageRoute:
+      return _getPageRoute(AuthenticationProvider(), authenticationDisplayName);
     default:
-      return _getPageRoute(LogProvider(), clientsLogDisplayName);
+      return _getPageRoute(AuthenticationProvider(), authenticationDisplayName);
   }
 }
 
 PageRoute _getPageRoute(Widget child, String title) {
-  locator<NavigationService>().currentTitle.value = title;
+  // REMOVE THIS LINE: locator<NavigationService>().currentTitle.value = title;
   return MaterialPageRoute(
     builder: (context) => child,
-    settings: RouteSettings(name: title),
+    settings:
+        RouteSettings(name: title), // The title is still passed via settings
   );
 }

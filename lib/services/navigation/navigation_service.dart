@@ -18,16 +18,6 @@ class NavigationService {
     return navigatorKey.currentState!.pushReplacementNamed(routeName).then((_) {
       updateNavigationState();
     });
-    // if (routeName == clientsLogPageRoute) {
-    //   navigatorKey.currentState!.popUntil(ModalRoute.withName('/'));
-    //   return navigatorKey.currentState!.pushNamed(routeName).then((_) {
-    //     updateNavigationState();
-    //   });
-    // }
-
-    // return navigatorKey.currentState!.pushNamed(routeName).then((_) {
-    //   updateNavigationState();
-    // });
   }
 
   void goBack() {
@@ -45,7 +35,7 @@ class NavigationService {
       if (routeName != null && routeName.isNotEmpty && routeName != '/') {
         currentTitle.value = routeName;
       } else {
-        currentTitle.value = clientsLogDisplayName;
+        currentTitle.value = authenticationDisplayName;
       }
     }
   }
@@ -58,9 +48,11 @@ class NavigationService {
         return clientsReqDisplayName;
       case clientsHistoryPageRoute:
         return clientsHistoryDisplayName;
+      case authenticationPageRoute:
+        return authenticationDisplayName;
 
       default:
-        return clientsLogDisplayName;
+        return authenticationPageRoute;
     }
   }
 }
