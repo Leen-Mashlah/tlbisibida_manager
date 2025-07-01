@@ -24,6 +24,17 @@ class DBClinicJoinRequestResponse {
     }
     successMessage = json['success_message'];
   }
+  DBClinicJoinRequestResponse.fromJsonReq(Map<String, dynamic> json) {
+    status = json['status'];
+    successCode = json['success_code'];
+    if (json['clinics_register_requests'] != null) {
+      joinOrdersClinics = <DBClinicDetails>[];
+      json['clinics_register_requests'].forEach((v) {
+        joinOrdersClinics!.add(DBClinicDetails.fromJsonReq(v));
+      });
+    }
+    successMessage = json['success_message'];
+  }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};

@@ -18,17 +18,23 @@ class AuthenticationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocBuilder<AuthCubit, String>(
+      body: BlocConsumer<AuthCubit, String>(
+        listener: (context, state) {
+          // This listener will be called whenever the state of AuthCubit changes.
+          if (state == 'logged_in') {
+            locator<NavigationService>().navigateTo(clientsLogPageRoute);
+          }
+        },
         builder: (context, state) {
+          AuthCubit cubit = context.read<AuthCubit>();
           return Container(
             decoration: const BoxDecoration(
                 image: DecorationImage(
-                    image: AssetImage(
-                      'assets/teeth_pattern.png',
-                    ),
-
-                    // fit: BoxFit.,
-                    repeat: ImageRepeat.repeat),
+                  image: AssetImage(
+                    'assets/teeth_pattern.png',
+                  ),
+                  repeat: ImageRepeat.repeat,
+                ),
                 gradient: LinearGradient(
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
@@ -48,7 +54,7 @@ class AuthenticationPage extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(vertical: 10.0),
                   child: Container(
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.only(
+                        borderRadius: const BorderRadius.only(
                           topLeft: Radius.circular(60),
                           topRight: Radius.circular(10),
                           bottomRight: Radius.circular(60),
@@ -76,10 +82,8 @@ class AuthenticationPage extends StatelessWidget {
                           const SizedBox(
                             width: 200,
                             height: 200,
-                            child: Image(
-                                image: AssetImage(
-                              "assets/logo_v2.png",
-                            )),
+                            child:
+                                Image(image: AssetImage("assets/logo_v2.png")),
                           ),
                           const SizedBox(
                             height: 35,
@@ -111,7 +115,6 @@ class AuthenticationPage extends StatelessWidget {
                                     color: cyan200,
                                     width: 2,
                                   )),
-                              // hintText: "abc@domain.com",
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
                                   color: cyan50,
@@ -136,7 +139,6 @@ class AuthenticationPage extends StatelessWidget {
                                     color: cyan200,
                                     width: 2,
                                   )),
-                              // hintText: "abc@domain.com",
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
                                   color: cyan50,
@@ -171,7 +173,6 @@ class AuthenticationPage extends StatelessWidget {
                                         borderRadius: BorderRadius.circular(5)),
                                     value: true,
                                     onChanged: (value) {},
-                                    //fillColor: WidgetStatePropertyAll(cyan500),
                                     checkColor: white,
                                   ),
                                 ],
@@ -199,18 +200,8 @@ class AuthenticationPage extends StatelessWidget {
                           ),
                           ElevatedButton(
                             onPressed: () {
-                              // onTap: adminAuth.isLoading.value
-                              //     ? null
-                              //     : ()async {
-                              //         adminAuth.admin_login(email.text, password.text);
-                              //          Get.offNamed("Employees");
-
-                              //       },
-
-                              print(
-                                  'AuthenticationPage: Login button pressed. Initiating navigation.');
-                              locator<NavigationService>()
-                                  .navigateTo(clientsLogPageRoute);
+                              cubit.login(email.text, password.text);
+                              // No navigation logic here directly
                             },
                             style: ButtonStyle(
                                 shadowColor:
@@ -241,148 +232,15 @@ class AuthenticationPage extends StatelessWidget {
                                         side: const BorderSide(color: cyan500),
                                         borderRadius:
                                             BorderRadius.circular(15)))),
-                            child: const CustomText(
-                                //  adminAuth.isLoading.value
-                                //     ? CircularProgressIndicator(
-                                //         valueColor:
-                                //             AlwaysStoppedAnimation<Color>(Colors.white))
-                                //
-                                text: "تسجيل الدخول",
-                                color: cyan500),
+                            child: cubit.state == 'logging_in'
+                                ? const CircularProgressIndicator(
+                                    valueColor: AlwaysStoppedAnimation<Color>(
+                                        Colors.white))
+                                : const CustomText(
+                                    text: "تسجيل الدخول", color: cyan500),
                           ),
                         ],
                       ),
-                      // const SizedBox(
-                      //   height: 15,
-                      // ),
-                      // Row(
-                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      //   children: [
-                      //     Row(
-                      //       children: [
-                      //         Checkbox(value: true, onChanged: (value) {}),
-                      //         const CustomText(
-                      //           text: "Remeber Me",
-                      //         ),
-                      //       ],
-                      //     ),
-                      //     const CustomText(text: "Forgot password?", color: cyan400)
-                      //   ],
-                      // ),
-                      // const SizedBox(
-                      //   height: 15,
-                      // ),
-
-                      // Padding(
-                      //   padding: const EdgeInsets.only(right: 12),
-                      //   child: Image.asset(
-                      //     "assets/logo_v2.png",
-                      //     width: 250,
-                      //     height: 250,
-                      //   ),
-                      // ),
-                      // Expanded(child: Container()),
-                      // const SizedBox(
-                      //   height: 30,
-                      // ),
-                      // Row(
-                      //   children: [
-                      //     Text("Login",
-                      //         style: TextStyle(
-                      //             fontSize: 30, fontWeight: FontWeight.bold)),
-                      //   ],
-                      // ),
-                      // const SizedBox(
-                      //   height: 10,
-                      // ),
-                      // Row(
-                      //   children: [
-                      //     CustomText(
-                      //       text: "Welcome back to the admin panel.",
-                      //       color: Colors.grey[300],
-                      //     ),
-                      //   ],
-                      // ),
-                      // const SizedBox(
-                      //   height: 15,
-                      // ),
-                      // // TextField(
-                      // //   controller: email,
-                      // //   decoration: InputDecoration(
-                      // //       labelText: "Email",
-                      // //       hintText: "abc@domain.com",
-                      // //       border: OutlineInputBorder(
-                      // //           borderRadius: BorderRadius.circular(20))),
-                      // // ),
-                      // const SizedBox(
-                      //   height: 15,
-                      // ),
-                      // // TextField(
-                      // //   controller: password,
-                      // //   obscureText: true,
-                      // //   decoration: InputDecoration(
-                      // //       labelText: "Password",
-                      // //       hintText: "123",
-                      // //       border: OutlineInputBorder(
-                      // //           borderRadius: BorderRadius.circular(20))),
-                      // // ),
-                      // const SizedBox(
-                      //   height: 15,
-                      // ),
-                      // Row(
-                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      //   children: [
-                      //     Row(
-                      //       children: [
-                      //         Checkbox(value: true, onChanged: (value) {}),
-                      //         const CustomText(
-                      //           text: "Remeber Me",
-                      //         ),
-                      //       ],
-                      //     ),
-                      //     const CustomText(text: "Forgot password?", color: cyan400)
-                      //   ],
-                      // ),
-                      // const SizedBox(
-                      //   height: 15,
-                      // ),
-                      // // InkWell(
-                      // //   // onTap: adminAuth.isLoading.value
-                      // //   //     ? null
-                      // //   //     : ()async {
-                      // //   //         adminAuth.admin_login(email.text, password.text);
-                      // //   //          Get.offNamed("Employees");
-
-                      // //   //       },
-                      // //   child: Container(
-                      // //     decoration: BoxDecoration(
-                      // //         color: cyan400,
-                      // //         borderRadius: BorderRadius.circular(20)),
-                      // //     alignment: Alignment.center,
-                      // //     // width: double.maxFinite,
-                      // //     padding: const EdgeInsets.symmetric(vertical: 16),
-                      // //     child:
-                      // //         //  adminAuth.isLoading.value
-                      // //         //     ? CircularProgressIndicator(
-                      // //         //         valueColor:
-                      // //         //             AlwaysStoppedAnimation<Color>(Colors.white))
-                      // //         //     :
-                      // //         const CustomText(
-                      // //       text: "Login",
-                      // //       color: Colors.white,
-                      // //     ),
-                      // //   ),
-                      // // ),
-                      // const SizedBox(
-                      //   height: 15,
-                      // ),
-                      // RichText(
-                      //     text: const TextSpan(children: [
-                      //   TextSpan(text: "Do not have admin credentials? "),
-                      //   TextSpan(
-                      //       text: "Request Credentials! ",
-                      //       style: TextStyle(color: cyan400))
-                      // ]))
                     ),
                   ),
                 ),

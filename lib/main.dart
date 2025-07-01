@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:lambda_dent_dash/constant/constants/constants.dart';
+import 'package:lambda_dent_dash/services/Cache/cache_helper.dart';
 import 'package:lambda_dent_dash/services/dio/dio.dart';
 import 'package:lambda_dent_dash/services/navigation/controllers.dart';
 import 'package:lambda_dent_dash/services/navigation/navigation_service.dart';
 import 'package:lambda_dent_dash/services/navigation/router.dart';
 import 'package:lambda_dent_dash/constant/components/site_layout.dart';
 
-void main() {
+void main() async {
   // ignore: unused_local_variable
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   DioHelper.init();
+  await CacheHelper.init();
   setupLocator();
 
   final navigationService = locator<NavigationService>();

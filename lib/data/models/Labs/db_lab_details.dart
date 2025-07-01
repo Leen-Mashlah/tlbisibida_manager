@@ -14,6 +14,7 @@ class DBLabDetails {
   String? labPhone;
   String? labAddress;
   String? registerDate;
+  int? duration;
 
   DBLabDetails({
     this.subscriptionableId,
@@ -29,16 +30,26 @@ class DBLabDetails {
   });
 
   DBLabDetails.fromJson(Map<String, dynamic> json) {
-    subscriptionableId = json['subscriptionable_id'];
-    subscriptionableType = json['subscriptional_type'];
-    subscriptionTo = json['subscription_to'];
-    subscriptionFrom = json['subscription_from'];
-    subscriptionId = json['id'];
+    subscriptionableId = json['subscriptionable_id'] ?? '';
+    subscriptionableType = json['subscriptional_type'] ?? '';
+    subscriptionTo = json['subscription_to'] ?? '';
+    subscriptionFrom = json['subscription_from'] ?? '';
+    subscriptionId = json['id'] ?? '';
     id = json['subscriptionable']['id'];
     labName = json['lab_name'];
     labPhone = json['lab_phone'];
     labAddress = json['lab_address'];
     registerDate = json['register_date'];
+    duration = json['register_subscription_duration'];
+  }
+
+  DBLabDetails.fromJsonReq(Map<String, dynamic> json) {
+    id = json['id'];
+    labName = json['lab_name'];
+    labPhone = json['lab_phone'];
+    labAddress = json['lab_address'];
+    registerDate = json['register_date'];
+    duration = json['register_subscription_duration'] ?? 0;
   }
 
   Map<String, dynamic> toJson() {
@@ -53,6 +64,7 @@ class DBLabDetails {
     data['lab_phone'] = labPhone;
     data['lab_address'] = labAddress;
     data['register_date'] = registerDate;
+    data['register_subscription_duration'] = duration;
     return data;
   }
 
@@ -65,7 +77,8 @@ class DBLabDetails {
         labName: labName,
         labPhone: decodeLabPhoneNumbers(labPhone!),
         labAddress: labAddress,
-        registerDate: registerDate);
+        registerDate: registerDate,
+        duration: duration);
   }
 
   static DBLabDetails fromdomain(LabDetails cd) {
@@ -78,6 +91,7 @@ class DBLabDetails {
       ..labName = cd.labName
       ..labPhone = encodeLabPhoneNumbers(cd.labPhone!)
       ..labAddress = cd.labAddress
-      ..registerDate = cd.registerDate;
+      ..registerDate = cd.registerDate
+      ..duration = cd.duration;
   }
 }

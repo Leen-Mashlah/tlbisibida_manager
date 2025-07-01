@@ -23,6 +23,17 @@ class DBLabsJoinRequestResponse {
     }
     successMessage = json['success_message'];
   }
+  DBLabsJoinRequestResponse.fromJsonReq(Map<String, dynamic> json) {
+    status = json['status'];
+    successCode = json['success_code'];
+    if (json['labs_register_requests'] != null) {
+      labsJoinRequest = <DBLabDetails>[]; // <--- Using LabDetails
+      json['labs_register_requests'].forEach((v) {
+        labsJoinRequest!.add(DBLabDetails.fromJsonReq(v)); // <--- Using LabDetails
+      });
+    }
+    successMessage = json['success_message'];
+  }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};

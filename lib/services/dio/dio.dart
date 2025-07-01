@@ -7,6 +7,8 @@ class DioHelper {
     dio = Dio(BaseOptions(
       baseUrl: baseUrl,
       headers: {
+        'ngrok-skip-browser-warning': 'true',
+        'Content-Type': 'application/json',
         'Accept': 'application/json',
       },
       receiveDataWhenStatusError: true,
@@ -16,8 +18,10 @@ class DioHelper {
   static Future<Response?> getData(String url,
       {Map<String, dynamic>? query, String? token}) async {
     dio?.options.headers = {
+      'ngrok-skip-browser-warning': 'true',
+      'Content-Type': 'application/json',
       'Accept': 'application/json',
-      'Authorization': testtoken,
+      'Authorization': token,
     };
     return await dio?.get(url, queryParameters: query);
   }
@@ -25,6 +29,8 @@ class DioHelper {
   static Future<Response?> postData(String url, Map<String, dynamic> body,
       {Map<String, dynamic>? query, String? token}) async {
     dio?.options.headers = {
+      'ngrok-skip-browser-warning': 'true',
+      'Content-Type': 'application/json',
       'Accept': 'application/json',
       'Authorization': token,
     };
@@ -34,6 +40,8 @@ class DioHelper {
   static Future<Response?> updateData(String url, Map<String, dynamic> body,
       {Map<String, dynamic>? query, String? token}) async {
     dio?.options.headers = {
+      'ngrok-skip-browser-warning': 'true',
+      'Content-Type': 'application/json',
       'Accept': 'application/json',
       'Authorization': token,
     };
@@ -43,6 +51,8 @@ class DioHelper {
   static Future<Response?> deleteData(String url,
       {Map<String, dynamic>? query, String? token}) async {
     dio?.options.headers = {
+      'ngrok-skip-browser-warning': 'true',
+      'Content-Type': 'application/json',
       'Accept': 'application/json',
       'Authorization': token,
     };
