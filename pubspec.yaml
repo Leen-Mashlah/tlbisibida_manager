@@ -38,6 +38,8 @@ dependencies:
   buildcondition:
   choice:
   flutter_bloc:
+  awesome_snackbar_content:
+  animated_snack_bar:
   flutter_localizations:
     sdk: flutter
 

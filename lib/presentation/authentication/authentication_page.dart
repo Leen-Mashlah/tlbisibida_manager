@@ -1,3 +1,4 @@
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -23,6 +24,10 @@ class AuthenticationPage extends StatelessWidget {
           // This listener will be called whenever the state of AuthCubit changes.
           if (state == 'logged_in') {
             locator<NavigationService>().navigateTo(clientsLogPageRoute);
+          }
+          if (state == 'error') {
+            
+
           }
         },
         builder: (context, state) {

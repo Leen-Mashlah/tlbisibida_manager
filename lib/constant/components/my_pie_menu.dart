@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lambda_dent_dash/constant/constants/constants.dart';
+import 'package:lambda_dent_dash/services/Cache/cache_helper.dart';
+import 'package:lambda_dent_dash/services/navigation/controllers.dart';
 import 'package:lambda_dent_dash/services/navigation/routes.dart';
 import 'package:pie_menu/pie_menu.dart';
 import 'package:lambda_dent_dash/services/navigation/navigation_service.dart';
@@ -41,6 +43,14 @@ Widget myPieMenu(NavigationService navigationService) {
             navigationService.navigateTo(clientsReqPageRoute);
           },
           child: const Icon(Icons.add_task_rounded),
+        ),
+        PieAction(
+          tooltip: const SizedBox(),
+          onSelect: () {
+            CacheHelper.removeString('token');
+            locator<NavigationService>().navigateTo(authenticationPageRoute);
+          },
+          child: const Icon(Icons.logout_outlined),
         ),
       ],
       child: const Icon(CupertinoIcons.circle_grid_hex_fill));

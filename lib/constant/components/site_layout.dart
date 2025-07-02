@@ -24,7 +24,7 @@ class SiteLayout extends StatelessWidget {
             key: locator<NavigationService>().navigatorKey,
             onGenerateRoute: generateRoute,
             initialRoute: CacheHelper.get('token') == '' ||
-                    CacheHelper.get('tokeb') == null
+                    CacheHelper.get('token') == null
                 ? authenticationPageRoute
                 : clientsLogPageRoute,
           ),

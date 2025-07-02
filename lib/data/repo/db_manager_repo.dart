@@ -32,23 +32,37 @@ class DbManagerRepo implements ManagerRepo {
       });
 
   @override
-  Future<bool> confirmlabs(int id) async {
-    await DioHelper.updateData(
-            'admin/lab-manager/accept-join-order-of-lab/$id', {},
-            token: CacheHelper.get('token'))
-        .then(
-      (value) {
-        if (value?.data['status']) {
+  Future<bool> logout() async =>
+      await DioHelper.postData('auth/logout', {}).then((value) {
+        if (value != null && value.data['status']) {
+          CacheHelper.removeString('token');
+          print("Logout successful. Token: ${CacheHelper.get('token')}");
           return true;
         } else {
+          print("Login failed: ${value?.data['message'] ?? 'Unknown error'}");
           return false;
         }
-      },
-    ).catchError((error) {
-      return false;
-    });
-    return false;
-  }
+      }).catchError((error) {
+        print(error.toString());
+        return false;
+      });
+
+  @override
+  Future<bool> confirmlabs(int id) async => await DioHelper.updateData(
+              'admin/lab-manager/accept-join-order-of-lab/$id', {},
+              token: CacheHelper.get('token'))
+          .then(
+        (value) {
+          if (value?.data['status']) {
+            return true;
+          } else {
+            print("Request failed: ${value?.data['message'] ?? 'Unknown error'}");
+            return false;
+          }
+        },
+      ).catchError((error) {
+        return false;
+      });
 
   @override
   Future<bool> confirmclinics(int id) async {
