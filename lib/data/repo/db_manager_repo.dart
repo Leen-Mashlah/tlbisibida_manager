@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_interpolation_to_compose_strings
+
 import 'package:lambda_dent_dash/data/models/Clinics/db_clinic_history.dart';
 import 'package:lambda_dent_dash/data/models/Clinics/db_clinic_join_request.dart';
 import 'package:lambda_dent_dash/data/models/Clinics/db_subscribed_clinics.dart';
@@ -67,36 +69,38 @@ class DbManagerRepo implements ManagerRepo {
       });
 
   @override
-  Future<bool> confirmclinics(int id) async {
-    await DioHelper.updateData(
-            'admin/clinic/accept-join-order-of-clinic/$id', {},
-            token: CacheHelper.get('token'))
-        .then(
-      (value) {
-        if (value?.data['status']) return true;
-      },
-    ).catchError((error) {
-      return false;
-    });
-    return false;
-  }
-
-  @override
-  Future<bool> renew(int months, int id) async {
-    await DioHelper.postData('renew-subscription',
-            {'admin/subscription_id': id, 'months': months},
-            token: CacheHelper.get('token'))
-        .then(
-      (value) {
+  Future<bool> confirmclinics(int id) async => await DioHelper.updateData(
+              'admin/clinic/accept-join-order-of-clinic/$id', {},
+              token: CacheHelper.get('token'))
+          .then((value) {
         if (value?.data['status']) {
           return true;
+        } else {
+          print("Request failed: ${value?.data['message'] ?? 'Unknown error'}");
+          return false;
         }
-      },
-    ).catchError((error) {
-      return false;
-    });
-    return false;
-  }
+      }).catchError((error) {
+        return false;
+      });
+
+  @override
+  Future<bool> renew(int months, int id) async => await DioHelper.postData(
+              'renew-subscription',
+              {'admin/subscription_id': id, 'months': months},
+              token: CacheHelper.get('token'))
+          .then(
+        (value) {
+          if (value?.data['status']) {
+            return true;
+          } else {
+            print(
+                "Request failed: ${value?.data['message'] ?? 'Unknown error'}");
+            return false;
+          }
+        },
+      ).catchError((error) {
+        return false;
+      });
 
   DBHistoryClinicsResponse? dbHistoryClinicsResponse;
   @override
