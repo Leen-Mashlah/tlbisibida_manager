@@ -1,4 +1,4 @@
-import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
+import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -23,11 +23,23 @@ class AuthenticationPage extends StatelessWidget {
         listener: (context, state) {
           // This listener will be called whenever the state of AuthCubit changes.
           if (state == 'logged_in') {
+            AnimatedSnackBar.material(
+              'تم تسجيل الدخول بنجاح!',
+              type: AnimatedSnackBarType.success,
+              desktopSnackBarPosition: DesktopSnackBarPosition.bottomCenter,
+              duration: Duration(seconds: 3),
+              animationCurve: Easing.standard,
+            ).show(context);
             locator<NavigationService>().navigateTo(clientsLogPageRoute);
           }
           if (state == 'error') {
-            
-
+            AnimatedSnackBar.material(
+              'لم يتم تسجيل الدخول ـ تأكد من المعلومات المدخلة ثم حاول مرة أخرى',
+              type: AnimatedSnackBarType.error,
+              desktopSnackBarPosition: DesktopSnackBarPosition.bottomCenter,
+              duration: Duration(seconds: 3),
+              animationCurve: Easing.standard,
+            ).show(context);
           }
         },
         builder: (context, state) {
@@ -88,7 +100,7 @@ class AuthenticationPage extends StatelessWidget {
                             width: 200,
                             height: 200,
                             child:
-                                Image(image: AssetImage("assets/logo_v2.png")),
+                                Image(image: AssetImage("assets/logo_v2.png",),),
                           ),
                           const SizedBox(
                             height: 35,
@@ -206,7 +218,6 @@ class AuthenticationPage extends StatelessWidget {
                           ElevatedButton(
                             onPressed: () {
                               cubit.login(email.text, password.text);
-                              // No navigation logic here directly
                             },
                             style: ButtonStyle(
                                 shadowColor:
@@ -239,8 +250,8 @@ class AuthenticationPage extends StatelessWidget {
                                             BorderRadius.circular(15)))),
                             child: cubit.state == 'logging_in'
                                 ? const CircularProgressIndicator(
-                                    valueColor: AlwaysStoppedAnimation<Color>(
-                                        Colors.white))
+                                    valueColor:
+                                        AlwaysStoppedAnimation<Color>(cyan500))
                                 : const CustomText(
                                     text: "تسجيل الدخول", color: cyan500),
                           ),

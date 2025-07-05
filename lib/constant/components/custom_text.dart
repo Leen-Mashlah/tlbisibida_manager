@@ -8,13 +8,19 @@ class CustomText extends StatelessWidget {
   final TextAlign? alignment;
 
   const CustomText(
-      {super.key, required this.text, this.size, this.color, this.weight, this.alignment});
+      {super.key,
+      required this.text,
+      this.size,
+      this.color,
+      this.weight,
+      this.alignment});
 
   @override
   Widget build(BuildContext context) {
     return Text(
       text,
       textAlign: alignment,
+      overflow: TextOverflow.ellipsis,
       style: TextStyle(
           fontSize: size ?? 16,
           color: color ?? Colors.black87,

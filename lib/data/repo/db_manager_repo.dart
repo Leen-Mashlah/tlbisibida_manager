@@ -23,7 +23,8 @@ class DbManagerRepo implements ManagerRepo {
           print("Login successful. Token: ${CacheHelper.get('token')}");
           return true;
         } else {
-          print("Login failed: ${value?.data['message'] ?? 'Unknown error'}");
+          print(
+              "Login failed: ${value?.data['message'] ?? 'Unknown error' + value.toString()}");
           return false;
         }
       }).catchError((error) {
@@ -56,7 +57,8 @@ class DbManagerRepo implements ManagerRepo {
           if (value?.data['status']) {
             return true;
           } else {
-            print("Request failed: ${value?.data['message'] ?? 'Unknown error'}");
+            print(
+                "Request failed: ${value?.data['message'] ?? 'Unknown error'}");
             return false;
           }
         },
@@ -96,17 +98,6 @@ class DbManagerRepo implements ManagerRepo {
     return false;
   }
 
-  // @override
-  // Future<void> renewclinics(int month, int id) {
-  //   return DioHelper.postData(
-  //       "renew-subscription-of-clinic?dentist_id=$id&months=$month&subscription_value=0",
-  //       {}).then(
-  //     (value) {
-  //       if (value?.data['status']) {}
-  //     },
-  //   ).catchError((error) {});
-  // }
-
   DBHistoryClinicsResponse? dbHistoryClinicsResponse;
   @override
   Future<List<ClinicDetails>> getHistoryClinics() async {
@@ -143,8 +134,13 @@ class DbManagerRepo implements ManagerRepo {
     await DioHelper.getData('admin/subscribed-clinics',
             token: CacheHelper.get('token'))
         .then((value) {
-      dbSubscribedClinicsResponse =
-          DBSubscribedClinicsResponse.fromJson(value?.data);
+      if (value?.data['status']) {
+        dbSubscribedClinicsResponse =
+            DBSubscribedClinicsResponse.fromJson(value?.data);
+      } else {
+        print("Request failed: ${value?.data['message'] ?? 'Unknown error'}");
+        return [];
+      }
       print(value?.data);
     });
     List<ClinicDetails> cliniclist = [];
@@ -160,7 +156,13 @@ class DbManagerRepo implements ManagerRepo {
     await DioHelper.getData('admin/subcribed-labs',
             token: CacheHelper.get('token'))
         .then((value) {
-      dbSubscribedLabsResponse = DBSubscribedLabsResponse.fromJson(value!.data);
+      if (value?.data['status']) {
+        dbSubscribedLabsResponse =
+            DBSubscribedLabsResponse.fromJson(value!.data);
+      } else {
+        print("Request failed: ${value?.data['message'] ?? 'Unknown error'}");
+        return [];
+      }
     });
     List<LabDetails> lablist = [];
     for (var labdet in dbSubscribedLabsResponse!.subscribedLabs!) {
@@ -175,8 +177,13 @@ class DbManagerRepo implements ManagerRepo {
     await DioHelper.getData('admin/labs-register-requests',
             token: CacheHelper.get('token'))
         .then((value) {
-      dbLabsJoinRequestResponse =
-          DBLabsJoinRequestResponse.fromJsonReq(value!.data);
+      if (value?.data['status']) {
+  dbLabsJoinRequestResponse =
+      DBLabsJoinRequestResponse.fromJsonReq(value!.data);
+} else {
+        print("Request failed: ${value?.data['message'] ?? 'Unknown error'}");
+        return false;
+      }
     });
     List<LabDetails> lablist = [];
     for (var labdet in dbLabsJoinRequestResponse!.labsJoinRequest!) {

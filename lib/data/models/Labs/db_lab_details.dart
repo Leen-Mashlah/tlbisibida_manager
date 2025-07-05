@@ -48,7 +48,7 @@ class DBLabDetails {
     labName = json['lab_name'];
     labPhone = json['lab_phone'];
     labAddress = json['lab_address'];
-    registerDate = json['register_date'];
+    registerDate = json['created_at'];
     duration = json['register_subscription_duration'] ?? 0;
   }
 

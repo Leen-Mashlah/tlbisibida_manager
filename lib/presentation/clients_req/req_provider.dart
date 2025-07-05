@@ -8,7 +8,6 @@ import 'package:lambda_dent_dash/services/navigation/controllers.dart';
 
 class ReqProvider extends StatelessWidget {
   ReqProvider({super.key});
-
   final ManagerRepo repo = locator<DbManagerRepo>();
   @override
   Widget build(BuildContext context) {

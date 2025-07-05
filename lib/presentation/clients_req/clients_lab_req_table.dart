@@ -41,28 +41,7 @@ class ClientsLabReqTable extends StatelessWidget {
                 DataColumn(
                   label: Center(
                       child: Text(
-                    'تأكيد الطلب',
-                    style: TextStyle(color: cyan300),
-                  )),
-                ),
-                DataColumn(
-                  label: Center(
-                      child: Text(
-                    'المدة',
-                    style: TextStyle(color: cyan300),
-                  )),
-                ),
-                DataColumn(
-                  label: Center(
-                      child: Text(
-                    'تاريخ الطلب ',
-                    style: TextStyle(color: cyan300),
-                  )),
-                ),
-                DataColumn(
-                  label: Center(
-                      child: Text(
-                    'العنوان',
+                    'اسم المخبر ',
                     style: TextStyle(color: cyan300),
                   )),
                 ),
@@ -76,7 +55,28 @@ class ClientsLabReqTable extends StatelessWidget {
                 DataColumn(
                   label: Center(
                       child: Text(
-                    'اسم المخبر ',
+                    'العنوان',
+                    style: TextStyle(color: cyan300),
+                  )),
+                ),
+                DataColumn(
+                  label: Center(
+                      child: Text(
+                    'تاريخ الطلب ',
+                    style: TextStyle(color: cyan300),
+                  )),
+                ),
+                DataColumn(
+                  label: Center(
+                      child: Text(
+                    'المدة',
+                    style: TextStyle(color: cyan300),
+                  )),
+                ),
+                DataColumn(
+                  label: Center(
+                      child: Text(
+                    'تأكيد الطلب',
                     style: TextStyle(color: cyan300),
                   )),
                 ),
@@ -86,34 +86,31 @@ class ClientsLabReqTable extends StatelessWidget {
                 (index) => DataRow(
                   cells: [
                     DataCell(Center(
-                        child: IconButton(
-                      onPressed: () {
-                        cubit.lablist[index].id!;
-                        // showDialog(
-                        //   context: context,
-                        //   builder: (context) => const BillDetailsDialog(),
-                        // );
-                      },
-                      icon: const Icon(
-                        CupertinoIcons.checkmark_seal,
-                        color: cyan300,
-                      ),
+                        child: CustomText(
+                      text: cubit.lablist[index].labName!,
                     ))),
-                    DataCell(Center(
-                        child: CustomText(
-                            text: cubit.lablist[index].duration.toString()))),
-                    DataCell(Center(
-                        child: CustomText(
-                            text: cubit.lablist[index].registerDate!))),
-                    DataCell(Center(
-                        child: CustomText(
-                            text: cubit.lablist[index].labAddress!))),
                     DataCell(Center(
                         child: CustomText(
                             text: cubit.lablist[index].labPhone![0]))),
                     DataCell(Center(
                         child: CustomText(
-                      text: cubit.lablist[index].labName!,
+                            text: cubit.lablist[index].labAddress!))),
+                    DataCell(Center(
+                        child: CustomText(
+                            text: cubit.lablist[index].registerDate!
+                                .substring(0, 9)))),
+                    DataCell(Center(
+                        child: CustomText(
+                            text: cubit.lablist[index].duration.toString()))),
+                    DataCell(Center(
+                        child: IconButton(
+                      onPressed: () {
+                        cubit.cliconfirm(cubit.lablist[index].id!);
+                      },
+                      icon: const Icon(
+                        CupertinoIcons.checkmark_seal,
+                        color: cyan300,
+                      ),
                     ))),
                   ],
                 ),

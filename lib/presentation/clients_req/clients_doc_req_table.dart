@@ -42,28 +42,7 @@ class ClientsDocReqTable extends StatelessWidget {
                 DataColumn(
                   label: Center(
                       child: Text(
-                    'تأكيد الطلب',
-                    style: TextStyle(color: cyan300),
-                  )),
-                ),
-                DataColumn(
-                  label: Center(
-                      child: Text(
-                    'المدة',
-                    style: TextStyle(color: cyan300),
-                  )),
-                ),
-                DataColumn(
-                  label: Center(
-                      child: Text(
-                    'تاريخ الطلب ',
-                    style: TextStyle(color: cyan300),
-                  )),
-                ),
-                DataColumn(
-                  label: Center(
-                      child: Text(
-                    'العنوان',
+                    'اسم الطبيب ',
                     style: TextStyle(color: cyan300),
                   )),
                 ),
@@ -77,7 +56,28 @@ class ClientsDocReqTable extends StatelessWidget {
                 DataColumn(
                   label: Center(
                       child: Text(
-                    'اسم الطبيب ',
+                    'العنوان',
+                    style: TextStyle(color: cyan300),
+                  )),
+                ),
+                DataColumn(
+                  label: Center(
+                      child: Text(
+                    'تاريخ الطلب ',
+                    style: TextStyle(color: cyan300),
+                  )),
+                ),
+                DataColumn(
+                  label: Center(
+                      child: Text(
+                    'المدة',
+                    style: TextStyle(color: cyan300),
+                  )),
+                ),
+                DataColumn(
+                  label: Center(
+                      child: Text(
+                    'تأكيد الطلب',
                     style: TextStyle(color: cyan300),
                   )),
                 ),
@@ -86,6 +86,27 @@ class ClientsDocReqTable extends StatelessWidget {
                 cubit.clilist.length,
                 (index) => DataRow(
                   cells: [
+                    //name
+                    DataCell(Center(
+                        child: CustomText(
+                      text: cubit.clilist[index].fullName!,
+                    ))),
+                    //add
+                    DataCell(Center(
+                        child:
+                            CustomText(text: cubit.clilist[index].address!))),
+                    //num
+                    DataCell(Center(
+                        child: CustomText(
+                            text: cubit.clilist[index].phone.toString()))),
+                    //date
+                    DataCell(Center(
+                        child: CustomText(
+                            text: cubit.clilist[index].registerDate!))),
+                    //mddi
+                    DataCell(Center(
+                        child: CustomText(
+                            text: cubit.clilist[index].duration.toString()))),
                     DataCell(Center(
                         child: IconButton(
                       onPressed: () {
@@ -115,27 +136,6 @@ class ClientsDocReqTable extends StatelessWidget {
                         CupertinoIcons.checkmark_seal,
                         color: cyan300,
                       ),
-                    ))),
-                    //mddi
-                    DataCell(Center(
-                        child: CustomText(
-                            text: cubit.clilist[index].duration.toString()))),
-                    //date
-                    DataCell(Center(
-                        child: CustomText(
-                            text: cubit.clilist[index].registerDate!))),
-                    //add
-                    DataCell(Center(
-                        child:
-                            CustomText(text: cubit.clilist[index].address!))),
-                    //num
-                    DataCell(Center(
-                        child: CustomText(
-                            text: cubit.clilist[index].phone.toString()))),
-                    //name
-                    DataCell(Center(
-                        child: CustomText(
-                      text: cubit.clilist[index].fullName!,
                     ))),
                   ],
                 ),

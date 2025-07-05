@@ -8,9 +8,7 @@ class ReqCubit extends Cubit<String> {
   final ManagerRepo repo;
 
   ReqCubit(this.repo) : super('initial') {
-    // Start with a clear initial state
-    cliload(); // Kick off initial clinic load
-    labload(); // Kick off initial lab load
+    cliload();
   }
 
   List<LabDetails> lablist = [];
