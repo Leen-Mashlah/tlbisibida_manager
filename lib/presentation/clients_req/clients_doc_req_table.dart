@@ -42,7 +42,7 @@ class ClientsDocReqTable extends StatelessWidget {
                 DataColumn(
                   label: Center(
                       child: Text(
-                    'اسم الطبيب ',
+                    'اسم الطبيب',
                     style: TextStyle(color: cyan300),
                   )),
                 ),

@@ -67,12 +67,15 @@ class ReqCubit extends Cubit<String> {
     emit('confirming_lab');
     bool status = false;
     try {
+      print('sending confirmation...');
       status = await repo.confirmlabs(id);
+      print('confirmation sequence complete');
     } on Exception catch (e) {
       emit('error');
       print(e.toString());
     }
     if (status) {
+      print('confirmation success');
       emit('confirmed_lab'); // Indicate success
       await labload(); // Re-load labs after confirmation
     } else {

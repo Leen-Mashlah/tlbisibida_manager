@@ -51,12 +51,13 @@ class DbManagerRepo implements ManagerRepo {
       });
 
   @override
-  Future<bool> confirmlabs(int id) async => await DioHelper.updateData(
-              'admin/lab-manager/accept-join-order-of-lab/$id', {},
+  Future<bool> confirmlabs(int id) async =>
+      await DioHelper.updateData('admin/accept-lab-register/$id', {},
               token: CacheHelper.get('token'))
           .then(
         (value) {
           if (value?.data['status']) {
+            print('response: ' + value?.data);
             return true;
           } else {
             print(
@@ -69,8 +70,8 @@ class DbManagerRepo implements ManagerRepo {
       });
 
   @override
-  Future<bool> confirmclinics(int id) async => await DioHelper.updateData(
-              'admin/clinic/accept-join-order-of-clinic/$id', {},
+  Future<bool> confirmclinics(int id) async =>
+      await DioHelper.updateData('admin/accept-clinic-register/$id', {},
               token: CacheHelper.get('token'))
           .then((value) {
         if (value?.data['status']) {
@@ -157,7 +158,7 @@ class DbManagerRepo implements ManagerRepo {
   DBSubscribedLabsResponse? dbSubscribedLabsResponse;
   @override
   Future<List<LabDetails>> getSubscribedLabs() async {
-    await DioHelper.getData('admin/subcribed-labs',
+    await DioHelper.getData('admin/subsccribed-labs',
             token: CacheHelper.get('token'))
         .then((value) {
       if (value?.data['status']) {
@@ -182,9 +183,9 @@ class DbManagerRepo implements ManagerRepo {
             token: CacheHelper.get('token'))
         .then((value) {
       if (value?.data['status']) {
-  dbLabsJoinRequestResponse =
-      DBLabsJoinRequestResponse.fromJsonReq(value!.data);
-} else {
+        dbLabsJoinRequestResponse =
+            DBLabsJoinRequestResponse.fromJsonReq(value!.data);
+      } else {
         print("Request failed: ${value?.data['message'] ?? 'Unknown error'}");
         return false;
       }

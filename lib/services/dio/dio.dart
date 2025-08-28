@@ -7,7 +7,6 @@ class DioHelper {
     dio = Dio(BaseOptions(
       baseUrl: baseUrl,
       headers: {
-        'ngrok-skip-browser-warning': 'true',
         'Content-Type': 'application/json',
         'Accept': 'application/json',
       },
@@ -18,7 +17,6 @@ class DioHelper {
   static Future<Response?> getData(String url,
       {Map<String, dynamic>? query, String? token}) async {
     dio?.options.headers = {
-      'ngrok-skip-browser-warning': 'true',
       'Content-Type': 'application/json',
       'Accept': 'application/json',
       'Authorization': token,

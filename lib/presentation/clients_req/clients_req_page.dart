@@ -15,9 +15,6 @@ class ClientsReqPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final ReqCubit reqCubit =
-    //     context.read<ReqCubit>(); // Get the cubit to trigger loads
-
     return Scaffold(
       body: BlocConsumer<ReqCubit, String>(
         listener: (context, state) {
