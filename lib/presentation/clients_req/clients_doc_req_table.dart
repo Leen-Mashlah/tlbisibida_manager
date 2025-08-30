@@ -114,21 +114,24 @@ class ClientsDocReqTable extends StatelessWidget {
                         showDialog(
                           context: context,
                           builder: (context) => Dialog(
-                            child: Column(
-                              children: [
-                                cubit.state == 'confirmed'
-                                    ? const Text('تم القبول بنجاح')
-                                    : const Text(
-                                        'حدث خطأ،لم تتم عملية القبول '),
-                                const SizedBox(
-                                  height: 5,
-                                ),
-                                defaultButton(
-                                    text: 'تم',
-                                    function: () {
-                                      Navigator.of(context).pop();
-                                    }),
-                              ],
+                            child: SizedBox(
+                              height: 200,
+                              child: Column(
+                                children: [
+                                  cubit.state == 'confirmed'
+                                      ? const Text('تم القبول بنجاح')
+                                      : const Text(
+                                          'حدث خطأ،لم تتم عملية القبول '),
+                                  const SizedBox(
+                                    height: 5,
+                                  ),
+                                  defaultButton(
+                                      text: 'تم',
+                                      function: () {
+                                        Navigator.of(context).pop();
+                                      }),
+                                ],
+                              ),
                             ),
                           ),
                         );
