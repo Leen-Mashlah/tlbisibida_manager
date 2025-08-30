@@ -14,10 +14,7 @@ class ClientsHistoryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<HisCubit, String>(
-      listener: (context, state) {
-        // TODO: implement listener
-      },
+    return BlocBuilder<HisCubit, HisState>(
       builder: (context, state) {
         HisCubit hisCubit = context.read<HisCubit>();
 
@@ -67,8 +64,6 @@ class ClientsHistoryPage extends StatelessWidget {
                                 alignment: WrapAlignment.center,
                                 direction: Axis.horizontal,
                                 textDirection: TextDirection.rtl,
-                                //spacing: 10,
-                                //runSpacing: 10,
                                 padding: const EdgeInsets.symmetric(
                                   horizontal: 20,
                                   vertical: 5,
@@ -82,13 +77,11 @@ class ClientsHistoryPage extends StatelessWidget {
                       child: ValueListenableBuilder<bool>(
                         valueListenable: _showregisteredlist,
                         builder: (context, isShowingRegistered, child) {
-                          if (isShowingRegistered && state == 'cliloaded') {
+                          // Show appropriate table based on selected tab
+                          if (isShowingRegistered) {
                             return const ClientsDocHisTable();
-                          } else if (!isShowingRegistered &&
-                              state == 'labsloaded') {
-                            return const ClientsLabHisTable();
                           } else {
-                            return const CircularProgressIndicator();
+                            return const ClientsLabHisTable();
                           }
                         },
                       ),

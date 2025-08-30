@@ -45,31 +45,68 @@ class DBClinicDetails {
   }
   DBClinicDetails.fromJson(Map<String, dynamic> json) {
     subscriptionableId = json['subscriptionable_id'];
-    subscriptionableType = json['subscriptional_type'];
+    subscriptionableType = json[
+        'subscriptionable_type']; // Fixed typo: 'subscriptional_type' -> 'subscriptionable_type'
     subscriptionTo = json['subscription_to'];
     subscriptionFrom = json['subscription_from'];
-    subscriptionId = json['id'];
-    id = json['subscriptionable']['id'];
-    // subscriptionId = json['subscription_id'];
-    fullName = json['subscriptionable']['first_name'] +
-        ' ' +
-        json['subscriptionable']['last_name'];
-    phone = json['subscriptionable']['phone'];
-    address = json['subscriptionable']['address'];
+
+    // The API doesn't have a top-level 'id' field, so we'll use subscriptionable_id
+    subscriptionId = json['subscriptionable_id'];
+
+    // Get the nested subscriptionable data
+    final subscriptionable = json['subscriptionable'] as Map<String, dynamic>?;
+    if (subscriptionable != null) {
+      id = subscriptionable['id'];
+
+      // Safely concatenate names
+      final firstName = subscriptionable['first_name'] ?? '';
+      final lastName = subscriptionable['last_name'] ?? '';
+      fullName = '$firstName $lastName'.trim();
+
+      // Handle phone field with proper type conversion
+      final phoneValue = subscriptionable['phone'];
+      if (phoneValue != null) {
+        if (phoneValue is int) {
+          phone = phoneValue;
+        } else if (phoneValue is String) {
+          phone = int.tryParse(phoneValue);
+        } else if (phoneValue is double) {
+          phone = phoneValue.toInt();
+        }
+      }
+
+      address = subscriptionable['address'];
+    }
+
+    // The API doesn't have register_date, so we'll leave it empty
     registerDate = '';
+
+    // Handle duration field if it exists
+    final durationValue = json['duration_as_months'];
+    if (durationValue != null) {
+      if (durationValue is int) {
+        duration = durationValue;
+      } else if (durationValue is String) {
+        duration = int.tryParse(durationValue);
+      } else if (durationValue is double) {
+        duration = durationValue.toInt();
+      }
+    }
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['subscriptionable_id'];
-    data['subscriptionable_type'];
-    data['subscription_to'];
+    data['subscriptionable_id'] = subscriptionableId;
+    data['subscriptionable_type'] = subscriptionableType;
+    data['subscription_to'] = subscriptionTo;
+    data['subscription_from'] = subscriptionFrom;
     data['id'] = subscriptionId;
-    data['subscriptionable']['id'] = id;
+    data['subscriptionable'] = {'id': id};
     data['first_name'] = fullName;
     data['phone'] = phone;
     data['address'] = address;
     data['created_at'] = registerDate;
+    data['duration_as_months'] = duration;
     return data;
   }
 
@@ -92,6 +129,7 @@ class DBClinicDetails {
         subscriptionTo: subscriptionTo,
         subscriptionFrom: subscriptionFrom,
         subscriptionableType: subscriptionableType,
+        subscriptionableId: subscriptionableId,
         fullName: fullName,
         phone: phone,
         address: address,

@@ -35,7 +35,7 @@ class NavigationService {
       if (routeName != null && routeName.isNotEmpty && routeName != '/') {
         currentTitle.value = routeName;
       } else {
-        currentTitle.value = authenticationDisplayName;
+        // currentTitle.value = authenticationDisplayName;
       }
     }
   }

@@ -5,7 +5,7 @@ import 'package:lambda_dent_dash/constant/components/default_textfield.dart';
 import 'package:lambda_dent_dash/constant/constants/constants.dart';
 import 'package:lambda_dent_dash/presentation/clients_history/c_h_cubit.dart';
 
-Dialog ConfirmRegisterDialog(BuildContext context, int id) {
+Dialog ConfirmRegisterDialog(BuildContext context, int id, HisCubit cubit) {
   TextEditingController monthscontroller = TextEditingController();
 
   return Dialog(
@@ -65,10 +65,7 @@ Dialog ConfirmRegisterDialog(BuildContext context, int id) {
                     defaultButton(
                         text: 'تم',
                         function: () {
-                          context
-                              .read<HisCubit>()
-                              .renew(int.parse(monthscontroller.text), id);
-
+                          cubit.renew(int.parse(monthscontroller.text), id);
                           Navigator.of(context).pop();
                         })
                   ],

@@ -4,82 +4,115 @@ import 'package:lambda_dent_dash/domain/models/Clinics/clinic_details.dart';
 import 'package:lambda_dent_dash/domain/models/Labs/lab_details.dart';
 import 'package:lambda_dent_dash/domain/repo/manager_repo.dart';
 
-class ReqCubit extends Cubit<String> {
+// Define proper states
+abstract class ReqState {}
+
+class ReqInitial extends ReqState {}
+
+class ReqLoading extends ReqState {
+  final bool isClinicLoading;
+  ReqLoading({this.isClinicLoading = true});
+}
+
+class ReqClinicsLoaded extends ReqState {
+  final List<ClinicDetails> clinics;
+  ReqClinicsLoaded({required this.clinics});
+}
+
+class ReqLabsLoaded extends ReqState {
+  final List<LabDetails> labs;
+  ReqLabsLoaded({required this.labs});
+}
+
+class ReqClinicsEmpty extends ReqState {}
+
+class ReqLabsEmpty extends ReqState {}
+
+class ReqError extends ReqState {
+  final String message;
+  ReqError({required this.message});
+}
+
+class ReqConfirming extends ReqState {
+  final bool isClinic;
+  ReqConfirming({required this.isClinic});
+}
+
+class ReqConfirmed extends ReqState {
+  final bool isClinic;
+  ReqConfirmed({required this.isClinic});
+}
+
+class ReqCubit extends Cubit<ReqState> {
   final ManagerRepo repo;
 
-  ReqCubit(this.repo) : super('initial') {
+  ReqCubit(this.repo) : super(ReqInitial()) {
     cliload();
   }
 
-  List<LabDetails> lablist = [];
   Future<void> labload() async {
-    emit('lab_loading'); // Indicate that labs are loading
+    emit(ReqLoading(isClinicLoading: false));
     try {
-      lablist = await repo.getnewLabs();
-      if (lablist.isNotEmpty) {
-        emit('labsloaded');
+      final labs = await repo.getnewLabs();
+      if (labs.isNotEmpty) {
+        emit(ReqLabsLoaded(labs: labs));
       } else {
-        emit('no_labs_found'); // A more specific state
+        emit(ReqLabsEmpty());
       }
     } on Exception catch (e) {
-      emit('error');
+      emit(ReqError(message: "Error loading labs: ${e.toString()}"));
       print("Error loading labs: ${e.toString()}");
     }
-    print("Lab list state: $state, Labs: ${lablist.length}");
   }
 
-  List<ClinicDetails> clilist = [];
   Future<void> cliload() async {
-    emit('clinic_loading'); // Indicate that clinics are loading
+    emit(ReqLoading(isClinicLoading: true));
     try {
-      clilist = await repo.getnewClinics();
-      if (clilist.isNotEmpty) {
-        emit('cliloaded');
+      final clinics = await repo.getnewClinics();
+      if (clinics.isNotEmpty) {
+        emit(ReqClinicsLoaded(clinics: clinics));
       } else {
-        emit('no_clinics_found'); // A more specific state
+        emit(ReqClinicsEmpty());
       }
     } on Exception catch (e) {
-      emit('error');
+      emit(ReqError(message: "Error loading clinics: ${e.toString()}"));
       print("Error loading clinics: ${e.toString()}");
     }
-    print("Clinic list state: $state, Clinics: ${clilist.length}");
   }
 
-  // confirm methods (unchanged logic, just ensures a re-load)
+  // confirm methods
   Future<void> cliconfirm(int id) async {
-    emit('confirming_clinic');
-    bool status = false;
+    emit(ReqConfirming(isClinic: true));
     try {
-      status = await repo.confirmclinics(id);
+      final status = await repo.confirmclinics(id);
+      if (status) {
+        emit(ReqConfirmed(isClinic: true));
+        await cliload(); // Re-load clinics after confirmation
+      } else {
+        emit(ReqError(message: "Clinic confirmation failed"));
+      }
     } on Exception catch (e) {
-      emit('error');
+      emit(ReqError(message: e.toString()));
       print(e.toString());
-    }
-    if (status) {
-      emit('confirmed_clinic'); // Indicate success
-      await cliload(); // Re-load clinics after confirmation
-    } else {
-      emit('error'); // Or a more specific 'clinic_confirmation_failed'
     }
   }
 
   Future<void> labconfirm(int id) async {
-    emit('confirming_lab');
-    bool status = false;
+    emit(ReqConfirming(isClinic: false));
     try {
       print('sending confirmation...');
-      status = await repo.confirmlabs(id);
+      final status = await repo.confirmlabs(id);
       print('confirmation sequence complete');
+      if (status) {
+        print('confirmation success');
+        emit(ReqConfirmed(isClinic: false));
+        await labload(); // Re-load labs after confirmation
+      } else {
+        emit(ReqError(message: "Lab confirmation failed"));
+      }
     } on Exception catch (e) {
-      emit('error');
+      emit(ReqError(message: e.toString()));
       print(e.toString());
-    }
-    if (status) {
-      print('confirmation success');
-      emit('confirmed_lab'); // Indicate success
-      await labload(); // Re-load labs after confirmation
-    } else {
-      emit('error'); // Or a more specific 'lab_confirmation_failed'
     }
   }
 }

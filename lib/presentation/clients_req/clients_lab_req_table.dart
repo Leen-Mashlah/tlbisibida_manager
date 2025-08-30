@@ -15,131 +15,184 @@ class ClientsLabReqTable extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.read<ReqCubit>();
+    return BlocBuilder<ReqCubit, ReqState>(
+      builder: (context, state) {
+        if (state is ReqLabsLoaded) {
+          final labs = state.labs;
+          if (labs.isEmpty) {
+            return const Center(
+              child: Text('لا توجد مخابر في انتظار التأكيد'),
+            );
+          }
 
-    return Center(
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.white,
-          border: Border.all(color: cyan200, width: .5),
-          boxShadow: const [
-            BoxShadow(offset: Offset(0, 6), color: Colors.grey, blurRadius: 12)
-          ],
-          borderRadius: BorderRadius.circular(8),
-        ),
-        padding: const EdgeInsets.all(16),
-        margin: const EdgeInsets.only(bottom: 30),
-        child: Column(mainAxisSize: MainAxisSize.min, children: [
-          SizedBox(
-            height: (56 * 50) + 40,
-            child: DataTable2(
-              columnSpacing: 12,
-              dataRowHeight: 56,
-              headingRowHeight: 40,
-              horizontalMargin: 12,
-              minWidth: 600,
-              columns: const [
-                DataColumn(
-                  label: Center(
-                      child: Text(
-                    'اسم المخبر ',
-                    style: TextStyle(color: cyan300),
-                  )),
-                ),
-                DataColumn(
-                  label: Center(
-                      child: Text(
-                    'رقم الهاتف',
-                    style: TextStyle(color: cyan300),
-                  )),
-                ),
-                DataColumn(
-                  label: Center(
-                      child: Text(
-                    'العنوان',
-                    style: TextStyle(color: cyan300),
-                  )),
-                ),
-                DataColumn(
-                  label: Center(
-                      child: Text(
-                    'تاريخ الطلب ',
-                    style: TextStyle(color: cyan300),
-                  )),
-                ),
-                DataColumn(
-                  label: Center(
-                      child: Text(
-                    'المدة',
-                    style: TextStyle(color: cyan300),
-                  )),
-                ),
-                DataColumn(
-                  label: Center(
-                      child: Text(
-                    'تأكيد الطلب',
-                    style: TextStyle(color: cyan300),
-                  )),
-                ),
-              ],
-              rows: List<DataRow>.generate(
-                cubit.lablist.length,
-                (index) => DataRow(
-                  cells: [
-                    DataCell(Center(
-                        child: CustomText(
-                      text: cubit.lablist[index].labName!,
-                    ))),
-                    DataCell(Center(
-                        child: CustomText(
-                            text: cubit.lablist[index].labPhone![0]))),
-                    DataCell(Center(
-                        child: CustomText(
-                            text: cubit.lablist[index].labAddress!))),
-                    DataCell(Center(
-                        child: CustomText(
-                            text: cubit.lablist[index].registerDate!
-                                .substring(0, 9)))),
-                    DataCell(Center(
-                        child: CustomText(
-                            text: cubit.lablist[index].duration.toString()))),
-                    DataCell(Center(
-                        child: IconButton(
-                      onPressed: () {
-                        cubit.labconfirm(cubit.lablist[index].id!);
-                        showDialog(
-                          context: context,
-                          builder: (context) => Dialog(
-                            child: Column(
-                              children: [
-                                cubit.state == 'confirmed_lab'
-                                    ? Text('تم القبول بنجاح')
-                                    : Text('حدث خطأ،لم تتم عملية القبول '),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                defaultButton(
-                                    text: 'تم',
-                                    function: () {
-                                      Navigator.of(context).pop();
-                                    }),
-                              ],
-                            ),
-                          ),
+          return Center(
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                border: Border.all(color: cyan200, width: .5),
+                boxShadow: const [
+                  BoxShadow(
+                      offset: Offset(0, 6), color: Colors.grey, blurRadius: 12)
+                ],
+                borderRadius: BorderRadius.circular(8),
+              ),
+              padding: const EdgeInsets.all(16),
+              margin: const EdgeInsets.only(bottom: 30),
+              child: Column(mainAxisSize: MainAxisSize.min, children: [
+                SizedBox(
+                  height: (56 * labs.length) + 40,
+                  child: DataTable2(
+                    columnSpacing: 12,
+                    dataRowHeight: 56,
+                    headingRowHeight: 40,
+                    horizontalMargin: 12,
+                    minWidth: 600,
+                    columns: const [
+                      DataColumn(
+                        label: Center(
+                            child: Text(
+                          'اسم المخبر ',
+                          style: TextStyle(color: cyan300),
+                        )),
+                      ),
+                      DataColumn(
+                        label: Center(
+                            child: Text(
+                          'رقم الهاتف',
+                          style: TextStyle(color: cyan300),
+                        )),
+                      ),
+                      DataColumn(
+                        label: Center(
+                            child: Text(
+                          'العنوان',
+                          style: TextStyle(color: cyan300),
+                        )),
+                      ),
+                      DataColumn(
+                        label: Center(
+                            child: Text(
+                          'تاريخ الطلب ',
+                          style: TextStyle(color: cyan300),
+                        )),
+                      ),
+                      DataColumn(
+                        label: Center(
+                            child: Text(
+                          'المدة',
+                          style: TextStyle(color: cyan300),
+                        )),
+                      ),
+                      DataColumn(
+                        label: Center(
+                            child: Text(
+                          'تأكيد الطلب',
+                          style: TextStyle(color: cyan300),
+                        )),
+                      ),
+                    ],
+                    rows: List<DataRow>.generate(
+                      labs.length,
+                      (index) {
+                        final lab = labs[index];
+                        // Add null safety checks
+                        if (lab.id == null ||
+                            lab.labName == null ||
+                            lab.labAddress == null ||
+                            lab.labPhone == null ||
+                            lab.labPhone!.isEmpty ||
+                            lab.registerDate == null ||
+                            lab.duration == null) {
+                          return DataRow(
+                            cells: List.generate(
+                                6,
+                                (cellIndex) => const DataCell(
+                                    Center(child: Text('بيانات غير متوفرة')))),
+                          );
+                        }
+
+                        return DataRow(
+                          cells: [
+                            DataCell(Center(
+                                child: CustomText(
+                              text: lab.labName!,
+                            ))),
+                            DataCell(Center(
+                                child: CustomText(text: lab.labPhone![0]))),
+                            DataCell(Center(
+                                child: CustomText(text: lab.labAddress!))),
+                            DataCell(Center(
+                                child: CustomText(
+                                    text: lab.registerDate!.substring(0, 9)))),
+                            DataCell(Center(
+                                child:
+                                    CustomText(text: lab.duration.toString()))),
+                            DataCell(Center(
+                                child: IconButton(
+                              onPressed: () {
+                                final cubit = context.read<ReqCubit>();
+                                cubit.labconfirm(lab.id!);
+                                cubit.labload();
+                                // showDialog(
+                                //   context: context,
+                                //   builder: (context) =>
+                                //       BlocBuilder<ReqCubit, ReqState>(
+                                //     builder: (context, dialogState) {
+                                //       return Dialog(
+                                //         child: Column(
+                                //           children: [
+                                //             dialogState is ReqConfirmed &&
+                                //                     !dialogState.isClinic
+                                //                 ? Text('تم القبول بنجاح')
+                                //                 : Text(
+                                //                     'حدث خطأ،لم تتم عملية القبول '),
+                                //             SizedBox(
+                                //               height: 5,
+                                //             ),
+                                //             defaultButton(
+                                //                 text: 'تم',
+                                //                 function: () {
+                                //                   Navigator.of(context).pop();
+                                //                 }),
+                                //           ],
+                                //         ),
+                                //       );
+                                //     },
+                                //   ),
+                                // );
+                              },
+                              icon: const Icon(
+                                CupertinoIcons.checkmark_seal,
+                                color: cyan300,
+                              ),
+                            ))),
+                          ],
                         );
                       },
-                      icon: const Icon(
-                        CupertinoIcons.checkmark_seal,
-                        color: cyan300,
-                      ),
-                    ))),
-                  ],
+                    ),
+                  ),
                 ),
-              ),
+              ]),
             ),
-          ),
-        ]),
-      ),
+          );
+        } else if (state is ReqLabsEmpty) {
+          return const Center(
+            child: Text('لا توجد مخابر في انتظار التأكيد'),
+          );
+        } else if (state is ReqError) {
+          return Center(
+            child: Text(
+              'خطأ: ${state.message}',
+              style: const TextStyle(color: Colors.red),
+            ),
+          );
+        }
+
+        // Fallback for other states
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      },
     );
   }
 }

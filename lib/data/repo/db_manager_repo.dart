@@ -86,11 +86,12 @@ class DbManagerRepo implements ManagerRepo {
 
   @override
   Future<bool> renew(int months, int id) async => await DioHelper.postData(
-              'renew-subscription',
-              {'admin/subscription_id': id, 'months': months},
+              'admin/renew-subscription',
+              {'subscription_id': id, 'months': months},
               token: CacheHelper.get('token'))
           .then(
         (value) {
+          print(value);
           if (value?.data['status']) {
             return true;
           } else {
@@ -158,9 +159,10 @@ class DbManagerRepo implements ManagerRepo {
   DBSubscribedLabsResponse? dbSubscribedLabsResponse;
   @override
   Future<List<LabDetails>> getSubscribedLabs() async {
-    await DioHelper.getData('admin/subsccribed-labs',
+    await DioHelper.getData('admin/subscribed-labs',
             token: CacheHelper.get('token'))
         .then((value) {
+      print(value);
       if (value?.data['status']) {
         dbSubscribedLabsResponse =
             DBSubscribedLabsResponse.fromJson(value!.data);

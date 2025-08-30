@@ -15,10 +15,7 @@ class ClientsLogPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocConsumer<LogCubit, String>(
-        listener: (context, state) {
-          // TODO: implement listener
-        },
+      body: BlocBuilder<LogCubit, LogState>(
         builder: (context, state) {
           LogCubit logCubit = context.read<LogCubit>();
 
@@ -82,13 +79,11 @@ class ClientsLogPage extends StatelessWidget {
                         child: ValueListenableBuilder<bool>(
                           valueListenable: _showregisteredlist,
                           builder: (context, isShowingRegistered, child) {
-                            if (isShowingRegistered && state == 'cliloaded') {
+                            // Show appropriate table based on selected tab
+                            if (isShowingRegistered) {
                               return const ClientsDocLogTable();
-                            } else if (!isShowingRegistered &&
-                                state == 'labsloaded') {
-                              return const ClientsLabLogTable();
                             } else {
-                              return const CircularProgressIndicator();
+                              return const ClientsLabLogTable();
                             }
                           },
                         ),

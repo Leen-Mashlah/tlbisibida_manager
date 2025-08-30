@@ -3,45 +3,69 @@ import 'package:lambda_dent_dash/domain/models/Clinics/clinic_details.dart';
 import 'package:lambda_dent_dash/domain/models/Labs/lab_details.dart';
 import 'package:lambda_dent_dash/domain/repo/manager_repo.dart';
 
-class LogCubit extends Cubit<String> {
+// Define proper states
+abstract class LogState {}
+
+class LogInitial extends LogState {}
+
+class LogLoading extends LogState {
+  final bool isClinicLoading;
+  LogLoading({this.isClinicLoading = true});
+}
+
+class LogClinicsLoaded extends LogState {
+  final List<ClinicDetails> clinics;
+  LogClinicsLoaded({required this.clinics});
+}
+
+class LogLabsLoaded extends LogState {
+  final List<LabDetails> labs;
+  LogLabsLoaded({required this.labs});
+}
+
+class LogClinicsEmpty extends LogState {}
+
+class LogLabsEmpty extends LogState {}
+
+class LogError extends LogState {
+  final String message;
+  LogError({required this.message});
+}
+
+class LogCubit extends Cubit<LogState> {
   final ManagerRepo repo;
 
-  LogCubit(this.repo) : super('initial') {
+  LogCubit(this.repo) : super(LogInitial()) {
     cliload();
   }
 
-  //load
-  List<LabDetails> lablist = [];
   Future<void> labload() async {
-    emit('lab_loading');
+    emit(LogLoading(isClinicLoading: false));
     try {
-      lablist = await repo.getSubscribedLabs();
-      if (lablist.isNotEmpty) {
-        emit('labsloaded');
+      final labs = await repo.getSubscribedLabs();
+      if (labs.isNotEmpty) {
+        emit(LogLabsLoaded(labs: labs));
       } else {
-        emit('no_labs_found'); // A more specific state
+        emit(LogLabsEmpty());
       }
     } on Exception catch (e) {
-      emit('error');
+      emit(LogError(message: "Error loading labs: ${e.toString()}"));
       print("Error loading labs: ${e.toString()}");
     }
-    print("Lab list state: $state, Labs: ${lablist.length}");
   }
 
-  List<ClinicDetails> clilist = [];
   Future<void> cliload() async {
-    emit('clinic_loading'); 
+    emit(LogLoading(isClinicLoading: true));
     try {
-      clilist = await repo.getSubscribedClinics();
-      if (clilist.isNotEmpty) {
-        emit('cliloaded');
+      final clinics = await repo.getSubscribedClinics();
+      if (clinics.isNotEmpty) {
+        emit(LogClinicsLoaded(clinics: clinics));
       } else {
-        emit('no_clinics_found'); // A more specific state
+        emit(LogClinicsEmpty());
       }
     } on Exception catch (e) {
-      emit('error');
+      emit(LogError(message: "Error loading clinics: ${e.toString()}"));
       print("Error loading clinics: ${e.toString()}");
     }
-    print("Clinic list state: $state, Clinics: ${clilist.length}");
   }
 }

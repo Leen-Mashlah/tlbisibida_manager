@@ -32,6 +32,6 @@ const Color bglight = Color.fromARGB(255, 241, 255, 253);
 BorderRadius standardBorderRadius = BorderRadius.circular(30.0);
 BorderRadius activeBorderRadius = BorderRadius.circular(10.0);
 
-String baseUrl = "https://tusk-project-production.up.railway.app/api/";
+String baseUrl = "http://localhost:8000/api/";
 String testtoken =
-    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vdHVzay1wcm9qZWN0LXByb2R1Y3Rpb24udXAucmFpbHdheS5hcHAvYXBpL2xvZ2luIiwiaWF0IjoxNzU2MzE2MzcyLCJleHAiOjE3NTg5MDgzNzIsIm5iZiI6MTc1NjMxNjM3MiwianRpIjoiYlBmV0hoTFM5anB0Zkd4RyIsInN1YiI6IjEiLCJwcnYiOiJkZjg4M2RiOTdiZDA1ZWY4ZmY4NTA4MmQ2ODZjNDVlODMyZTU5M2E5In0.LQff8atB4eaIeEIVuYGPckRbinM3RHhSF5qcrNhvzC4";
+    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNzU2NTQ1NTczLCJleHAiOjE3NTkxMzc1NzMsIm5iZiI6MTc1NjU0NTU3MywianRpIjoiRnlaVVIxbzUwY3NxZE03bCIsInN1YiI6IjEiLCJwcnYiOiJkZjg4M2RiOTdiZDA1ZWY4ZmY4NTA4MmQ2ODZjNDVlODMyZTU5M2E5In0.5M9n0OgwZw-hkDIi4nBQmHAC1Mp5_0uIL80MFe8osCQ";

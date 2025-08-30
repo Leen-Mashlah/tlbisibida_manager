@@ -16,7 +16,7 @@ class ClientsReqPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocConsumer<ReqCubit, String>(
+      body: BlocConsumer<ReqCubit, ReqState>(
         listener: (context, state) {
           // TODO: implement listener
         },
@@ -90,14 +90,57 @@ class ClientsReqPage extends StatelessWidget {
                         child: ValueListenableBuilder<bool>(
                           valueListenable: _showregisteredlist,
                           builder: (context, isShowingRegistered, child) {
-                            if (isShowingRegistered && state == 'cliloaded') {
-                              return const ClientsDocReqTable();
-                            } else if (!isShowingRegistered &&
-                                state == 'labsloaded') {
-                              return const ClientsLabReqTable();
-                            } else {
+                            // Handle different state types properly
+                            if (state is ReqLoading) {
                               return const CircularProgressIndicator();
                             }
+
+                            if (state is ReqError) {
+                              return Text(
+                                state.message,
+                                style: const TextStyle(color: Colors.red),
+                              );
+                            }
+
+                            if (state is ReqClinicsLoaded) {
+                              if (isShowingRegistered) {
+                                return const ClientsDocReqTable();
+                              }
+                            }
+
+                            if (state is ReqLabsLoaded) {
+                              if (!isShowingRegistered) {
+                                return const ClientsLabReqTable();
+                              }
+                            }
+
+                            if (state is ReqClinicsEmpty) {
+                              if (isShowingRegistered) {
+                                return const ClientsDocReqTable();
+                              }
+                            }
+
+                            if (state is ReqLabsEmpty) {
+                              if (!isShowingRegistered) {
+                                return const ClientsLabReqTable();
+                              }
+                            }
+
+                            if (state is ReqConfirming) {
+                              return const CircularProgressIndicator();
+                            }
+
+                            if (state is ReqConfirmed) {
+                              // Show the appropriate table after confirmation
+                              if (state.isClinic) {
+                                return const ClientsDocReqTable();
+                              } else {
+                                return const ClientsLabReqTable();
+                              }
+                            }
+
+                            // Default loading state for initial or unexpected states
+                            return const CircularProgressIndicator();
                           },
                         ),
                       ),

@@ -14,116 +14,136 @@ class ClientsLabHisTable extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.read<HisCubit>();
-    return Center(
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.white,
-          border: Border.all(color: cyan200, width: .5),
-          boxShadow: const [
-            BoxShadow(offset: Offset(0, 6), color: Colors.grey, blurRadius: 12)
-          ],
-          borderRadius: BorderRadius.circular(8),
-        ),
-        padding: const EdgeInsets.all(16),
-        margin: const EdgeInsets.only(bottom: 30),
-        child: Column(mainAxisSize: MainAxisSize.min, children: [
-          SizedBox(
-            height: (56 * 50) + 40,
-            child: DataTable2(
-              columnSpacing: 12,
-              dataRowHeight: 56,
-              headingRowHeight: 40,
-              horizontalMargin: 12,
-              minWidth: 600,
-              columns: const [
-                DataColumn(
-                  label: Center(
-                      child: Text(
-                    ' تجديد الاشتراك',
-                    style: TextStyle(color: cyan300),
-                  )),
-                ),
-                // DataColumn(
-                //   label: Center(
-                //       child: Text(
-                //     'المدة',
-                //     style: TextStyle(color: cyan300),
-                //   )),
-                // ),
-                DataColumn(
-                  label: Center(
-                      child: Text(
-                    'تاريخ نهاية الاشتراك ',
-                    style: TextStyle(color: cyan300),
-                  )),
-                ),
-                DataColumn(
-                  label: Center(
-                      child: Text(
-                    'العنوان',
-                    style: TextStyle(color: cyan300),
-                  )),
-                ),
-                DataColumn(
-                  label: Center(
-                      child: Text(
-                    'رقم الهاتف',
-                    style: TextStyle(color: cyan300),
-                  )),
-                ),
-                DataColumn(
-                  label: Center(
-                      child: Text(
-                    'اسم المخبر ',
-                    style: TextStyle(color: cyan300),
-                  )),
-                ),
-              ],
-              rows: List<DataRow>.generate(
-                cubit.lablist.length,
-                (index) => DataRow(
-                  cells: [
-                    DataCell(Center(
-                        child: IconButton(
-                      onPressed: () {
-                        showDialog(
-                          context: context,
-                          builder: (context) => ConfirmRegisterDialog(
-                            context,
-                            cubit.lablist[index].subscriptionId!,
-                          ),
-                        );
-                      },
-                      icon: const Icon(
-                        CupertinoIcons.checkmark_seal,
-                        color: cyan300,
-                      ),
-                    ))),
-                    //date
-                    DataCell(Center(
-                        child: CustomText(
-                            text: cubit.lablist[index].subscriptionTo!))),
-                    //city
-                    DataCell(Center(
-                        child: CustomText(
-                            text: cubit.lablist[index].labAddress!))),
-                    //number
-                    DataCell(Center(
-                        child: CustomText(
-                            text: cubit.lablist[index].labPhone![0]))),
-                    //name
-                    DataCell(Center(
-                        child: CustomText(
-                      text: cubit.lablist[index].labName!,
-                    ))),
-                  ],
-                ),
+    return BlocBuilder<HisCubit, HisState>(
+      builder: (context, state) {
+        if (state is HisLabsLoaded) {
+          final labs = state.labs;
+          if (labs.isEmpty) {
+            return const Center(
+              child: Text('لا توجد مخابر مسجلة'),
+            );
+          }
+
+          return Center(
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                border: Border.all(color: cyan200, width: .5),
+                boxShadow: const [
+                  BoxShadow(
+                      offset: Offset(0, 6), color: Colors.grey, blurRadius: 12)
+                ],
+                borderRadius: BorderRadius.circular(8),
               ),
+              padding: const EdgeInsets.all(16),
+              margin: const EdgeInsets.only(bottom: 30),
+              child: Column(mainAxisSize: MainAxisSize.min, children: [
+                SizedBox(
+                  height: (56 * labs.length) + 40,
+                  child: Directionality(
+                    textDirection: TextDirection.ltr,
+                    child: DataTable2(
+                      columnSpacing: 12,
+                      dataRowHeight: 56,
+                      headingRowHeight: 40,
+                      horizontalMargin: 12,
+                      minWidth: 600,
+                      columns: const [
+                        DataColumn(
+                          label: Center(
+                              child: Text(
+                            ' تجديد الاشتراك',
+                            style: TextStyle(color: cyan300),
+                          )),
+                        ),
+                        DataColumn(
+                          label: Center(
+                              child: Text(
+                            'تاريخ نهاية الاشتراك ',
+                            style: TextStyle(color: cyan300),
+                          )),
+                        ),
+                        DataColumn(
+                          label: Center(
+                              child: Text(
+                            'العنوان',
+                            style: TextStyle(color: cyan300),
+                          )),
+                        ),
+                        DataColumn(
+                          label: Center(
+                              child: Text(
+                            'رقم الهاتف',
+                            style: TextStyle(color: cyan300),
+                          )),
+                        ),
+                        DataColumn(
+                          label: Center(
+                              child: Text(
+                            'اسم المخبر ',
+                            style: TextStyle(color: cyan300),
+                          )),
+                        ),
+                      ],
+                      rows: List<DataRow>.generate(
+                        labs.length,
+                        (index) => DataRow(
+                          cells: [
+                            DataCell(Center(
+                                child: IconButton(
+                              onPressed: () {
+                                final cubit = context.read<HisCubit>();
+                                showDialog(
+                                  context: context,
+                                  builder: (context) => ConfirmRegisterDialog(
+                                    context,
+                                    labs[index].subscriptionId!,
+                                    cubit,
+                                  ),
+                                );
+                              },
+                              icon: const Icon(
+                                CupertinoIcons.checkmark_seal,
+                                color: cyan300,
+                              ),
+                            ))),
+                            //date
+                            DataCell(Center(
+                                child: CustomText(
+                                    text: labs[index].subscriptionTo!))),
+                            //city
+                            DataCell(Center(
+                                child:
+                                    CustomText(text: labs[index].labAddress!))),
+                            //number
+                            DataCell(Center(
+                                child: CustomText(
+                                    text: labs[index].labPhone![0]))),
+                            //name
+                            DataCell(Center(
+                                child: CustomText(
+                              text: labs[index].labName!,
+                            ))),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ]),
             ),
-          ),
-        ]),
-      ),
+          );
+        } else if (state is HisLabsEmpty) {
+          return const Center(
+            child: Text('لا توجد مخابر مسجلة'),
+          );
+        }
+
+        // Fallback for other states
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      },
     );
   }
 }
