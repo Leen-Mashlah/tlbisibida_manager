@@ -118,7 +118,7 @@ class ClientsDocReqTable extends StatelessWidget {
                               height: 200,
                               child: Column(
                                 children: [
-                                  cubit.state == 'confirmed'
+                                  cubit.state == 'confirmed_clinic'
                                       ? const Text('تم القبول بنجاح')
                                       : const Text(
                                           'حدث خطأ،لم تتم عملية القبول '),
