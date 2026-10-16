@@ -39,6 +39,12 @@ class LogCubit extends Cubit<LogState> {
     cliload();
   }
 
+  // Requests may finish after the page was replaced (e.g. on a 401 redirect).
+  @override
+  void emit(LogState state) {
+    if (!isClosed) super.emit(state);
+  }
+
   Future<void> labload() async {
     emit(LogLoading(isClinicLoading: false));
     try {
@@ -48,7 +54,7 @@ class LogCubit extends Cubit<LogState> {
       } else {
         emit(LogLabsEmpty());
       }
-    } on Exception catch (e) {
+    } catch (e) {
       emit(LogError(message: "Error loading labs: ${e.toString()}"));
       print("Error loading labs: ${e.toString()}");
     }
@@ -63,7 +69,7 @@ class LogCubit extends Cubit<LogState> {
       } else {
         emit(LogClinicsEmpty());
       }
-    } on Exception catch (e) {
+    } catch (e) {
       emit(LogError(message: "Error loading clinics: ${e.toString()}"));
       print("Error loading clinics: ${e.toString()}");
     }

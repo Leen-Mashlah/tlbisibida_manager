@@ -50,6 +50,12 @@ class ReqCubit extends Cubit<ReqState> {
     cliload();
   }
 
+  // Requests may finish after the page was replaced (e.g. on a 401 redirect).
+  @override
+  void emit(ReqState state) {
+    if (!isClosed) super.emit(state);
+  }
+
   Future<void> labload() async {
     emit(ReqLoading(isClinicLoading: false));
     try {
@@ -59,7 +65,7 @@ class ReqCubit extends Cubit<ReqState> {
       } else {
         emit(ReqLabsEmpty());
       }
-    } on Exception catch (e) {
+    } catch (e) {
       emit(ReqError(message: "Error loading labs: ${e.toString()}"));
       print("Error loading labs: ${e.toString()}");
     }
@@ -74,7 +80,7 @@ class ReqCubit extends Cubit<ReqState> {
       } else {
         emit(ReqClinicsEmpty());
       }
-    } on Exception catch (e) {
+    } catch (e) {
       emit(ReqError(message: "Error loading clinics: ${e.toString()}"));
       print("Error loading clinics: ${e.toString()}");
     }
@@ -91,7 +97,7 @@ class ReqCubit extends Cubit<ReqState> {
       } else {
         emit(ReqError(message: "Clinic confirmation failed"));
       }
-    } on Exception catch (e) {
+    } catch (e) {
       emit(ReqError(message: e.toString()));
       print(e.toString());
     }
@@ -110,7 +116,7 @@ class ReqCubit extends Cubit<ReqState> {
       } else {
         emit(ReqError(message: "Lab confirmation failed"));
       }
-    } on Exception catch (e) {
+    } catch (e) {
       emit(ReqError(message: e.toString()));
       print(e.toString());
     }

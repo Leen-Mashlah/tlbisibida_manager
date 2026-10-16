@@ -33,5 +33,3 @@ BorderRadius standardBorderRadius = BorderRadius.circular(30.0);
 BorderRadius activeBorderRadius = BorderRadius.circular(10.0);
 
 String baseUrl = "http://localhost:8000/api/";
-String testtoken =
-    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNzU2NTQ1NTczLCJleHAiOjE3NTkxMzc1NzMsIm5iZiI6MTc1NjU0NTU3MywianRpIjoiRnlaVVIxbzUwY3NxZE03bCIsInN1YiI6IjEiLCJwcnYiOiJkZjg4M2RiOTdiZDA1ZWY4ZmY4NTA4MmQ2ODZjNDVlODMyZTU5M2E5In0.5M9n0OgwZw-hkDIi4nBQmHAC1Mp5_0uIL80MFe8osCQ";

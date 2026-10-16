@@ -110,19 +110,19 @@ class ClientsLabHisTable extends StatelessWidget {
                             //date
                             DataCell(Center(
                                 child: CustomText(
-                                    text: labs[index].subscriptionTo!))),
+                                    text: labs[index].subscriptionTo ?? ''))),
                             //city
                             DataCell(Center(
                                 child:
-                                    CustomText(text: labs[index].labAddress!))),
+                                    CustomText(text: labs[index].labAddress ?? ''))),
                             //number
                             DataCell(Center(
                                 child: CustomText(
-                                    text: labs[index].labPhone![0]))),
+                                    text: labs[index].labPhone?.firstOrNull ?? ''))),
                             //name
                             DataCell(Center(
                                 child: CustomText(
-                              text: labs[index].labName!,
+                              text: labs[index].labName ?? '',
                             ))),
                           ],
                         ),
@@ -136,6 +136,13 @@ class ClientsLabHisTable extends StatelessWidget {
         } else if (state is HisLabsEmpty) {
           return const Center(
             child: Text('لا توجد مخابر مسجلة'),
+          );
+        } else if (state is HisError) {
+          return Center(
+            child: Text(
+              'خطأ: ${state.message}',
+              style: const TextStyle(color: Colors.red),
+            ),
           );
         }
 

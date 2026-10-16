@@ -1,5 +1,4 @@
-// ignore_for_file: prefer_interpolation_to_compose_strings
-
+import 'package:dio/dio.dart';
 import 'package:lambda_dent_dash/data/models/Clinics/db_clinic_history.dart';
 import 'package:lambda_dent_dash/data/models/Clinics/db_clinic_join_request.dart';
 import 'package:lambda_dent_dash/data/models/Clinics/db_subscribed_clinics.dart';
@@ -13,207 +12,146 @@ import 'package:lambda_dent_dash/domain/repo/manager_repo.dart';
 import 'package:lambda_dent_dash/services/Cache/cache_helper.dart';
 import 'package:lambda_dent_dash/services/dio/dio.dart';
 
+/// Error reported by the backend in its `status: false` envelope.
+class ApiException implements Exception {
+  final String message;
+  ApiException(this.message);
+
+  @override
+  String toString() => message;
+}
+
 class DbManagerRepo implements ManagerRepo {
-  @override
-  Future<bool> login(String email, String password) async =>
-      await DioHelper.postData(
-              'login', {'email': email, 'password': password, 'guard': 'admin'})
-          .then((value) {
-        if (value != null && value.data['status']) {
-          CacheHelper.setString(
-              'token', 'Bearer ' + value.data['data']['access_token']);
-          print("Login successful. Token: ${CacheHelper.get('token')}");
-          return true;
-        } else {
-          print(
-              "Login failed: ${value?.data['message'] ?? 'Unknown error' + value.toString()}");
-          return false;
-        }
-      }).catchError((error) {
-        print(error.toString());
-        return false;
-      });
+  /// Backend errors arrive as `error_message`, which is either a string or a
+  /// map of validation errors.
+  static String _errorMessage(Map data) {
+    final message = data['error_message'] ?? data['message'];
+    if (message is Map) {
+      return message.values
+          .expand((v) => v is List ? v : [v])
+          .map((v) => v.toString())
+          .join('\n');
+    }
+    return message?.toString() ?? 'Unknown error';
+  }
+
+  /// Returns the response body of a list endpoint, or null when the backend
+  /// reports "no records" (HTTP 200 with `status: false`, `error_code: 200`).
+  Future<Map<String, dynamic>?> _getList(String path) async {
+    final data = (await DioHelper.getData(path))?.data;
+    if (data is! Map<String, dynamic>) {
+      throw ApiException('Unexpected response from $path');
+    }
+    if (data['status'] == true) return data;
+    if (data['error_code'] == 200) return null;
+    throw ApiException(_errorMessage(data));
+  }
+
+  Future<bool> _isSuccess(Future<Response?> request) async {
+    try {
+      final data = (await request)?.data;
+      if (data is Map && data['status'] == true) return true;
+      print(
+          "Request failed: ${data is Map ? _errorMessage(data) : 'Unknown error'}");
+      return false;
+    } catch (error) {
+      print('Request failed: $error');
+      return false;
+    }
+  }
 
   @override
-  Future<bool> logout() async =>
-      await DioHelper.postData('auth/logout', {}).then((value) {
-        if (value != null && value.data['status']) {
-          CacheHelper.removeString('token');
-          print("Logout successful. Token: ${CacheHelper.get('token')}");
-          return true;
-        } else {
-          print("Login failed: ${value?.data['message'] ?? 'Unknown error'}");
-          return false;
-        }
-      }).catchError((error) {
-        print(error.toString());
-        return false;
-      });
+  Future<bool> login(String email, String password) async {
+    try {
+      final response = await DioHelper.postData(
+          'login', {'email': email, 'password': password, 'guard': 'admin'});
+      final data = response?.data;
+      final token = data is Map && data['data'] is Map
+          ? data['data']['access_token']
+          : null;
+      if (data is Map && data['status'] == true && token is String) {
+        await CacheHelper.setString('token', 'Bearer $token');
+        print('Login successful.');
+        return true;
+      }
+      print(
+          "Login failed: ${data is Map ? _errorMessage(data) : 'Unknown error'}");
+      return false;
+    } catch (error) {
+      print('Login failed: $error');
+      return false;
+    }
+  }
 
   @override
-  Future<bool> confirmlabs(int id) async =>
-      await DioHelper.updateData('admin/accept-lab-register/$id', {},
-              token: CacheHelper.get('token'))
-          .then(
-        (value) {
-          if (value?.data['status']) {
-            print('response: ' + value?.data);
-            return true;
-          } else {
-            print(
-                "Request failed: ${value?.data['message'] ?? 'Unknown error'}");
-            return false;
-          }
-        },
-      ).catchError((error) {
-        return false;
-      });
+  Future<bool> logout() async {
+    final success = await _isSuccess(DioHelper.postData('auth/logout', {}));
+    if (success) await CacheHelper.removeString('token');
+    return success;
+  }
 
   @override
-  Future<bool> confirmclinics(int id) async =>
-      await DioHelper.updateData('admin/accept-clinic-register/$id', {},
-              token: CacheHelper.get('token'))
-          .then((value) {
-        if (value?.data['status']) {
-          return true;
-        } else {
-          print("Request failed: ${value?.data['message'] ?? 'Unknown error'}");
-          return false;
-        }
-      }).catchError((error) {
-        return false;
-      });
+  Future<bool> confirmlabs(int id) =>
+      _isSuccess(DioHelper.updateData('admin/accept-lab-register/$id', {}));
 
   @override
-  Future<bool> renew(int months, int id) async => await DioHelper.postData(
-              'admin/renew-subscription',
-              {'subscription_id': id, 'months': months},
-              token: CacheHelper.get('token'))
-          .then(
-        (value) {
-          print(value);
-          if (value?.data['status']) {
-            return true;
-          } else {
-            print(
-                "Request failed: ${value?.data['message'] ?? 'Unknown error'}");
-            return false;
-          }
-        },
-      ).catchError((error) {
-        return false;
-      });
+  Future<bool> confirmclinics(int id) =>
+      _isSuccess(DioHelper.updateData('admin/accept-clinic-register/$id', {}));
 
-  DBHistoryClinicsResponse? dbHistoryClinicsResponse;
+  @override
+  Future<bool> renew(int months, int id) => _isSuccess(DioHelper.postData(
+      'admin/renew-subscription', {'subscription_id': id, 'months': months}));
+
   @override
   Future<List<ClinicDetails>> getHistoryClinics() async {
-    await DioHelper.getData('admin/clinics/null-subscription',
-            token: CacheHelper.get('token'))
-        .then((value) {
-      dbHistoryClinicsResponse = DBHistoryClinicsResponse.fromJson(value?.data);
-    });
-    List<ClinicDetails> cliniclist = [];
-    for (var clinic in dbHistoryClinicsResponse!.notSubscribedClinics!) {
-      cliniclist.add(clinic.todomain());
-    }
-    return cliniclist;
+    final data = await _getList('admin/clinics/null-subscription');
+    if (data == null) return [];
+    final clinics =
+        DBHistoryClinicsResponse.fromJson(data).notSubscribedClinics ?? [];
+    return clinics.map((clinic) => clinic.todomain()).toList();
   }
 
-  DBHistoryLabsResponse? dbHistoryLabsResponse;
   @override
   Future<List<LabDetails>> getHistoryLabs() async {
-    await DioHelper.getData('admin/labs/null-subscription',
-            token: CacheHelper.get('token'))
-        .then((value) {
-      dbHistoryLabsResponse = DBHistoryLabsResponse.fromJson(value?.data);
-    });
-    List<LabDetails> lablist = [];
-    for (var lab in dbHistoryLabsResponse!.subscribedNotSubscribeLabs!) {
-      lablist.add(lab.todomain());
-    }
-    return lablist;
+    final data = await _getList('admin/labs/null-subscription');
+    if (data == null) return [];
+    final labs =
+        DBHistoryLabsResponse.fromJson(data).subscribedNotSubscribeLabs ?? [];
+    return labs.map((lab) => lab.todomain()).toList();
   }
 
-  DBSubscribedClinicsResponse? dbSubscribedClinicsResponse;
   @override
   Future<List<ClinicDetails>> getSubscribedClinics() async {
-    await DioHelper.getData('admin/subscribed-clinics',
-            token: CacheHelper.get('token'))
-        .then((value) {
-      if (value?.data['status']) {
-        dbSubscribedClinicsResponse =
-            DBSubscribedClinicsResponse.fromJson(value?.data);
-      } else {
-        print("Request failed: ${value?.data['message'] ?? 'Unknown error'}");
-        return [];
-      }
-      print(value?.data);
-    });
-    List<ClinicDetails> cliniclist = [];
-    for (var clnc in dbSubscribedClinicsResponse!.subscribedClinics!) {
-      cliniclist.add(clnc.todomain());
-    }
-    return cliniclist;
+    final data = await _getList('admin/subscribed-clinics');
+    if (data == null) return [];
+    final clinics =
+        DBSubscribedClinicsResponse.fromJson(data).subscribedClinics ?? [];
+    return clinics.map((clinic) => clinic.todomain()).toList();
   }
 
-  DBSubscribedLabsResponse? dbSubscribedLabsResponse;
   @override
   Future<List<LabDetails>> getSubscribedLabs() async {
-    await DioHelper.getData('admin/subscribed-labs',
-            token: CacheHelper.get('token'))
-        .then((value) {
-      print(value);
-      if (value?.data['status']) {
-        dbSubscribedLabsResponse =
-            DBSubscribedLabsResponse.fromJson(value!.data);
-      } else {
-        print("Request failed: ${value?.data['message'] ?? 'Unknown error'}");
-        return [];
-      }
-    });
-    List<LabDetails> lablist = [];
-    for (var labdet in dbSubscribedLabsResponse!.subscribedLabs!) {
-      lablist.add(labdet.todomain());
-    }
-    return lablist;
+    final data = await _getList('admin/subscribed-labs');
+    if (data == null) return [];
+    final labs = DBSubscribedLabsResponse.fromJson(data).subscribedLabs ?? [];
+    return labs.map((lab) => lab.todomain()).toList();
   }
 
-  DBLabsJoinRequestResponse? dbLabsJoinRequestResponse;
   @override
   Future<List<LabDetails>> getnewLabs() async {
-    await DioHelper.getData('admin/labs-register-requests',
-            token: CacheHelper.get('token'))
-        .then((value) {
-      if (value?.data['status']) {
-        dbLabsJoinRequestResponse =
-            DBLabsJoinRequestResponse.fromJsonReq(value!.data);
-      } else {
-        print("Request failed: ${value?.data['message'] ?? 'Unknown error'}");
-        return false;
-      }
-    });
-    List<LabDetails> lablist = [];
-    for (var labdet in dbLabsJoinRequestResponse!.labsJoinRequest!) {
-      lablist.add(labdet.todomain());
-    }
-    return lablist;
+    final data = await _getList('admin/labs-register-requests');
+    if (data == null) return [];
+    final labs =
+        DBLabsJoinRequestResponse.fromJsonReq(data).labsJoinRequest ?? [];
+    return labs.map((lab) => lab.todomain()).toList();
   }
 
-  DBClinicJoinRequestResponse? dbClinicJoinRequestResponse;
   @override
   Future<List<ClinicDetails>> getnewClinics() async {
-    String token = CacheHelper.get('token');
-    print(token);
-    await DioHelper.getData('admin/clinics-register-requests', token: token)
-        .then((value) {
-      dbClinicJoinRequestResponse =
-          DBClinicJoinRequestResponse.fromJsonReq(value!.data);
-      print(value);
-    });
-    List<ClinicDetails> clilist = [];
-    for (var labdet in dbClinicJoinRequestResponse!.joinOrdersClinics!) {
-      clilist.add(labdet.todomain());
-    }
-    return clilist;
+    final data = await _getList('admin/clinics-register-requests');
+    if (data == null) return [];
+    final clinics =
+        DBClinicJoinRequestResponse.fromJsonReq(data).joinOrdersClinics ?? [];
+    return clinics.map((clinic) => clinic.todomain()).toList();
   }
 }

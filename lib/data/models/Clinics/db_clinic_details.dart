@@ -37,8 +37,9 @@ class DBClinicDetails {
 
   DBClinicDetails.fromJsonReq(Map<String, dynamic> json) {
     id = json['id'];
-    fullName = json['first_name'] + ' ' + json['last_name'];
-    phone = json['phone'];
+    fullName = '${json['first_name'] ?? ''} ${json['last_name'] ?? ''}'.trim();
+    final phoneValue = json['phone'];
+    phone = phoneValue is int ? phoneValue : int.tryParse('${phoneValue ?? ''}');
     address = json['address'];
     registerDate = json['created_at'];
     duration = json['register_subscription_duration'];
@@ -50,8 +51,9 @@ class DBClinicDetails {
     subscriptionTo = json['subscription_to'];
     subscriptionFrom = json['subscription_from'];
 
-    // The API doesn't have a top-level 'id' field, so we'll use subscriptionable_id
-    subscriptionId = json['subscriptionable_id'];
+    // Subscription primary key, used by admin/renew-subscription. Only the
+    // null-subscription endpoint returns it; subscribed-clinics does not.
+    subscriptionId = json['id'];
 
     // Get the nested subscriptionable data
     final subscriptionable = json['subscriptionable'] as Map<String, dynamic>?;

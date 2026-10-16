@@ -1,5 +1,7 @@
 // common_models.dart
 
+import 'dart:convert';
+
 import 'package:lambda_dent_dash/domain/models/Labs/lab_details.dart';
 import 'package:lambda_dent_dash/domain/repo/lapphone_chat.dart';
 
@@ -36,15 +38,16 @@ class DBLabDetails {
     subscriptionTo = json['subscription_to'];
     subscriptionFrom = json['subscription_from'];
 
-    // The API doesn't have a top-level 'id' field, so we'll use subscriptionable_id
-    subscriptionId = json['subscriptionable_id'];
+    // Subscription primary key, used by admin/renew-subscription. Only the
+    // null-subscription endpoint returns it; subscribed-labs does not.
+    subscriptionId = json['id'];
 
     // Get the nested subscriptionable data
     final subscriptionable = json['subscriptionable'] as Map<String, dynamic>?;
     if (subscriptionable != null) {
       id = subscriptionable['id'];
       labName = subscriptionable['lab_name'];
-      labPhone = subscriptionable['lab_phone'];
+      labPhone = _phoneString(subscriptionable['lab_phone']);
       labAddress = subscriptionable['lab_address'];
     }
 
@@ -68,10 +71,16 @@ class DBLabDetails {
   DBLabDetails.fromJsonReq(Map<String, dynamic> json) {
     id = json['id'];
     labName = json['lab_name'];
-    labPhone = json['lab_phone'];
+    labPhone = _phoneString(json['lab_phone']);
     labAddress = json['lab_address'];
     registerDate = json['created_at'];
     duration = json['register_subscription_duration'] ?? 0;
+  }
+
+  /// `lab_phone` is a JSON-encoded string; re-encode if it arrives decoded.
+  static String? _phoneString(dynamic value) {
+    if (value == null || value is String) return value;
+    return jsonEncode(value);
   }
 
   Map<String, dynamic> toJson() {

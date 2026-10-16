@@ -12,7 +12,7 @@ class AuthCubit extends Cubit<String> {
     emit('logging_in');
     try {
       auth = await repo.login(email, password);
-    } on Exception catch (e) {
+    } catch (e) {
       emit('error');
       print(e.toString());
     }

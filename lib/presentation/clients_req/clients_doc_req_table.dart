@@ -115,22 +115,22 @@ class ClientsDocReqTable extends StatelessWidget {
                             //name
                             DataCell(Center(
                                 child: CustomText(
-                              text: clinic.fullName!,
+                              text: clinic.fullName ?? '',
                             ))),
                             //add
                             DataCell(Center(
-                                child: CustomText(text: clinic.address!))),
+                                child: CustomText(text: clinic.address ?? ''))),
                             //num
                             DataCell(Center(
                                 child:
-                                    CustomText(text: clinic.phone.toString()))),
+                                    CustomText(text: clinic.phone?.toString() ?? ''))),
                             //date
                             DataCell(Center(
-                                child: CustomText(text: clinic.registerDate!))),
+                                child: CustomText(text: clinic.registerDate ?? ''))),
                             //mddi
                             DataCell(Center(
                                 child: CustomText(
-                                    text: clinic.duration.toString()))),
+                                    text: clinic.duration?.toString() ?? ''))),
                             DataCell(Center(
                                 child: IconButton(
                               onPressed: () {

@@ -8,6 +8,7 @@ import 'package:lambda_dent_dash/services/dio/dio.dart';
 import 'package:lambda_dent_dash/services/navigation/controllers.dart';
 import 'package:lambda_dent_dash/services/navigation/navigation_service.dart';
 import 'package:lambda_dent_dash/services/navigation/router.dart';
+import 'package:lambda_dent_dash/services/navigation/routes.dart';
 import 'package:lambda_dent_dash/constant/components/site_layout.dart';
 
 void main() async {
@@ -17,9 +18,16 @@ void main() async {
   DioHelper.init();
   await CacheHelper.init();
   setupLocator();
-  CacheHelper.setString('token', 'Bearer ' + testtoken);
 
   final navigationService = locator<NavigationService>();
+  if (!CacheHelper.hasToken) {
+    navigationService.currentTitle.value = authenticationDisplayName;
+  }
+  DioHelper.onUnauthorized = () {
+    if (navigationService.navigatorKey.currentState != null) {
+      navigationService.navigateTo(authenticationPageRoute);
+    }
+  };
   runApp(const MyApp());
 
   WidgetsBinding.instance.addPostFrameCallback((_) {

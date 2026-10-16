@@ -43,6 +43,12 @@ class HisCubit extends Cubit<HisState> {
     cliload();
   }
 
+  // Requests may finish after the page was replaced (e.g. on a 401 redirect).
+  @override
+  void emit(HisState state) {
+    if (!isClosed) super.emit(state);
+  }
+
   Future<void> labload() async {
     emit(HisLoading(isClinicLoading: false));
     try {
@@ -52,7 +58,7 @@ class HisCubit extends Cubit<HisState> {
       } else {
         emit(HisLabsEmpty());
       }
-    } on Exception catch (e) {
+    } catch (e) {
       emit(HisError(message: "Error loading labs: ${e.toString()}"));
       print("Error loading labs: ${e.toString()}");
     }
@@ -67,7 +73,7 @@ class HisCubit extends Cubit<HisState> {
       } else {
         emit(HisClinicsEmpty());
       }
-    } on Exception catch (e) {
+    } catch (e) {
       emit(HisError(message: "Error loading clinics: ${e.toString()}"));
       print("Error loading clinics: ${e.toString()}");
     }
@@ -83,7 +89,7 @@ class HisCubit extends Cubit<HisState> {
       } else {
         emit(HisError(message: "Renewal failed"));
       }
-    } on Exception catch (e) {
+    } catch (e) {
       emit(HisError(message: e.toString()));
       print(e.toString());
     }

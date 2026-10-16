@@ -123,7 +123,7 @@ class ClientsLabReqTable extends StatelessWidget {
                                 child: CustomText(text: lab.labAddress!))),
                             DataCell(Center(
                                 child: CustomText(
-                                    text: lab.registerDate!.substring(0, 9)))),
+                                    text: lab.registerDate!.substring(0, 10)))),
                             DataCell(Center(
                                 child:
                                     CustomText(text: lab.duration.toString()))),

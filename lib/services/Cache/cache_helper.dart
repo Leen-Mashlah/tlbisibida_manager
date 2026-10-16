@@ -21,4 +21,12 @@ class CacheHelper {
   static get(String key) {
     return sharedPreferences?.get(key);
   }
+
+  /// Cached auth header value, e.g. `Bearer <jwt>`, or null when logged out.
+  static String? get token {
+    final value = get('token');
+    return value is String && value.isNotEmpty ? value : null;
+  }
+
+  static bool get hasToken => token != null;
 }

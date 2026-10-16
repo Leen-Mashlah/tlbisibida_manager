@@ -111,19 +111,19 @@ class ClientsDocHisTable extends StatelessWidget {
                             //date
                             DataCell(Center(
                                 child: CustomText(
-                                    text: clinics[index].subscriptionTo!))),
+                                    text: clinics[index].subscriptionTo ?? ''))),
                             //city
                             DataCell(Center(
                                 child:
-                                    CustomText(text: clinics[index].address!))),
+                                    CustomText(text: clinics[index].address ?? ''))),
                             //number
                             DataCell(Center(
                                 child: CustomText(
-                                    text: clinics[index].phone.toString()))),
+                                    text: clinics[index].phone?.toString() ?? ''))),
                             //name
                             DataCell(Center(
                                 child: CustomText(
-                              text: clinics[index].fullName!,
+                              text: clinics[index].fullName ?? '',
                             ))),
                           ],
                         ),
@@ -137,6 +137,13 @@ class ClientsDocHisTable extends StatelessWidget {
         } else if (state is HisClinicsEmpty) {
           return const Center(
             child: Text('لا توجد عيادات مسجلة'),
+          );
+        } else if (state is HisError) {
+          return Center(
+            child: Text(
+              'خطأ: ${state.message}',
+              style: const TextStyle(color: Colors.red),
+            ),
           );
         }
 

@@ -23,10 +23,9 @@ class SiteLayout extends StatelessWidget {
           largeScreen: Navigator(
             key: locator<NavigationService>().navigatorKey,
             onGenerateRoute: generateRoute,
-            initialRoute: CacheHelper.get('token') == '' ||
-                    CacheHelper.get('token') == null
-                ? authenticationPageRoute
-                : clientsLogPageRoute,
+            initialRoute: CacheHelper.hasToken
+                ? clientsLogPageRoute
+                : authenticationPageRoute,
           ),
         ),
       ),
